@@ -13,4 +13,11 @@ abstract class _SignUpViewModelBase with Store, BaseViewModel {
 
   @override
   init() {}
+
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
+  final TextEditingController nameSurname = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
+  final TextEditingController gender = TextEditingController();
+  final TextEditingController age = TextEditingController();
 }

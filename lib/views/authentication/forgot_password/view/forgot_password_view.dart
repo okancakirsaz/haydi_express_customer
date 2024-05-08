@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/widgets/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
+import 'package:haydi_express_customer/core/widgets/custom_statefull_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/view/log_in_view.dart';
 import 'package:haydi_express_customer/views/authentication/public_components/logo_bar.dart';
 import 'package:haydi_express_customer/views/authentication/public_components/page_top_container.dart';
+import 'package:haydi_express_customer/views/authentication/sign_up/view/sign_up_view.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/consts/text_consts.dart';
 import '../../../../core/widgets/custom_text_button.dart';
@@ -60,7 +61,7 @@ class ForgotPasswordView extends StatelessWidget {
         ),
         Padding(
           padding: PaddingConsts.instance.top20,
-          child: CustomButton(
+          child: CustomStateFullButton(
             onPressed: () {},
             text: "Gönder",
           ),
@@ -79,7 +80,7 @@ class ForgotPasswordView extends StatelessWidget {
           text: "Giriş Yap",
         ),
         CustomTextButton(
-          onPressed: () {},
+          onPressed: () => model.navigationManager.navigate(const SignUpView()),
           style: TextConsts.instance.regularThird20,
           text: "Kayıt Ol",
         ),

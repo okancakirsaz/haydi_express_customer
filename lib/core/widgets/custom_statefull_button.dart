@@ -22,20 +22,21 @@ class CustomStateFullButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? 200,
-      height: height ?? 60,
+      width: width ?? 150,
+      height: height ?? 50,
       constraints: const BoxConstraints(
         minHeight: 50,
-        minWidth: 160,
+        minWidth: 150,
       ),
       decoration: BoxDecoration(
-          color: ColorConsts.instance.primary,
-          border: Border.all(),
-          borderRadius: RadiusConsts.instance.circularAll20),
+        color: ColorConsts.instance.primary,
+        border: Border.all(),
+        borderRadius: RadiusConsts.instance.circularAll10,
+      ),
       child: EasyButton(
           type: EasyButtonType.text,
           buttonColor: ColorConsts.instance.primary,
-          borderRadius: 20,
+          borderRadius: 10,
           onPressed: onPressed,
           idleStateWidget: Text(
             text,
