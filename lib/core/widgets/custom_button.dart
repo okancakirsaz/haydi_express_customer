@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
                 backGroundColor ?? ColorConsts.instance.primary),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: RadiusConsts.instance.circularAll20,
+                borderRadius: RadiusConsts.instance.circularAll10,
               ),
             ),
           ),

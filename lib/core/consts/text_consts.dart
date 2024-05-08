@@ -93,6 +93,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularThird20 {
+    return GoogleFonts.montserrat(
+      fontSize: 20,
+      color: ColorConsts.instance.third,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularWhite16 {
     return GoogleFonts.montserrat(
       fontSize: 16,

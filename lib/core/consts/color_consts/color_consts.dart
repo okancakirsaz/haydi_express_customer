@@ -15,7 +15,7 @@ class ColorConsts {
     const BoxShadow(
       offset: Offset(5, 5),
       blurRadius: 5,
-      color: Color(0x25000000),
+      color: Color(0x9D000000),
     )
   ];
 }
