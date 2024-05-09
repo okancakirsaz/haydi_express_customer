@@ -1,16 +1,21 @@
+import 'package:haydi_express_customer/views/authentication/models/customer_model.dart';
+
 class LogInModel {
   String mail;
   String password;
   bool isLoginSuccess;
   String? unSuccessfulReason;
+  CustomerModel? customerData;
   String? uid;
 
-  LogInModel(
-      {required this.mail,
-      required this.password,
-      required this.isLoginSuccess,
-      this.unSuccessfulReason,
-      this.uid});
+  LogInModel({
+    required this.mail,
+    required this.password,
+    required this.isLoginSuccess,
+    this.unSuccessfulReason,
+    this.customerData,
+    this.uid,
+  });
 
   Map<String, dynamic> toJson() {
     return {
@@ -18,18 +23,20 @@ class LogInModel {
       'password': password,
       'isLoginSuccess': isLoginSuccess,
       'unSuccessfulReason': unSuccessfulReason,
-      'uid': uid
+      'uid': uid,
+      'customerData': customerData?.toJson(),
     };
   }
 
   factory LogInModel.fromJson(Map<String, dynamic> json) {
     return LogInModel(
-      mail: json['mail'] as String,
-      password: json['password'] as String,
-      isLoginSuccess: json['isLoginSuccess'] as bool,
-      unSuccessfulReason: json['unSuccessfulReason'] as String?,
-      uid: json['uid'] as String?,
-    );
+        mail: json['mail'] as String,
+        password: json['password'] as String,
+        isLoginSuccess: json['isLoginSuccess'] as bool,
+        unSuccessfulReason: json['unSuccessfulReason'] as String?,
+        uid: json['uid'] as String?,
+        customerData:
+            CustomerModel.fromJson(json['customerData']) as CustomerModel?);
   }
 
   @override

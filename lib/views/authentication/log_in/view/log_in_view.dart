@@ -105,7 +105,8 @@ class LogInView extends StatelessWidget {
         Padding(
           padding: PaddingConsts.instance.top20,
           child: CustomStateFullButton(
-            onPressed: () {},
+            onPressed: () async =>
+                await model.tryToLogIn(model.email.text, model.password.text),
             text: "Giriş Yap",
           ),
         )

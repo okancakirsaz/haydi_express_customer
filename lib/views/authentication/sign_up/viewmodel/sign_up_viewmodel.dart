@@ -7,6 +7,7 @@ import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/init/model/http_exception_model.dart';
+import '../../log_in/viewmodel/log_in_viewmodel.dart';
 import '../../models/mail_verification_model.dart';
 import '../../models/mail_verification_request_model.dart';
 import '../view/sign_up_view.dart';
@@ -157,11 +158,18 @@ abstract class _SignUpViewModelBase with Store, BaseViewModel {
         showErrorDialog(response.message);
         navigatorPop();
       } else {
-        //TODO: Do log in
+        await _tryToLogIn();
       }
     } else {
       showErrorDialog();
     }
+  }
+
+  Future<void> _tryToLogIn() async {
+    //Dependency Injection
+    final LogInViewModel loginViewModel = LogInViewModel();
+    loginViewModel.setContext(viewModelContext);
+    await loginViewModel.tryToLogIn(email.text, password.text);
   }
 
   CustomerModel get _fetchSignUpData => CustomerModel(

@@ -36,8 +36,13 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> tryToLogIn(String mail, String pass) async {
-    if (mail != "" && pass != "") {
-      final LogInModel response = await _sendLogInRequest(mail, pass);
+    if (mail.isNotEmpty && pass.isNotEmpty && mail.contains("@")) {
+      final LogInModel? response = await _sendLogInRequest(mail, pass);
+
+      if (response == null) {
+        showErrorDialog();
+        return;
+      }
 
       if (response.isLoginSuccess) {
         await localeManager.setStringData(
@@ -47,20 +52,16 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
         showErrorDialog(response.unSuccessfulReason);
       }
     } else {
-      showErrorDialog("E-Posta veya şifre eksik.");
+      showErrorDialog("E-Posta veya şifre giriniz.");
     }
   }
 
-  Future<LogInModel> _sendLogInRequest(String mail, String pass) async {
+  Future<LogInModel?> _sendLogInRequest(String mail, String pass) async {
     final LogInModel? response = await service.logIn(LogInModel(
       mail: mail,
       password: pass,
       isLoginSuccess: false,
     ));
-    if (response == null) {
-      showErrorDialog("Bir sorun oluştu, tekrar deneyiniz.");
-      throw Exception("Response is null");
-    }
     return response;
   }
 }
