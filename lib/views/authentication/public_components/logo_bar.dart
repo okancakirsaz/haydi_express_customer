@@ -7,16 +7,17 @@ import 'package:haydi_express_customer/core/widgets/logo.dart';
 
 class LogoBar extends StatelessWidget {
   final String title;
-  const LogoBar({super.key, required this.title});
+  final Alignment? alignment;
+  const LogoBar({super.key, required this.title, this.alignment});
 
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: alignment ?? Alignment.topLeft,
       child: Container(
         padding: PaddingConsts.instance.all5,
         width: MediaQuery.of(context).size.width - 50,
-        height: 75,
+        height: 60,
         decoration: BoxDecoration(
           color: ColorConsts.instance.background,
           borderRadius: RadiusConsts.instance.circularRight100,
@@ -30,7 +31,7 @@ class LogoBar extends StatelessWidget {
                 padding: PaddingConsts.instance.left30,
                 child: Text(
                   title,
-                  style: TextConsts.instance.regularBlack25Bold,
+                  style: TextConsts.instance.regularBlack23Bold,
                 ),
               ),
             )

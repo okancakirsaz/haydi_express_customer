@@ -37,6 +37,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularBlack23Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 23,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   TextStyle get regularBlack20Bold {
     return GoogleFonts.montserrat(
       fontSize: 20,

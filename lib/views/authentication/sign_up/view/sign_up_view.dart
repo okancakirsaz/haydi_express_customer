@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/widgets/custom_button.dart';
+import 'package:haydi_express_customer/core/widgets/custom_checkbox.dart';
+import 'package:haydi_express_customer/core/widgets/custom_dropdown.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/views/authentication/forgot_password/view/forgot_password_view.dart';
+import 'package:haydi_express_customer/core/widgets/custom_stepper.dart';
+import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
+import 'package:haydi_express_customer/core/widgets/pop_button.dart';
+import 'package:haydi_express_customer/views/authentication/public_components/logo_bar.dart';
+import 'package:pinput/pinput.dart';
 import '../../../../core/base/view/base_view.dart';
+import '../../../../core/consts/color_consts/color_consts.dart';
 import '../../../../core/consts/padding_consts.dart';
-import '../../../../core/consts/text_consts.dart';
+import '../../../../core/consts/radius_consts.dart';
 import '../../../../core/widgets/custom_text_button.dart';
-import '../../log_in/view/log_in_view.dart';
 import '../../public_components/page_top_container.dart';
 import '../viewmodel/sign_up_viewmodel.dart';
+
+part './components/simple_data_inputs.dart';
+part './components/personal_data_inputs.dart';
+part './components/mail_verify.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -20,16 +35,24 @@ class SignUpView extends StatelessWidget {
           return CustomScaffold(
             body: Column(
               children: <Widget>[
-                const Expanded(
-                  flex: 3,
-                  child: PageTopContainer(
-                    child: SizedBox(),
-                  ),
-                ),
+                Observer(builder: (context) {
+                  return Expanded(
+                    flex: model.pageContainerExpand,
+                    child: PageTopContainer(
+                      child: model.currentBody,
+                    ),
+                  );
+                }),
                 Expanded(
                   child: Padding(
                     padding: PaddingConsts.instance.top20,
-                    child: _buildOtherPagesButtons(model),
+                    child: Observer(builder: (context) {
+                      return CustomStepper(
+                        currentStep: model.stepperIndex,
+                        steps: model.steps,
+                        height: 20,
+                      );
+                    }),
                   ),
                 ),
               ],
@@ -39,26 +62,8 @@ class SignUpView extends StatelessWidget {
         onModelReady: (model) {
           model.init();
           model.setContext(context);
+          model.setCurrentBody(SimpleDataInputs(viewModel: model), 1);
         },
         onDispose: (model) {});
-  }
-
-  Widget _buildOtherPagesButtons(SignUpViewModel model) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        CustomTextButton(
-          onPressed: () => model.navigationManager.navigate(const LogInView()),
-          style: TextConsts.instance.regularThird20,
-          text: "Giriş Yap",
-        ),
-        CustomTextButton(
-          onPressed: () =>
-              model.navigationManager.navigate(const ForgotPasswordView()),
-          style: TextConsts.instance.regularThird20,
-          text: "Şifremi Unuttum",
-        ),
-      ],
-    );
   }
 }

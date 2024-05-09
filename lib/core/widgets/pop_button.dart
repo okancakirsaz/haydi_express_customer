@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../consts/color_consts/color_consts.dart';
+
 class PopButton extends StatelessWidget {
-  final TextStyle style;
-  const PopButton({super.key, required this.style});
+  final VoidCallback onPressed;
+  const PopButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: Text(
-          "{ Önceki Sayfaya Dön",
-          style: style,
-        ),
+    return IconButton(
+      onPressed: onPressed,
+      icon: Icon(
+        Icons.arrow_back_ios,
+        color: ColorConsts.instance.background,
       ),
     );
   }

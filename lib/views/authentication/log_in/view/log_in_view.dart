@@ -87,7 +87,7 @@ class LogInView extends StatelessWidget {
           title: "Giriş Yap",
         ),
         Padding(
-          padding: PaddingConsts.instance.top10,
+          padding: PaddingConsts.instance.top20,
           child: CustomTextField(
             padding: PaddingConsts.instance.horizontal30,
             controller: model.email,

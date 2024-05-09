@@ -33,7 +33,9 @@ dependencies:
   passwordfield:
   calendar_date_picker2: ^0.5.3
   toastification: ^1.2.1
-
+  horizontal_stepper_flutter: ^1.0.3
+  pinput: ^4.0.0
+  
   #Others
   shared_preferences: ^2.2.1
   
@@ -45,6 +47,8 @@ dependencies:
   dio:
   socket_io_client: ^2.0.3+1
   http_parser: ^4.0.2
+  
+  
   
   
   

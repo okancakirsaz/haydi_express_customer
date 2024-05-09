@@ -19,11 +19,12 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
-      textStyle: TextConsts.instance.regularWhite20,
+      textStyle: TextConsts.instance.regularWhite16,
       menuStyle: MenuStyle(
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-              borderRadius: RadiusConsts.instance.circularAll10),
+            borderRadius: RadiusConsts.instance.circularAll10,
+          ),
         ),
       ),
       width: width,
@@ -34,9 +35,13 @@ class CustomDropdown extends StatelessWidget {
         filled: true,
         fillColor: ColorConsts.instance.blurGrey,
         border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        activeIndicatorBorder:
-            BorderSide(color: ColorConsts.instance.background),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        activeIndicatorBorder: BorderSide(
+          color: ColorConsts.instance.background,
+        ),
       ),
       hintText: hint,
       requestFocusOnTap: false,
