@@ -71,12 +71,9 @@ class PersonalDataInputs extends StatelessWidget {
         ),
         Padding(
           padding: PaddingConsts.instance.top20,
-          child: CustomButton(
-            onPressed: () => viewModel.setCurrentBody(
-              MailVerify(viewModel: viewModel),
-              3,
-              viewModel.validatePersonalInputs,
-            ),
+          child: CustomStateFullButton(
+            onPressed: () async =>
+                await viewModel.sendMailVerifyRequest(viewModel),
             text: "Devam Et",
           ),
         ),

@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/views/authentication/models/customer_model.dart';
+import 'package:haydi_express_customer/views/authentication/sign_up/service/sign_up_service.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../../core/init/model/http_exception_model.dart';
+import '../../models/mail_verification_model.dart';
+import '../../models/mail_verification_request_model.dart';
+import '../view/sign_up_view.dart';
 
 part 'sign_up_viewmodel.g.dart';
 
@@ -13,6 +21,8 @@ abstract class _SignUpViewModelBase with Store, BaseViewModel {
 
   @override
   init() {}
+
+  final SignUpService service = SignUpService();
 
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -91,4 +101,77 @@ abstract class _SignUpViewModelBase with Store, BaseViewModel {
       return true;
     }
   }
+
+  Future<void> sendMailVerifyRequest(SignUpViewModel viewModel) async {
+    if (validatePersonalInputs) {
+      final MailVerificationRequestModel? response =
+          await service.sendVerifyRequest(
+        MailVerificationRequestModel(
+            email: email.text, isMailSent: false, verificationCode: null),
+      );
+      _handleMailVerifyResponse(response, viewModel);
+    }
+  }
+
+  _handleMailVerifyResponse(
+      MailVerificationRequestModel? response, SignUpViewModel viewModel) {
+    if (response != null) {
+      if (response.isMailSent) {
+        viewModel.setCurrentBody(
+          MailVerify(viewModel: viewModel),
+          3,
+        );
+      } else {
+        showErrorDialog();
+      }
+    } else {
+      showErrorDialog();
+    }
+  }
+
+  Future<void> sendVerifyCode(String code) async {
+    final MailVerificationModel? response = await service.verifyMailCode(
+      MailVerificationModel(
+          email: email.text, isCodeTrue: false, verificationCode: code),
+    );
+    await _handleSendVerifyCodeResponse(response);
+  }
+
+  Future<void> _handleSendVerifyCodeResponse(
+      MailVerificationModel? response) async {
+    if (response != null) {
+      if (response.isCodeTrue) {
+        await _signUp();
+      } else {
+        showErrorDialog("Girilen kod yanlış tekrar deneyiniz.");
+      }
+    } else {
+      showErrorDialog();
+    }
+  }
+
+  Future<void> _signUp() async {
+    final dynamic response = await service.signUp(_fetchSignUpData);
+    if (response != null) {
+      if (response is HttpExceptionModel) {
+        showErrorDialog(response.message);
+        navigatorPop();
+      } else {
+        //TODO: Do log in
+      }
+    } else {
+      showErrorDialog();
+    }
+  }
+
+  CustomerModel get _fetchSignUpData => CustomerModel(
+        email: email.text,
+        password: password.text,
+        isAgreementsAccepted: true,
+        name: nameSurname.text,
+        phoneNumber: "+90${phoneNumber.text}",
+        gender: gender.text,
+        isPhoneVerified: false,
+        uid: const Uuid().v7(),
+      );
 }

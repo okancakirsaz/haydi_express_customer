@@ -73,7 +73,7 @@ class _MailVerifyState extends State<MailVerify> {
         ),
       ),
       length: 4,
-      onCompleted: (value) {},
+      onCompleted: (value) async => widget.viewModel.sendVerifyCode(value),
     );
   }
 }
