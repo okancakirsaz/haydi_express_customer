@@ -36,24 +36,25 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> tryToLogIn(String mail, String pass) async {
-    if (mail.isNotEmpty && pass.isNotEmpty && mail.contains("@")) {
-      final LogInModel? response = await _sendLogInRequest(mail, pass);
-
-      if (response == null) {
-        showErrorDialog();
-        return;
-      }
-
-      if (response.isLoginSuccess) {
-        await localeManager.setStringData(
-            LocaleKeysEnums.id.name, response.uid!);
-        _navigateToMainPage();
-      } else {
-        showErrorDialog(response.unSuccessfulReason);
-      }
-    } else {
+    if (mail.isEmpty || pass.isEmpty || !mail.contains("@")) {
       showErrorDialog("E-Posta veya şifre giriniz.");
+      return;
     }
+
+    final LogInModel? response = await _sendLogInRequest(mail, pass);
+
+    if (response == null) {
+      showErrorDialog();
+      return;
+    }
+
+    if (!response.isLoginSuccess) {
+      showErrorDialog(response.unSuccessfulReason);
+      return;
+    }
+
+    await localeManager.setStringData(LocaleKeysEnums.id.name, response.uid!);
+    _navigateToMainPage();
   }
 
   Future<LogInModel?> _sendLogInRequest(String mail, String pass) async {

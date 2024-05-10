@@ -30,13 +30,15 @@ class LogInModel {
 
   factory LogInModel.fromJson(Map<String, dynamic> json) {
     return LogInModel(
-        mail: json['mail'] as String,
-        password: json['password'] as String,
-        isLoginSuccess: json['isLoginSuccess'] as bool,
-        unSuccessfulReason: json['unSuccessfulReason'] as String?,
-        uid: json['uid'] as String?,
-        customerData:
-            CustomerModel.fromJson(json['customerData']) as CustomerModel?);
+      mail: json['mail'] as String,
+      password: json['password'] as String,
+      isLoginSuccess: json['isLoginSuccess'] as bool,
+      unSuccessfulReason: json['unSuccessfulReason'] as String?,
+      uid: json['uid'] as String?,
+      customerData: json['customerData'] != null
+          ? CustomerModel.fromJson(json['customerData'])
+          : null,
+    );
   }
 
   @override
