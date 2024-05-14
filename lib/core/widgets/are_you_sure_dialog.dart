@@ -35,7 +35,6 @@ class AreYouSure extends StatelessWidget {
     );
   }
 
-  //TODO: Make the button as seperated widget
   Widget buildSpecialButton(VoidCallback onPressed, String text) {
     return ElevatedButton(
       onPressed: onPressed,
