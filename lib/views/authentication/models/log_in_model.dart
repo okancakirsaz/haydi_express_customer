@@ -7,6 +7,7 @@ class LogInModel {
   String? unSuccessfulReason;
   CustomerModel? customerData;
   String? uid;
+  String? accessToken;
 
   LogInModel({
     required this.mail,
@@ -15,6 +16,7 @@ class LogInModel {
     this.unSuccessfulReason,
     this.customerData,
     this.uid,
+    this.accessToken,
   });
 
   Map<String, dynamic> toJson() {
@@ -25,6 +27,7 @@ class LogInModel {
       'unSuccessfulReason': unSuccessfulReason,
       'uid': uid,
       'customerData': customerData?.toJson(),
+      'accessToken': accessToken,
     };
   }
 
@@ -38,6 +41,7 @@ class LogInModel {
       customerData: json['customerData'] != null
           ? CustomerModel.fromJson(json['customerData'])
           : null,
+      accessToken: json['accessToken'] as String?,
     );
   }
 

@@ -52,8 +52,7 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
       showErrorDialog(response.unSuccessfulReason);
       return;
     }
-
-    await localeManager.setStringData(LocaleKeysEnums.id.name, response.uid!);
+    await _cacheUserData(response);
     _navigateToMainPage();
   }
 
@@ -64,5 +63,15 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
       isLoginSuccess: false,
     ));
     return response;
+  }
+
+  Future<void> _cacheUserData(LogInModel response) async {
+    await localeManager.setStringData(LocaleKeysEnums.id.name, response.uid!);
+    await localeManager.setStringData(
+        LocaleKeysEnums.accessToken.name, response.accessToken!);
+    await localeManager.setStringData(
+        LocaleKeysEnums.password.name, response.password);
+    await localeManager.setStringData(
+        LocaleKeysEnums.email.name, response.mail);
   }
 }
