@@ -4,6 +4,7 @@ import 'package:haydi_express_customer/views/authentication/forgot_password/view
 import 'package:haydi_express_customer/views/authentication/log_in/service/log_in_service.dart';
 import 'package:haydi_express_customer/views/authentication/models/log_in_model.dart';
 import 'package:haydi_express_customer/views/authentication/sign_up/view/sign_up_view.dart';
+import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -31,8 +32,7 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
   }
 
   _navigateToMainPage() {
-    //TODO: Implement main page
-    navigationManager.navigateAndRemoveUntil(const Scaffold());
+    navigationManager.navigateAndRemoveUntil(const MainView());
   }
 
   Future<void> tryToLogIn(String mail, String pass) async {

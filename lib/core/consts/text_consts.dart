@@ -77,6 +77,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularWhite12 {
+    return GoogleFonts.montserrat(
+      fontSize: 12,
+      color: Colors.white,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularWhite14Bold {
     return GoogleFonts.montserrat(
       fontSize: 14,
@@ -120,6 +128,14 @@ class TextConsts {
   TextStyle get regularPrimary16 {
     return GoogleFonts.montserrat(
       fontSize: 16,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary12 {
+    return GoogleFonts.montserrat(
+      fontSize: 12,
       color: ColorConsts.instance.primary,
       fontWeight: FontWeight.normal,
     );
