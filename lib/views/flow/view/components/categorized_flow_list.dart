@@ -12,8 +12,7 @@ class CategorizedFlowList extends StatelessWidget {
       itemCount: dataList.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        //TODO: Do menu widget
-        return Card(child: Text(dataList[index].menuId));
+        return MinimizedMenu(data: dataList[index]);
       },
     );
   }

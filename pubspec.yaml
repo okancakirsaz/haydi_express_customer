@@ -35,6 +35,7 @@ dependencies:
   toastification: ^1.2.1
   horizontal_stepper_flutter: ^1.0.3
   pinput: ^4.0.0
+  skeletonizer: 1.1.2+1
   
   #Others
   shared_preferences: ^2.2.1
