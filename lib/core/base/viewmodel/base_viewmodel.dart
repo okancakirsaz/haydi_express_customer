@@ -36,4 +36,21 @@ abstract mixin class BaseViewModel {
   int calculateDiscount(int price, int discountAmount) {
     return (price - ((price * discountAmount) / 100)).toInt();
   }
+
+  Future<void> bringDataFromCacheOrApi(String dataKey,
+      {required Function getFromApi, required Function getFromCache}) async {
+    try {
+      final List<dynamic>? cachedData =
+          localeManager.getNullableJsonData(dataKey);
+      if (cachedData == null) {
+        await getFromApi();
+        debugPrint("$dataKey getting from api...");
+      } else {
+        await getFromCache();
+        debugPrint("$dataKey getting from local storage...");
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

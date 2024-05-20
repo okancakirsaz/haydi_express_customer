@@ -91,19 +91,20 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
   }
 
   Future<int> fetchAdverts() async {
-    final List<dynamic>? cachedData =
-        localeManager.getNullableJsonData(LocaleKeysEnums.haydiFirsatlar.name);
-    if (cachedData == null) {
+    await bringDataFromCacheOrApi(LocaleKeysEnums.haydiFirsatlar.name,
+        getFromApi: () async {
       final List<MenuModel>? dataFromApi = await _getAdvertsFromApi();
       await localeManager.setNullableJsonData(
           LocaleKeysEnums.haydiFirsatlar.name,
           dataFromApi?.map((e) => e.toJson()).toList());
       haydiFirsatlar = dataFromApi ?? [];
-    } else {
+    }, getFromCache: () {
+      final List<dynamic> cachedData =
+          localeManager.getJsonData(LocaleKeysEnums.haydiFirsatlar.name);
       for (Map<String, dynamic> data in cachedData) {
         haydiFirsatlar.add(MenuModel.fromJson(data));
       }
-    }
+    });
     return 1;
   }
 }
