@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
+import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/core/services/public_service.dart';
 import 'package:haydi_express_customer/views/authentication/forgot_password/view/forgot_password_view.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/service/log_in_service.dart';
 import 'package:haydi_express_customer/views/authentication/models/log_in_model.dart';
@@ -22,6 +25,9 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final LogInService service = LogInService();
+  final PublicService publicService = PublicService();
+
+  List<MenuModel> haydiFirsatlar = [];
 
   navigateToForgotPassword() {
     navigationManager.navigate(const ForgotPasswordView());
@@ -73,5 +79,31 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
         LocaleKeysEnums.password.name, response.password);
     await localeManager.setStringData(
         LocaleKeysEnums.email.name, response.mail);
+  }
+
+  Future<List<MenuModel>?> _getAdvertsFromApi() async {
+    final List<MenuModel>? response = await publicService.getHaydiFirsatlar();
+    if (response == null && kDebugMode) {
+      showErrorDialog("Haydi Fırsatlar getirilirken bir sorun oluştu");
+      return null;
+    }
+    return response;
+  }
+
+  Future<int> fetchAdverts() async {
+    final List<dynamic>? cachedData =
+        localeManager.getNullableJsonData(LocaleKeysEnums.haydiFirsatlar.name);
+    if (cachedData == null) {
+      final List<MenuModel>? dataFromApi = await _getAdvertsFromApi();
+      await localeManager.setNullableJsonData(
+          LocaleKeysEnums.haydiFirsatlar.name,
+          dataFromApi?.map((e) => e.toJson()).toList());
+      haydiFirsatlar = dataFromApi ?? [];
+    } else {
+      for (Map<String, dynamic> data in cachedData) {
+        haydiFirsatlar.add(MenuModel.fromJson(data));
+      }
+    }
+    return 1;
   }
 }

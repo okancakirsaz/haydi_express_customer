@@ -10,4 +10,7 @@ final class Endpoints {
 
   //Menu
   final String getRestaurantMenu = "/menu/get-restaurant-menu";
+
+  //Flows
+  final String getHaydiFirsatlar = "/flow/haydi-firsatlar";
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 
@@ -125,11 +126,29 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularWhite16LineThrough {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      decoration: TextDecoration.lineThrough,
+      color: Colors.white,
+      decorationColor: Colors.white,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularPrimary16 {
     return GoogleFonts.montserrat(
       fontSize: 16,
       color: ColorConsts.instance.primary,
       fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary18Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.bold,
     );
   }
 

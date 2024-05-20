@@ -1,1 +1,1 @@
-enum LocaleKeysEnums { id, accessToken, password, email }
+enum LocaleKeysEnums { id, accessToken, password, email, haydiFirsatlar }

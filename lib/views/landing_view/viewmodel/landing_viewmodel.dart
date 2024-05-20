@@ -19,7 +19,8 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
   Future<Widget?> init() async {
     WebSocketManager.instance.initializeSocketConnection();
     await localeManager.getSharedPreferencesInstance();
-    //await localeManager.removeData(LocaleKeysEnums.id.name);
+    await localeManager.removeData(LocaleKeysEnums.id.name);
+    await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
     _checkLoggedInState();
     return defaultWidget;
   }

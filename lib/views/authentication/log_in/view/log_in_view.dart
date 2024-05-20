@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_password_field.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_statefull_button.dart';
@@ -17,6 +19,7 @@ import 'package:haydi_express_customer/views/authentication/sign_up/view/sign_up
 import '../../../../core/base/view/base_view.dart';
 
 part './components/advert_campaigns.dart';
+part './components/advert_campaign_container.dart';
 
 //TODO: We have overflow problem on keyboard open fix it.
 class LogInView extends StatelessWidget {
