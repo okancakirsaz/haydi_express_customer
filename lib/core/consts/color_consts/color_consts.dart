@@ -13,9 +13,9 @@ class ColorConsts {
   final Color blurGrey = const Color(0xB4CCCCCC);
   final List<BoxShadow> shadow = [
     const BoxShadow(
-      offset: Offset(5, 5),
+      offset: Offset(3, 3),
       blurRadius: 5,
-      color: Color(0x9D000000),
+      color: Color(0x63000000),
     )
   ];
 }
