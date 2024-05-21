@@ -32,16 +32,30 @@ class MinimizedMenu extends StatelessWidget {
             children: <Widget>[
               _buildImage(),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   _buildTitle(),
+                  Padding(
+                    padding: PaddingConsts.instance.left10,
+                    child: Padding(
+                      padding: PaddingConsts.instance.top10,
+                      child: _information(),
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
-          Row(
-            children: <Widget>[],
-          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: Text(
+              data.content,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextConsts.instance.regularBlack14,
+            ),
+          )
         ],
       ),
     );
@@ -65,11 +79,70 @@ class MinimizedMenu extends StatelessWidget {
   }
 
   Widget _buildTitle() {
-    //TODO: Handle overflow problem
-    return Text(
-      data.name,
-      overflow: TextOverflow.fade,
-      style: TextConsts.instance.regularBlack18Bold,
+    return SizedBox(
+      width: 130,
+      child: Text(
+        textAlign: TextAlign.center,
+        data.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextConsts.instance.regularBlack16Bold,
+      ),
+    );
+  }
+
+  Widget _information() {
+    return Row(
+      children: <Widget>[
+        calculatedDiscountedPrice != null ? _discountedPrice() : _normalPrice(),
+        calculatedDiscountedPrice != null
+            ? _discountAmount()
+            : const SizedBox(),
+      ],
+    );
+  }
+
+  Widget _discountedPrice() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "${data.price}₺",
+          style: TextConsts.instance.regularPrimary16LineThrough,
+        ),
+        Text(
+          "${calculatedDiscountedPrice}₺",
+          style: TextConsts.instance.regularBlack16,
+        ),
+      ],
+    );
+  }
+
+  Widget _normalPrice() {
+    return Padding(
+      padding: PaddingConsts.instance.top10,
+      child: Text(
+        "${data.price}₺",
+        style: TextConsts.instance.regularBlack20,
+      ),
+    );
+  }
+
+  Widget _discountAmount() {
+    return Container(
+      margin: PaddingConsts.instance.left30,
+      width: 45,
+      height: 45,
+      decoration: BoxDecoration(
+        color: ColorConsts.instance.third,
+        borderRadius: RadiusConsts.instance.circularAll10,
+      ),
+      child: Center(
+        child: Text(
+          "%${data.discountAmount}",
+          style: TextConsts.instance.regularWhite16Bold,
+        ),
+      ),
     );
   }
 }

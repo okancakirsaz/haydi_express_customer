@@ -136,6 +136,16 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularPrimary16LineThrough {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      decoration: TextDecoration.lineThrough,
+      color: ColorConsts.instance.primary,
+      decorationColor: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularPrimary16 {
     return GoogleFonts.montserrat(
       fontSize: 16,
@@ -233,6 +243,14 @@ class TextConsts {
       fontSize: 16,
       color: Colors.black,
       fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularBlack16Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
     );
   }
 

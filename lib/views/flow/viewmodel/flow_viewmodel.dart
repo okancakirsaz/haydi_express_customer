@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/services/public_service.dart';
+import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -14,8 +16,14 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   @override
   void setContext(BuildContext context) => viewModelContext = context;
 
+  initViewModelInstance(FlowViewModel model) => viewModelInstance = model;
+
   @override
-  init() {}
+  init() {
+    checkIsUserHaveAnyAddress(viewModelInstance);
+  }
+
+  late final FlowViewModel viewModelInstance;
 
   List<MenuModel> haydiFirsatlar = [];
   final PublicService publicService = PublicService();
@@ -45,5 +53,21 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
       }
     });
     return haydiFirsatlar;
+  }
+
+  checkIsUserHaveAnyAddress(FlowViewModel viewModel) {
+    final addresses =
+        localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name);
+    //TODO: If addresses is null in cache.
+    //Try to look database. Then if is null show bottom sheet
+    if (addresses == null) {
+      //Wait for build page
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        showBottomSheet(
+            context: viewModelContext,
+            builder: (context) =>
+                CreateAddressBottomSheet(viewModel: viewModel));
+      });
+    }
   }
 }

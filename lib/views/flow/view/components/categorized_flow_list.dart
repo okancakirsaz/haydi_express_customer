@@ -12,7 +12,13 @@ class CategorizedFlowList extends StatelessWidget {
       itemCount: dataList.length,
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
-        return MinimizedMenu(data: dataList[index]);
+        return MinimizedMenu(
+          data: dataList[index],
+          calculatedDiscountedPrice: dataList[index].isOnDiscount
+              ? viewModel.calculateDiscount(
+                  dataList[index].price, dataList[index].discountAmount!)
+              : null,
+        );
       },
     );
   }

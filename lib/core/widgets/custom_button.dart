@@ -23,11 +23,11 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: width ?? 160,
+      height: height ?? 50,
       constraints: const BoxConstraints(
-        minHeight: 50,
-        minWidth: 160,
+        minHeight: 40,
+        minWidth: 130,
       ),
       child: ElevatedButton(
           style: ButtonStyle(

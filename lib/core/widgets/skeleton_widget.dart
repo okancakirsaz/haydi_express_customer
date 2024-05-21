@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SkeletonWidget extends StatelessWidget {
@@ -12,6 +13,8 @@ class SkeletonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeletonizer(
       enabled: true,
+      effect: const ShimmerEffect(),
+      containersColor: ColorConsts.instance.blurGrey,
       child: ListView.builder(
         itemCount: count ?? 10,
         scrollDirection: scrollDirection ?? Axis.horizontal,

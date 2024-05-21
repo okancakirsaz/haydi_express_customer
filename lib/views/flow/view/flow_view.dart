@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/widgets/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
 import 'package:haydi_express_customer/core/widgets/minimized_menu.dart';
@@ -13,6 +15,7 @@ import '../../../core/init/model/menu_model.dart';
 import '../viewmodel/flow_viewmodel.dart';
 
 part './components/categorized_flow_list.dart';
+part './components/create_address_bottom_sheet.dart';
 
 class FlowView extends StatelessWidget {
   const FlowView({super.key});
@@ -55,8 +58,9 @@ class FlowView extends StatelessWidget {
           );
         },
         onModelReady: (model) {
-          model.init();
           model.setContext(context);
+          model.initViewModelInstance(model);
+          model.init();
         },
         onDispose: (model) {});
   }
@@ -112,7 +116,10 @@ class FlowView extends StatelessWidget {
               viewModel: model,
             );
           } else {
-            return const SkeletonWidget(widget: Placeholder());
+            return SkeletonWidget(
+                widget: MinimizedMenu(
+              data: AppConst.instance.mockMenuModel,
+            ));
           }
         },
       ),
