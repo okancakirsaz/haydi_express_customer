@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/services/public_service.dart';
@@ -29,7 +30,8 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   final PublicService publicService = PublicService();
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
-    final List<MenuModel>? response = await publicService.getHaydiFirsatlar();
+    final List<MenuModel>? response =
+        await publicService.getAdvertedMenu(AppConst.instance.haydiFirsatlar);
     if (response == null && kDebugMode) {
       showErrorDialog("Haydi Fırsatlar getirilirken bir sorun oluştu");
       return null;

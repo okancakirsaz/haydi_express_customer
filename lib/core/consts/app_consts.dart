@@ -28,4 +28,7 @@ class AppConst {
     ),
     restaurantName: "restaurantName",
   );
+
+  //Flow categories
+  final String haydiFirsatlar = "Haydi Fırsatlar";
 }

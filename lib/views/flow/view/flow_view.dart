@@ -9,6 +9,7 @@ import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
 import 'package:haydi_express_customer/core/widgets/minimized_menu.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
+import 'package:haydi_express_customer/views/category_list/view/category_list_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../core/init/model/menu_model.dart';
@@ -31,6 +32,8 @@ class FlowView extends StatelessWidget {
                 children: <Widget>[
                   _buildTitle(
                     context,
+                    model,
+                    category: AppConst.instance.haydiFirsatlar,
                     text: "Haydi Fırsatlar",
                     alignment: Alignment.topLeft,
                     color: ColorConsts.instance.lightSecondary,
@@ -42,12 +45,16 @@ class FlowView extends StatelessWidget {
                   ),
                   _buildTitle(
                     context,
+                    model,
+                    category: "",
                     text: "Ne Yesem?",
                     alignment: Alignment.topRight,
                     color: ColorConsts.instance.secondary,
                   ),
                   _buildTitle(
                     context,
+                    model,
+                    category: "",
                     text: "Favorilerim",
                     alignment: Alignment.topLeft,
                     color: ColorConsts.instance.primary,
@@ -65,9 +72,10 @@ class FlowView extends StatelessWidget {
         onDispose: (model) {});
   }
 
-  Widget _buildTitle(BuildContext context,
+  Widget _buildTitle(BuildContext context, FlowViewModel model,
       {required String text,
       required Alignment alignment,
+      required String category,
       required Color color}) {
     return Align(
       alignment: alignment,
@@ -92,7 +100,11 @@ class FlowView extends StatelessWidget {
               style: TextConsts.instance.regularBlack20Bold,
             ),
             CustomTextButton(
-              onPressed: () {},
+              onPressed: () =>
+                  model.navigationManager.navigate(CategoryListView(
+                category: category,
+                appBarColor: color,
+              )),
               style: TextConsts.instance.regularBlack14Underlined,
               text: "Tümünü Gör",
             ),
