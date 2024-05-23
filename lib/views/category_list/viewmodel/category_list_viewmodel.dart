@@ -24,7 +24,10 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
 
   String category = "";
   String categoryLocaleKey = "";
-  List<MenuModel> dataList = [];
+
+  @observable
+  ObservableList<MenuModel> dataList = ObservableList.of([]);
+
   bool isCategoryAdvert = false;
   final PublicService publicService = PublicService();
 
@@ -37,8 +40,9 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
   }
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
-    final List<MenuModel>? response =
-        await publicService.getAdvertedMenu(category);
+    final List<MenuModel>? response = await publicService.getAdvertedMenu(
+      category,
+    );
     if (response == null && kDebugMode) {
       showErrorDialog("$category getirilirken bir sorun oluştu");
       return null;
@@ -46,15 +50,23 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
     return response;
   }
 
+  Future<List<MenuModel>> _getMoreAdvertsFromApi() async {
+    final List<MenuModel>? response = await publicService.getMoreAdvertedMenu(
+        category, dataList.last.boostExpireDate!, accessToken!);
+    if (response == null && kDebugMode) {
+      showErrorDialog("Daha fazla $category getirilirken bir sorun oluştu");
+      return [];
+    }
+    return response ?? [];
+  }
+
   Future<List<MenuModel>> fetchData() async {
     await bringDataFromCacheOrApi(categoryLocaleKey, getFromApi: () async {
       //TODO: Add normal category function
       final List<MenuModel>? dataFromApi =
           isCategoryAdvert ? await _getAdvertsFromApi() : [];
-
-      await localeManager.setNullableJsonData(
-          categoryLocaleKey, dataFromApi?.map((e) => e.toJson()).toList());
-      dataList = dataFromApi ?? [];
+      await _setLocaleToMenu(dataFromApi);
+      dataList = ObservableList.of(dataFromApi ?? []);
     }, getFromCache: () {
       final List<dynamic> cachedData =
           localeManager.getJsonData(categoryLocaleKey);
@@ -62,6 +74,21 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
         dataList.add(MenuModel.fromJson(data));
       }
     });
+    return dataList;
+  }
+
+  Future<void> _setLocaleToMenu(List<MenuModel>? dataFromApi) async {
+    await localeManager.setNullableJsonData(
+        categoryLocaleKey, dataFromApi?.map((e) => e.toJson()).toList());
+  }
+
+  @action
+  Future<List<MenuModel>> fetchMoreData() async {
+    //TODO: Add normal category function
+    final List<MenuModel> dataFromApi =
+        isCategoryAdvert ? await _getMoreAdvertsFromApi() : [];
+    dataList = ObservableList.of(dataList + dataFromApi);
+    await _setLocaleToMenu(dataList);
     return dataList;
   }
 }

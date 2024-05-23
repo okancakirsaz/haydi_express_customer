@@ -39,6 +39,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
     return response;
   }
 
+  //TODO: *REVIEW* Do this function more growable
   Future<List<MenuModel>> fetchHaydiFirsatlar() async {
     await bringDataFromCacheOrApi(LocaleKeysEnums.haydiFirsatlar.name,
         getFromApi: () async {
@@ -71,5 +72,9 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
                 CreateAddressBottomSheet(viewModel: viewModel));
       });
     }
+  }
+
+  navigateToSeeAll(String category, Widget page) {
+    navigationManager.navigate(page);
   }
 }

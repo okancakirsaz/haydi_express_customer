@@ -29,4 +29,8 @@ abstract class NetworkManager {
       contentType: MediaType("File", name.split(".").last),
     );
   }
+
+  Map<String, dynamic> setHeaderAccessToken(String accessToken) {
+    return {'Authorization': 'Bearer $accessToken'};
+  }
 }

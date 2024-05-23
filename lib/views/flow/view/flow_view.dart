@@ -100,11 +100,12 @@ class FlowView extends StatelessWidget {
               style: TextConsts.instance.regularBlack20Bold,
             ),
             CustomTextButton(
-              onPressed: () =>
-                  model.navigationManager.navigate(CategoryListView(
-                category: category,
-                appBarColor: color,
-              )),
+              onPressed: () => model.navigateToSeeAll(
+                  category,
+                  CategoryListView(
+                    category: category,
+                    appBarColor: color,
+                  )),
               style: TextConsts.instance.regularBlack14Underlined,
               text: "Tümünü Gör",
             ),
@@ -115,17 +116,24 @@ class FlowView extends StatelessWidget {
   }
 
   Widget _buildList(BuildContext context, FlowViewModel model,
-      {required Future<dynamic> future}) {
+      {required Future<List<MenuModel>> future}) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 150,
-      child: FutureBuilder(
+      child: FutureBuilder<List<MenuModel>>(
         future: future,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
             return CategorizedFlowList(
-              dataList: snapshot.data,
+              dataList: snapshot.data!,
               viewModel: model,
+            );
+          } else if (snapshot.hasData && snapshot.data!.isEmpty) {
+            return Center(
+              child: Text(
+                "Şuan bir fırsat menüsü bulunmamakta.",
+                style: TextConsts.instance.regularBlack18Bold,
+              ),
             );
           } else {
             return SkeletonWidget(

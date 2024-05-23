@@ -3,6 +3,7 @@ import 'package:haydi_express_customer/core/init/cache/local_manager.dart';
 import 'package:haydi_express_customer/core/managers/navigation_manager.dart';
 import 'package:intl/intl.dart';
 
+import '../../init/cache/local_keys_enums.dart';
 import '../../widgets/error_dialog.dart';
 
 abstract mixin class BaseViewModel {
@@ -53,4 +54,7 @@ abstract mixin class BaseViewModel {
       throw Exception(e);
     }
   }
+
+  String? get accessToken =>
+      localeManager.getNullableStringData(LocaleKeysEnums.accessToken.name);
 }

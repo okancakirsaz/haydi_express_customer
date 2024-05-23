@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
@@ -7,6 +8,7 @@ import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
 import 'package:haydi_express_customer/core/widgets/vertical_list_minimized_menu.dart';
 import '../../../../core/base/view/base_view.dart';
+import '../../../core/widgets/custom_text_button.dart';
 import '../viewmodel/category_list_viewmodel.dart';
 
 class CategoryListView extends StatelessWidget {
@@ -43,7 +45,12 @@ class CategoryListView extends StatelessWidget {
                   future: model.fetchData(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return _buildList(model, snapshot.data!);
+                      return Expanded(
+                        child: Container(
+                          color: ColorConsts.instance.background,
+                          child: _buildList(model),
+                        ),
+                      );
                     } else {
                       return _buildSkeleton(model);
                     }
@@ -63,44 +70,41 @@ class CategoryListView extends StatelessWidget {
     );
   }
 
-  Widget _buildList(CategoryListViewModel model, List<MenuModel> data) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-      ),
-      itemCount: data.length + 1,
-      itemBuilder: (context, index) {
-        if (index == data.length) {
-          //TODO: Contuniue here
-          return Center(
-            child: CircularProgressIndicator(
-              color: ColorConsts.instance.primary,
-            ),
-          );
-        } else {
-          return VerticalListMinimizedMenu(
-            data: data[index],
-            calculatedDiscountedPrice: data[index].isOnDiscount
-                ? model.calculateDiscount(
-                    data[index].price, data[index].discountAmount!)
-                : null,
-          );
-        }
-      },
-    );
+  Widget _buildList(CategoryListViewModel model) {
+    return Observer(builder: (context) {
+      return GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+        ),
+        itemCount: model.dataList.length + 1,
+        itemBuilder: (context, index) {
+          if (index == model.dataList.length && model.dataList.isNotEmpty) {
+            return CustomTextButton(
+              onPressed: () async => model.fetchMoreData(),
+              text: "Daha fazla",
+              style: TextConsts.instance.regularBlack18Underlined,
+            );
+          } else if (model.dataList.isNotEmpty) {
+            return VerticalListMinimizedMenu(
+              data: model.dataList[index],
+              calculatedDiscountedPrice: model.dataList[index].isOnDiscount
+                  ? model.calculateDiscount(model.dataList[index].price,
+                      model.dataList[index].discountAmount!)
+                  : null,
+            );
+          } else {
+            return const SizedBox();
+          }
+        },
+      );
+    });
   }
 
   Widget _buildSkeleton(CategoryListViewModel model) {
-    return GridView.builder(
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemCount: 20,
-      itemBuilder: (context, index) {
-        return SkeletonWidget(
-            widget: VerticalListMinimizedMenu(
-                data: AppConst.instance.mockMenuModel));
-      },
+    return SkeletonWidget(
+      scrollDirection: Axis.vertical,
+      widget: VerticalListMinimizedMenu(data: AppConst.instance.mockMenuModel),
     );
   }
 }

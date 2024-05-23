@@ -230,6 +230,16 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularBlack18Underlined {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      decoration: TextDecoration.underline,
+      decorationColor: Colors.black,
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularBlack18Bold {
     return GoogleFonts.montserrat(
       fontSize: 18,
