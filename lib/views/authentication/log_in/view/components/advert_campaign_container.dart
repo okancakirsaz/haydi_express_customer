@@ -24,9 +24,13 @@ class AdvertCampaignContainer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  data.name,
-                  style: TextConsts.instance.regularBlack18Bold,
+                Container(
+                  constraints: const BoxConstraints(maxWidth: 200),
+                  child: Text(
+                    data.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextConsts.instance.regularBlack18Bold,
+                  ),
                 ),
                 Text(
                   data.restaurantName,

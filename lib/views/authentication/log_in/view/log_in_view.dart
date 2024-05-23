@@ -21,7 +21,6 @@ import '../../../../core/base/view/base_view.dart';
 part './components/advert_campaigns.dart';
 part './components/advert_campaign_container.dart';
 
-//TODO: We have overflow problem on keyboard open fix it.
 class LogInView extends StatelessWidget {
   const LogInView({super.key});
 
