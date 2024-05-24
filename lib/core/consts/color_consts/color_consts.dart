@@ -11,6 +11,7 @@ class ColorConsts {
   final Color third = const Color(0xFF401F71);
   final Color lightThird = const Color(0xFF6230AD);
   final Color blurGrey = const Color(0xB4CCCCCC);
+  final Color darkBlurGrey = const Color(0xB4989898);
   final List<BoxShadow> shadow = [
     const BoxShadow(
       offset: Offset(3, 3),

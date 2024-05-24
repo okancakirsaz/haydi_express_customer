@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
@@ -10,13 +12,13 @@ import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
 import 'package:haydi_express_customer/core/widgets/minimized_menu.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
 import 'package:haydi_express_customer/views/category_list/view/category_list_view.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../core/init/model/menu_model.dart';
 import '../viewmodel/flow_viewmodel.dart';
 
 part './components/categorized_flow_list.dart';
 part './components/create_address_bottom_sheet.dart';
+part './components/search_bar.dart';
 
 class FlowView extends StatelessWidget {
   const FlowView({super.key});
@@ -30,6 +32,13 @@ class FlowView extends StatelessWidget {
             body: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
+                  Padding(
+                    padding: PaddingConsts.instance.top20,
+                    child: Padding(
+                      padding: PaddingConsts.instance.horizontal10,
+                      child: CustomSearchBar(viewModel: model),
+                    ),
+                  ),
                   _buildTitle(
                     context,
                     model,

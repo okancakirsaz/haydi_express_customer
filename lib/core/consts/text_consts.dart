@@ -126,6 +126,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularLightGrey18 {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      color: const Color(0xFFE8E8E8),
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularWhite16LineThrough {
     return GoogleFonts.montserrat(
       fontSize: 16,

@@ -20,14 +20,39 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   initViewModelInstance(FlowViewModel model) => viewModelInstance = model;
 
   @override
-  init() {
+  init() async {
     checkIsUserHaveAnyAddress(viewModelInstance);
+    await changeSearchBarHint();
   }
 
   late final FlowViewModel viewModelInstance;
 
   List<MenuModel> haydiFirsatlar = [];
   final PublicService publicService = PublicService();
+
+  @observable
+  String searchBarHint = "";
+
+  List<String> searchBarHints = [
+    "Restoran Adı",
+    "Örn: Gülyurt",
+    "Menü Adı",
+    "Örn: BigMac Menü",
+    "Anahtar Kelime",
+    "Örn: Döner"
+  ];
+
+  @action
+  Future<void> changeSearchBarHint() async {
+    for (String hint in searchBarHints) {
+      await Future.delayed(const Duration(milliseconds: 1000));
+      searchBarHint = "";
+      for (int i = 0; i <= hint.length - 1; i++) {
+        searchBarHint += hint[i];
+        await Future.delayed(const Duration(milliseconds: 200));
+      }
+    }
+  }
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
     final List<MenuModel>? response =
