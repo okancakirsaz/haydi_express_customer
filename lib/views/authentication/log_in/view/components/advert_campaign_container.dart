@@ -10,7 +10,7 @@ class AdvertCampaignContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: PaddingConsts.instance.bottom25,
-      constraints: const BoxConstraints(maxHeight: 60, maxWidth: 220),
+      constraints: const BoxConstraints(maxHeight: 60, maxWidth: 170),
       decoration: BoxDecoration(
         color: ColorConsts.instance.blurGrey,
         borderRadius: RadiusConsts.instance.circularAll10,
@@ -25,7 +25,7 @@ class AdvertCampaignContainer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  constraints: const BoxConstraints(maxWidth: 200),
+                  constraints: const BoxConstraints(maxWidth: 120),
                   child: Text(
                     data.name,
                     overflow: TextOverflow.ellipsis,

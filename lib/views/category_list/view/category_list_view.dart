@@ -75,7 +75,7 @@ class CategoryListView extends StatelessWidget {
       return GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.8,
+          childAspectRatio: 0.75,
         ),
         itemCount: model.dataList.length + 1,
         itemBuilder: (context, index) {
