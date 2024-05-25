@@ -8,7 +8,7 @@ import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
 import 'package:haydi_express_customer/core/widgets/vertical_list_minimized_menu.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../core/widgets/custom_text_button.dart';
+import '../../../core/widgets/custom_statefull_text_button.dart';
 import '../viewmodel/category_list_viewmodel.dart';
 
 class CategoryListView extends StatelessWidget {
@@ -80,7 +80,7 @@ class CategoryListView extends StatelessWidget {
         itemCount: model.dataList.length + 1,
         itemBuilder: (context, index) {
           if (index == model.dataList.length && model.dataList.isNotEmpty) {
-            return CustomTextButton(
+            return CustomStateFullTextButton(
               onPressed: () async => model.fetchMoreData(),
               text: "Daha fazla",
               style: TextConsts.instance.regularBlack18Underlined,

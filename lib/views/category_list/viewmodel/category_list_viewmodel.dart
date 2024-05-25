@@ -113,6 +113,9 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
     final List<MenuModel> dataFromApi = isCategoryAdvert
         ? await _getMoreAdvertsFromApi()
         : await _getMoreMenuFromApi();
+    if (dataFromApi.isEmpty) {
+      showErrorDialog("Daha fazla menü bulunmamakta.");
+    }
     dataList = ObservableList.of(dataList + dataFromApi);
     await _setLocaleToMenu(dataList);
     return dataList;
