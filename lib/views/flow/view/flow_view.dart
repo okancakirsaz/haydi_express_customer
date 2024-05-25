@@ -55,10 +55,15 @@ class FlowView extends StatelessWidget {
                   _buildTitle(
                     context,
                     model,
-                    category: "",
+                    category: AppConst.instance.discover,
                     text: "Ne Yesem?",
                     alignment: Alignment.topRight,
                     color: ColorConsts.instance.secondary,
+                  ),
+                  _buildList(
+                    context,
+                    model,
+                    future: model.fetchDiscover(),
                   ),
                   _buildTitle(
                     context,

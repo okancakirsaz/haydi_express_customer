@@ -21,6 +21,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     await localeManager.getSharedPreferencesInstance();
     //await localeManager.removeData(LocaleKeysEnums.id.name);
     await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
+    await localeManager.removeData(LocaleKeysEnums.discover.name);
     _checkLoggedInState();
     return defaultWidget;
   }

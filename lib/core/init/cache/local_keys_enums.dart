@@ -4,5 +4,6 @@ enum LocaleKeysEnums {
   password,
   email,
   haydiFirsatlar,
+  discover,
   addresses
 }

@@ -38,4 +38,36 @@ final class PublicService extends NetworkManager {
       return null;
     }
   }
+
+  Future<List<MenuModel>?> getDiscoverMenu(String accessToken) async {
+    try {
+      final response = await network.get(Endpoints.instance.discover,
+          options: Options(headers: setHeaderAccessToken(accessToken)));
+
+      final List<MenuModel> dataList = [];
+      for (Map<String, dynamic> data in response.data) {
+        dataList.add(MenuModel.fromJson(data));
+      }
+      return dataList;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<List<MenuModel>?> getMoreDiscoverMenu(
+      int likeRatio, String accessToken) async {
+    try {
+      final response = await network.get(Endpoints.instance.getMoreDiscover,
+          queryParameters: {"likeRatio": likeRatio},
+          options: Options(headers: setHeaderAccessToken(accessToken)));
+
+      final List<MenuModel> dataList = [];
+      for (Map<String, dynamic> data in response.data) {
+        dataList.add(MenuModel.fromJson(data));
+      }
+      return dataList;
+    } catch (e) {
+      return null;
+    }
+  }
 }

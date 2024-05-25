@@ -37,6 +37,12 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
       isCategoryAdvert = true;
       return;
     }
+
+    if (category == AppConst.instance.discover) {
+      categoryLocaleKey = LocaleKeysEnums.discover.name;
+      isCategoryAdvert = false;
+      return;
+    }
   }
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
@@ -50,6 +56,16 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
     return response;
   }
 
+  Future<List<MenuModel>> _getMoreMenuFromApi() async {
+    final List<MenuModel>? response = await publicService.getMoreDiscoverMenu(
+        dataList.last.stats.likeRatio, accessToken!);
+    if (response == null && kDebugMode) {
+      showErrorDialog("Daha fazla $category getirilirken bir sorun oluştu");
+      return [];
+    }
+    return response ?? [];
+  }
+
   Future<List<MenuModel>> _getMoreAdvertsFromApi() async {
     final List<MenuModel>? response = await publicService.getMoreAdvertedMenu(
         category, dataList.last.boostExpireDate!, accessToken!);
@@ -60,11 +76,21 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
     return response ?? [];
   }
 
+  Future<List<MenuModel>?> _getMenuFromApi() async {
+    final List<MenuModel>? response =
+        await publicService.getDiscoverMenu(accessToken!);
+    if (response == null && kDebugMode) {
+      showErrorDialog("$category getirilirken bir sorun oluştu");
+      return null;
+    }
+    return response;
+  }
+
   Future<List<MenuModel>> fetchData() async {
     await bringDataFromCacheOrApi(categoryLocaleKey, getFromApi: () async {
-      //TODO: Add normal category function
-      final List<MenuModel>? dataFromApi =
-          isCategoryAdvert ? await _getAdvertsFromApi() : [];
+      final List<MenuModel>? dataFromApi = isCategoryAdvert
+          ? await _getAdvertsFromApi()
+          : await _getMenuFromApi();
       await _setLocaleToMenu(dataFromApi);
       dataList = ObservableList.of(dataFromApi ?? []);
     }, getFromCache: () {
@@ -84,9 +110,9 @@ abstract class _CategoryListViewModelBase with Store, BaseViewModel {
 
   @action
   Future<List<MenuModel>> fetchMoreData() async {
-    //TODO: Add normal category function
-    final List<MenuModel> dataFromApi =
-        isCategoryAdvert ? await _getMoreAdvertsFromApi() : [];
+    final List<MenuModel> dataFromApi = isCategoryAdvert
+        ? await _getMoreAdvertsFromApi()
+        : await _getMoreMenuFromApi();
     dataList = ObservableList.of(dataList + dataFromApi);
     await _setLocaleToMenu(dataList);
     return dataList;

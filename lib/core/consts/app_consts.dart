@@ -31,4 +31,5 @@ class AppConst {
 
   //Flow categories
   final String haydiFirsatlar = "Haydi Fırsatlar";
+  final String discover = "Ne Yesem?";
 }

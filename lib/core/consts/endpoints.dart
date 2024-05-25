@@ -14,4 +14,6 @@ final class Endpoints {
   //Flow
   final String getAdvertedMenus = "/flow/adverted-menu";
   final String getMoreAdvertedMenus = "/flow/more-adverted-menu";
+  final String discover = "/flow/discover";
+  final String getMoreDiscover = "/flow/more-discover";
 }

@@ -28,6 +28,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   late final FlowViewModel viewModelInstance;
 
   List<MenuModel> haydiFirsatlar = [];
+  List<MenuModel> discover = [];
   final PublicService publicService = PublicService();
 
   @observable
@@ -64,7 +65,16 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
     return response;
   }
 
-  //TODO: *REVIEW* Do this function more growable
+  Future<List<MenuModel>?> _getDiscoverFromApi() async {
+    final List<MenuModel>? response =
+        await publicService.getDiscoverMenu(accessToken!);
+    if (response == null && kDebugMode) {
+      showErrorDialog("Ne Yesem getirilirken bir sorun oluştu");
+      return null;
+    }
+    return response;
+  }
+
   Future<List<MenuModel>> fetchHaydiFirsatlar() async {
     await bringDataFromCacheOrApi(LocaleKeysEnums.haydiFirsatlar.name,
         getFromApi: () async {
@@ -81,6 +91,23 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
       }
     });
     return haydiFirsatlar;
+  }
+
+  Future<List<MenuModel>> fetchDiscover() async {
+    await bringDataFromCacheOrApi(LocaleKeysEnums.discover.name,
+        getFromApi: () async {
+      final List<MenuModel>? dataFromApi = await _getDiscoverFromApi();
+      await localeManager.setNullableJsonData(LocaleKeysEnums.discover.name,
+          dataFromApi?.map((e) => e.toJson()).toList());
+      discover = dataFromApi ?? [];
+    }, getFromCache: () {
+      final List<dynamic> cachedData =
+          localeManager.getJsonData(LocaleKeysEnums.discover.name);
+      for (Map<String, dynamic> data in cachedData) {
+        discover.add(MenuModel.fromJson(data));
+      }
+    });
+    return discover;
   }
 
   checkIsUserHaveAnyAddress(FlowViewModel viewModel) {
