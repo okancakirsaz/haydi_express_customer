@@ -1,10 +1,12 @@
 import 'package:haydi_express_customer/core/init/model/comment_model.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/init/model/menu_stats_model.dart';
+import 'package:haydi_express_customer/core/init/model/suggestion_model.dart';
 
 class AppConst {
   static final AppConst instance = AppConst();
 
+  //Mock Models
   MenuModel mockMenuModel = MenuModel(
     name: "Example Name",
     price: 100,
@@ -27,6 +29,66 @@ class AppConst {
       ],
     ),
     restaurantName: "restaurantName",
+  );
+
+  final SuggestionModel restaurantSuggestionBoosted = SuggestionModel(
+    name: "Mock Restaurant",
+    isRestaurant: true,
+    isOnDiscount: false,
+    isBoosted: true,
+    price: 0,
+    discountAmount: 0,
+    elementId: "mock-element-id",
+  );
+
+  final SuggestionModel restaurantSuggestion = SuggestionModel(
+    name: "Mock Restaurant 2",
+    isRestaurant: true,
+    isOnDiscount: false,
+    isBoosted: false,
+    price: 0,
+    discountAmount: 0,
+    elementId: "mock-element-id6",
+  );
+
+  final SuggestionModel menuSuggestionBoostedDiscounted = SuggestionModel(
+    name: "Mock Menu 1",
+    isRestaurant: false,
+    isOnDiscount: true,
+    isBoosted: true,
+    price: 100,
+    discountAmount: 20,
+    elementId: "mock-element-id2",
+  );
+
+  final SuggestionModel menuSuggestionBoosted = SuggestionModel(
+    name: "Mock Menu 2",
+    isRestaurant: false,
+    isOnDiscount: false,
+    isBoosted: true,
+    price: 100,
+    discountAmount: 0,
+    elementId: "mock-element-id3",
+  );
+
+  final SuggestionModel menuSuggestionDiscounted = SuggestionModel(
+    name: "Mock Menu 3",
+    isRestaurant: false,
+    isOnDiscount: true,
+    isBoosted: false,
+    price: 100,
+    discountAmount: 20,
+    elementId: "mock-element-id4",
+  );
+
+  final SuggestionModel menuSuggestion = SuggestionModel(
+    name: "Mock Menu 4",
+    isRestaurant: false,
+    isOnDiscount: false,
+    isBoosted: false,
+    price: 100,
+    discountAmount: 0,
+    elementId: "mock-element-id5",
   );
 
   //Flow categories

@@ -39,15 +39,17 @@ class CustomSearchBar extends StatelessWidget {
         },
         suggestionsBuilder:
             (BuildContext context, SearchController controller) {
-          //TODO: build suggestions
-          return List<Widget>.generate(15, (int index) {
-            final String item = 'item $index';
-            return Card(
-              color: ColorConsts.instance.lightThird,
-              child: ListTile(
-                title: Text(item),
-              ),
-            );
+          //TODO: Remove mock values and continue
+          return List<Widget>.generate(6, (int index) {
+            final List<SuggestionModel> items = [
+              AppConst.instance.menuSuggestionBoosted,
+              AppConst.instance.menuSuggestionBoostedDiscounted,
+              AppConst.instance.restaurantSuggestionBoosted,
+              AppConst.instance.menuSuggestion,
+              AppConst.instance.menuSuggestionDiscounted,
+              AppConst.instance.restaurantSuggestion,
+            ];
+            return Suggestion(data: items[index], viewModel: viewModel);
           });
         });
   }

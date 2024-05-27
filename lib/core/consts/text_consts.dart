@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 
 class TextConsts {
   static final TextConsts instance = TextConsts();
 
+  //White
   TextStyle get regularWhite25 {
     return GoogleFonts.montserrat(
       fontSize: 25,
@@ -14,51 +14,16 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularWhite25Bold {
+    return GoogleFonts.montserrat(
+        fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold);
+  }
+
   TextStyle get regularWhite22 {
     return GoogleFonts.montserrat(
       fontSize: 22,
       color: Colors.white,
       fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularBlack25 {
-    return GoogleFonts.montserrat(
-      fontSize: 25,
-      color: Colors.black,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularBlack25Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 25,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularBlack23Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 23,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularBlack20Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 20,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularBlack36Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 36,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
     );
   }
 
@@ -70,25 +35,9 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularWhite14 {
+  TextStyle get regularWhite20Bold {
     return GoogleFonts.montserrat(
-      fontSize: 14,
-      color: Colors.white,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularWhite12 {
-    return GoogleFonts.montserrat(
-      fontSize: 12,
-      color: Colors.white,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularWhite14Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 14,
+      fontSize: 20,
       color: Colors.white,
       fontWeight: FontWeight.bold,
     );
@@ -102,34 +51,10 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularThird16Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: ColorConsts.instance.third,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularThird20 {
-    return GoogleFonts.montserrat(
-      fontSize: 20,
-      color: ColorConsts.instance.third,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
   TextStyle get regularWhite16 {
     return GoogleFonts.montserrat(
       fontSize: 16,
       color: Colors.white,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularLightGrey18 {
-    return GoogleFonts.montserrat(
-      fontSize: 18,
-      color: const Color(0xFFE8E8E8),
       fontWeight: FontWeight.normal,
     );
   }
@@ -144,55 +69,52 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularPrimary16LineThrough {
+  TextStyle get regularWhite14 {
     return GoogleFonts.montserrat(
-      fontSize: 16,
-      decoration: TextDecoration.lineThrough,
-      color: ColorConsts.instance.primary,
-      decorationColor: ColorConsts.instance.primary,
+      fontSize: 14,
+      color: Colors.white,
       fontWeight: FontWeight.normal,
     );
   }
 
-  TextStyle get regularPrimary16 {
+  TextStyle get regularWhite14Bold {
     return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: ColorConsts.instance.primary,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularPrimary18Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 18,
-      color: ColorConsts.instance.primary,
+      fontSize: 14,
+      color: Colors.white,
       fontWeight: FontWeight.bold,
     );
   }
 
-  TextStyle get regularPrimary12 {
+  TextStyle get regularWhite12 {
     return GoogleFonts.montserrat(
       fontSize: 12,
-      color: ColorConsts.instance.primary,
+      color: Colors.white,
       fontWeight: FontWeight.normal,
     );
   }
 
-  TextStyle get regularPrimary16Underlined {
+  //Black
+  TextStyle get regularBlack25Bold {
     return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: ColorConsts.instance.primary,
-      decoration: TextDecoration.underline,
-      fontWeight: FontWeight.normal,
-      decorationColor: ColorConsts.instance.primary,
+      fontSize: 25,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
     );
   }
 
-  TextStyle get regularPrimary20 {
+  TextStyle get regularBlack25 {
     return GoogleFonts.montserrat(
-      fontSize: 20,
-      color: ColorConsts.instance.primary,
+      fontSize: 25,
+      color: Colors.black,
       fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularBlack23Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 23,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
     );
   }
 
@@ -204,9 +126,43 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularBlack12 {
+  TextStyle get regularBlack20Bold {
     return GoogleFonts.montserrat(
-      fontSize: 12,
+      fontSize: 20,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle get regularBlack18Underlined {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      decoration: TextDecoration.underline,
+      decorationColor: Colors.black,
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularBlack18Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle get regularBlack16Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: Colors.black,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle get regularBlack16 {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
       color: Colors.black,
       fontWeight: FontWeight.normal,
     );
@@ -238,93 +194,123 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularBlack18Underlined {
+  TextStyle get regularBlack12 {
     return GoogleFonts.montserrat(
-      fontSize: 18,
-      decoration: TextDecoration.underline,
-      decorationColor: Colors.black,
+      fontSize: 12,
       color: Colors.black,
       fontWeight: FontWeight.normal,
     );
   }
 
-  TextStyle get regularBlack18Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 18,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularBlack16 {
-    return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: Colors.black,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularBlack16Bold {
-    return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  TextStyle get regularWhite30Underline5Spaced {
-    return GoogleFonts.montserrat(
-      fontSize: 30,
-      color: Colors.white,
-      decoration: TextDecoration.underline,
-      decorationColor: Colors.white,
-      letterSpacing: 5.5,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
-  TextStyle get regularWhite20Underlined {
-    return GoogleFonts.montserrat(
-        fontSize: 20,
-        decoration: TextDecoration.underline,
-        color: Colors.white,
-        fontWeight: FontWeight.normal,
-        decorationColor: Colors.white);
-  }
-
-  TextStyle get regularWhite20Bold {
+  //Primary
+  TextStyle get regularPrimary20 {
     return GoogleFonts.montserrat(
       fontSize: 20,
-      color: Colors.white,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary18Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      color: ColorConsts.instance.primary,
       fontWeight: FontWeight.bold,
     );
   }
 
-  TextStyle get regularWhite35Bold {
+  TextStyle get regularPrimary16 {
     return GoogleFonts.montserrat(
-      fontSize: 35,
-      color: Colors.white,
+      fontSize: 16,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary16LineThrough {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      decoration: TextDecoration.lineThrough,
+      color: ColorConsts.instance.primary,
+      decorationColor: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary16Underlined {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: ColorConsts.instance.primary,
+      decoration: TextDecoration.underline,
+      fontWeight: FontWeight.normal,
+      decorationColor: ColorConsts.instance.primary,
+    );
+  }
+
+  TextStyle get regularPrimary12 {
+    return GoogleFonts.montserrat(
+      fontSize: 12,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  //Third
+  TextStyle get regularThird20 {
+    return GoogleFonts.montserrat(
+      fontSize: 20,
+      color: ColorConsts.instance.third,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularThird16Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: ColorConsts.instance.third,
       fontWeight: FontWeight.bold,
     );
   }
 
-  TextStyle get regularWhite30 {
+  //Other
+  TextStyle get regularLightGrey18 {
     return GoogleFonts.montserrat(
-        fontSize: 30, color: Colors.white, fontWeight: FontWeight.normal);
+      fontSize: 18,
+      color: const Color(0xFFE8E8E8),
+      fontWeight: FontWeight.normal,
+    );
   }
 
-  TextStyle get regularWhite30Bold {
+  //Custom
+  TextStyle regularBoldCustomColor18(Color color) {
     return GoogleFonts.montserrat(
-        fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold);
+      fontSize: 18,
+      color: color,
+      fontWeight: FontWeight.bold,
+    );
   }
 
-  TextStyle get regularWhite25Bold {
+  TextStyle regularBoldCustomColor16(Color color) {
     return GoogleFonts.montserrat(
-        fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold);
+      fontSize: 16,
+      color: color,
+      fontWeight: FontWeight.bold,
+    );
   }
 
-  TextStyle get regularWhite40Bold {
+  TextStyle regularCustomColor16(Color color) {
     return GoogleFonts.montserrat(
-        fontSize: 40, color: Colors.white, fontWeight: FontWeight.bold);
+      fontSize: 16,
+      color: color,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle regularCustomColor14(Color color) {
+    return GoogleFonts.montserrat(
+      fontSize: 14,
+      color: color,
+      fontWeight: FontWeight.normal,
+    );
   }
 }

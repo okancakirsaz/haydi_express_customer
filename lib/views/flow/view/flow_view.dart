@@ -6,11 +6,13 @@ import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dar
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/init/model/suggestion_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
 import 'package:haydi_express_customer/core/widgets/minimized_menu.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
+import 'package:haydi_express_customer/core/widgets/suggestion.dart';
 import 'package:haydi_express_customer/views/category_list/view/category_list_view.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../core/init/model/menu_model.dart';
@@ -145,6 +147,7 @@ class FlowView extends StatelessWidget {
           } else if (snapshot.hasData && snapshot.data!.isEmpty) {
             return Center(
               child: Text(
+                //TODO: Add new text
                 "Şuan bir fırsat menüsü bulunmamakta.",
                 style: TextConsts.instance.regularBlack18Bold,
               ),
