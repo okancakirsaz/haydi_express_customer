@@ -5,9 +5,12 @@ import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/services/public_service.dart';
+import 'package:haydi_express_customer/views/flow/service/flow_service.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
+
+import '../../../core/init/model/suggestion_model.dart';
 
 part 'flow_viewmodel.g.dart';
 
@@ -22,6 +25,9 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   @override
   init() async {
     checkIsUserHaveAnyAddress(viewModelInstance);
+    await getSearchAds();
+    _initSuggestions();
+    print(suggestions);
     await changeSearchBarHint();
   }
 
@@ -29,7 +35,11 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   List<MenuModel> haydiFirsatlar = [];
   List<MenuModel> discover = [];
+
+  @observable
+  ObservableList<SuggestionModel> suggestions = ObservableList.of([]);
   final PublicService publicService = PublicService();
+  final FlowService service = FlowService();
 
   @observable
   String searchBarHint = "";
@@ -128,5 +138,36 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   navigateToSeeAll(String category, Widget page) {
     navigationManager.navigate(page);
+  }
+
+  _initSuggestions() async {
+    List<dynamic> suggestionsRaw = localeManager
+            .getNullableJsonData(LocaleKeysEnums.advertSuggestions.name) ??
+        [];
+    List<SuggestionModel> advertSuggestions = [];
+
+    for (dynamic suggestion in suggestionsRaw) {
+      advertSuggestions.add(SuggestionModel.fromJson(suggestion));
+    }
+
+    suggestions = ObservableList.of(advertSuggestions);
+  }
+
+  Future<void> getSearchAds() async {
+    final List<SuggestionModel>? response =
+        await service.getSearchAds(accessToken!);
+    if (response == null) {
+      showErrorDialog();
+      return;
+    }
+
+    final List<Map<String, dynamic>> responseRaw = [];
+
+    for (SuggestionModel data in response) {
+      responseRaw.add(data.toJson());
+    }
+
+    await localeManager.setJsonData(
+        LocaleKeysEnums.advertSuggestions.name, responseRaw);
   }
 }

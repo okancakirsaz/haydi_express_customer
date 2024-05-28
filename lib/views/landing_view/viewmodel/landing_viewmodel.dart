@@ -20,10 +20,15 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     WebSocketManager.instance.initializeSocketConnection();
     await localeManager.getSharedPreferencesInstance();
     //await localeManager.removeData(LocaleKeysEnums.id.name);
-    await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
-    await localeManager.removeData(LocaleKeysEnums.discover.name);
+    await _clearCache();
     _checkLoggedInState();
     return defaultWidget;
+  }
+
+  Future<void> _clearCache() async {
+    await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
+    await localeManager.removeData(LocaleKeysEnums.discover.name);
+    await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
   }
 
   Widget defaultWidget = const SplashScreen();

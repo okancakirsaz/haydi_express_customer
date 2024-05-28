@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/app_consts.dart';
@@ -6,7 +5,6 @@ import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dar
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:haydi_express_customer/core/init/model/suggestion_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
@@ -163,5 +161,3 @@ class FlowView extends StatelessWidget {
     );
   }
 }
-
-// 

@@ -5,5 +5,6 @@ enum LocaleKeysEnums {
   email,
   haydiFirsatlar,
   discover,
-  addresses
+  addresses,
+  advertSuggestions
 }
