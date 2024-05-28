@@ -31,8 +31,10 @@ class Suggestion extends StatelessWidget {
               : null,
           title: Text(
             data.name,
+            overflow: TextOverflow.ellipsis,
             style: TextConsts.instance.regularBoldCustomColor18(
-                data.isBoosted ? Colors.white : Colors.black),
+              data.isBoosted ? Colors.white : Colors.black,
+            ),
           ),
           subtitle: data.isRestaurant
               ? Text(
