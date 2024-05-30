@@ -25,9 +25,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   @override
   init() async {
     checkIsUserHaveAnyAddress(viewModelInstance);
-    await getSearchAds();
     _initSuggestions();
-    print(suggestions);
     await changeSearchBarHint();
   }
 
@@ -68,8 +66,10 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
     final List<MenuModel>? response =
         await publicService.getAdvertedMenu(AppConst.instance.haydiFirsatlar);
-    if (response == null && kDebugMode) {
-      showErrorDialog("Haydi Fırsatlar getirilirken bir sorun oluştu");
+    if (response == null) {
+      kDebugMode
+          ? showErrorDialog("Haydi Fırsatlar getirilirken bir sorun oluştu")
+          : null;
       return null;
     }
     return response;
@@ -78,8 +78,10 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   Future<List<MenuModel>?> _getDiscoverFromApi() async {
     final List<MenuModel>? response =
         await publicService.getDiscoverMenu(accessToken!);
-    if (response == null && kDebugMode) {
-      showErrorDialog("Ne Yesem getirilirken bir sorun oluştu");
+    if (response == null) {
+      kDebugMode
+          ? showErrorDialog("Ne Yesem getirilirken bir sorun oluştu")
+          : null;
       return null;
     }
     return response;
@@ -141,24 +143,31 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   }
 
   _initSuggestions() async {
-    List<dynamic> suggestionsRaw = localeManager
-            .getNullableJsonData(LocaleKeysEnums.advertSuggestions.name) ??
-        [];
-    List<SuggestionModel> advertSuggestions = [];
+    await bringDataFromCacheOrApi(
+      LocaleKeysEnums.advertSuggestions.name,
+      getFromApi: () async {
+        await getSearchAds();
+      },
+      getFromCache: () {
+        List<dynamic> suggestionsRaw = localeManager
+                .getNullableJsonData(LocaleKeysEnums.advertSuggestions.name) ??
+            [];
+        List<SuggestionModel> advertSuggestions = [];
 
-    for (dynamic suggestion in suggestionsRaw) {
-      advertSuggestions.add(SuggestionModel.fromJson(suggestion));
-    }
+        for (dynamic suggestion in suggestionsRaw) {
+          advertSuggestions.add(SuggestionModel.fromJson(suggestion));
+        }
 
-    suggestions = ObservableList.of(advertSuggestions);
+        suggestions = ObservableList.of(advertSuggestions);
+      },
+    );
   }
 
-  Future<void> getSearchAds() async {
+  Future<List<SuggestionModel>> getSearchAds() async {
     final List<SuggestionModel>? response =
         await service.getSearchAds(accessToken!);
     if (response == null) {
-      showErrorDialog();
-      return;
+      return [];
     }
 
     final List<Map<String, dynamic>> responseRaw = [];
@@ -169,5 +178,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
     await localeManager.setJsonData(
         LocaleKeysEnums.advertSuggestions.name, responseRaw);
+    suggestions = ObservableList.of(response);
+    return response;
   }
 }

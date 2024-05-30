@@ -95,6 +95,7 @@ class SimpleDataInputs extends StatelessWidget {
         Padding(
           padding: PaddingConsts.instance.top10,
           child: CustomButton(
+            style: TextConsts.instance.regularWhite20,
             onPressed: () => viewModel.setCurrentBody(
               PersonalDataInputs(viewModel: viewModel),
               2,
