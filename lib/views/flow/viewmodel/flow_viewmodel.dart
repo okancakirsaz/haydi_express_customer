@@ -9,9 +9,6 @@ import 'package:haydi_express_customer/views/flow/service/flow_service.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../core/init/model/suggestion_model.dart';
-
 part 'flow_viewmodel.g.dart';
 
 class FlowViewModel = _FlowViewModelBase with _$FlowViewModel;
@@ -25,8 +22,6 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   @override
   init() async {
     checkIsUserHaveAnyAddress(viewModelInstance);
-    _initSuggestions();
-    await changeSearchBarHint();
   }
 
   late final FlowViewModel viewModelInstance;
@@ -34,34 +29,8 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   List<MenuModel> haydiFirsatlar = [];
   List<MenuModel> discover = [];
 
-  @observable
-  ObservableList<SuggestionModel> suggestions = ObservableList.of([]);
   final PublicService publicService = PublicService();
   final FlowService service = FlowService();
-
-  @observable
-  String searchBarHint = "";
-
-  List<String> searchBarHints = [
-    "Restoran Adı",
-    "Örn: Gülyurt",
-    "Menü Adı",
-    "Örn: BigMac Menü",
-    "Anahtar Kelime",
-    "Örn: Döner"
-  ];
-
-  @action
-  Future<void> changeSearchBarHint() async {
-    for (String hint in searchBarHints) {
-      await Future.delayed(const Duration(milliseconds: 1000));
-      searchBarHint = "";
-      for (int i = 0; i <= hint.length - 1; i++) {
-        searchBarHint += hint[i];
-        await Future.delayed(const Duration(milliseconds: 200));
-      }
-    }
-  }
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
     final List<MenuModel>? response =
@@ -140,45 +109,5 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   navigateToSeeAll(String category, Widget page) {
     navigationManager.navigate(page);
-  }
-
-  _initSuggestions() async {
-    await bringDataFromCacheOrApi(
-      LocaleKeysEnums.advertSuggestions.name,
-      getFromApi: () async {
-        await getSearchAds();
-      },
-      getFromCache: () {
-        List<dynamic> suggestionsRaw = localeManager
-                .getNullableJsonData(LocaleKeysEnums.advertSuggestions.name) ??
-            [];
-        List<SuggestionModel> advertSuggestions = [];
-
-        for (dynamic suggestion in suggestionsRaw) {
-          advertSuggestions.add(SuggestionModel.fromJson(suggestion));
-        }
-
-        suggestions = ObservableList.of(advertSuggestions);
-      },
-    );
-  }
-
-  Future<List<SuggestionModel>> getSearchAds() async {
-    final List<SuggestionModel>? response =
-        await service.getSearchAds(accessToken!);
-    if (response == null) {
-      return [];
-    }
-
-    final List<Map<String, dynamic>> responseRaw = [];
-
-    for (SuggestionModel data in response) {
-      responseRaw.add(data.toJson());
-    }
-
-    await localeManager.setJsonData(
-        LocaleKeysEnums.advertSuggestions.name, responseRaw);
-    suggestions = ObservableList.of(response);
-    return response;
   }
 }

@@ -30,7 +30,7 @@ class CustomStateFullButton extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: ColorConsts.instance.primary,
-        border: Border.all(),
+        border: Border.all(color: Colors.transparent),
         borderRadius: RadiusConsts.instance.circularAll10,
       ),
       child: EasyButton(

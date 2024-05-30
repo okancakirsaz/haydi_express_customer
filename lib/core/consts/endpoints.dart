@@ -18,5 +18,6 @@ final class Endpoints {
   final String getMoreDiscover = "/flow/more-discover";
 
   //Search
+  final String search = "/search";
   final String getSearchAds = "/search/get-search-ads";
 }

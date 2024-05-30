@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
@@ -8,7 +10,8 @@ abstract class NetworkManager {
   }
   final Dio network = Dio();
 
-  final String localHost = "http://localhost:3000";
+  final String localHost =
+      Platform.isAndroid ? "http://10.0.2.2:3000" : "http://localhost:3000";
 
   //TODO: Use base product url
   final String baseUrlProduct = "https://haydiexpress.api.com";

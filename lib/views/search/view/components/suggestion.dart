@@ -1,16 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:haydi_express_customer/core/base/viewmodel/base_viewmodel.dart';
-import 'package:haydi_express_customer/core/consts/asset_consts.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
-
-import '../init/model/suggestion_model.dart';
+part of '../search_view.dart';
 
 class Suggestion extends StatelessWidget {
   final SuggestionModel data;
-  final BaseViewModel viewModel;
+  final SearchViewModel viewModel;
   const Suggestion({super.key, required this.data, required this.viewModel});
 
   @override
@@ -22,6 +14,7 @@ class Suggestion extends StatelessWidget {
       child: SizedBox(
         height: 65,
         child: ListTile(
+          onTap: () async => await viewModel.onSuggestionTap(data),
           minVerticalPadding: 0,
           leading: data.isBoosted
               ? SvgPicture.asset(

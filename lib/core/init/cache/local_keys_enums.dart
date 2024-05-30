@@ -6,5 +6,6 @@ enum LocaleKeysEnums {
   haydiFirsatlar,
   discover,
   addresses,
+  favSuggestions,
   advertSuggestions
 }
