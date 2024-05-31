@@ -17,6 +17,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
 
   @override
   init() async {
+    //await localeManager.removeData(LocaleKeysEnums.favSuggestions.name);
     _initSuggestions();
     await changeSearchBarHint();
   }
@@ -112,8 +113,14 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
     final List<dynamic> cachedSuggestions = localeManager
             .getNullableJsonData(LocaleKeysEnums.favSuggestions.name) ??
         [];
-    //TODO fix here
-    if (!cachedSuggestions.contains(data.toJson()) && !data.isBoosted) {
+    final List<SuggestionModel> cachedSugsAsModel =
+        cachedSuggestions.map((e) => SuggestionModel.fromJson(e)).toList();
+
+    final bool isDataExist = cachedSugsAsModel
+        .where((element) => element.elementId == data.elementId)
+        .isNotEmpty;
+
+    if (!isDataExist && !data.isBoosted) {
       cachedSuggestions.add(data.toJson());
       await localeManager.setJsonData(
           LocaleKeysEnums.favSuggestions.name, cachedSuggestions);
