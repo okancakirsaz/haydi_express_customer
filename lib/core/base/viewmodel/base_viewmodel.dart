@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../init/cache/local_keys_enums.dart';
 import '../../widgets/error_dialog.dart';
+import '../../widgets/success_dialog.dart';
 
 abstract mixin class BaseViewModel {
   late BuildContext viewModelContext;
@@ -20,6 +21,11 @@ abstract mixin class BaseViewModel {
       context: viewModelContext,
       reason: reason ?? "Bir sorun oluştu, daha sonra tekrar deneyiniz.",
     );
+  }
+
+  showSuccessDialog([String? reason]) {
+    SuccessDialog(
+        context: viewModelContext, reason: reason ?? "İşlem Başarılı!");
   }
 
   navigatorPop() {

@@ -35,8 +35,8 @@ class CreateAddressBottomSheet extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       CustomButton(
-                        //TODO: Navigate to add address page,
-                        onPressed: () {},
+                        onPressed: () => viewModel.navigationManager
+                            .navigate(const CreateAddressView()),
                         text: "Evet",
                         style: TextConsts.instance.regularWhite16,
                         height: 40,

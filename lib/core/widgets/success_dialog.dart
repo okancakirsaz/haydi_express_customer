@@ -4,16 +4,17 @@ import 'package:toastification/toastification.dart';
 
 import '../consts/color_consts/color_consts.dart';
 
-class ErrorDialog {
+class SuccessDialog {
   final String reason;
   final BuildContext context;
-  ErrorDialog({required this.context, required this.reason}) {
+  SuccessDialog({required this.context, required this.reason}) {
     show();
   }
   show() {
     toastification.show(
       primaryColor: ColorConsts.instance.primary,
       context: context,
+      type: ToastificationType.success,
       title: Text(
         reason,
         style: TextConsts.instance.regularBlack16,

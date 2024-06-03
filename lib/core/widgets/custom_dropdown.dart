@@ -8,13 +8,15 @@ class CustomDropdown extends StatelessWidget {
   final List<DropdownMenuEntry> props;
   final String hint;
   final double? width;
+  final TextStyle? style;
   final TextEditingController controller;
   const CustomDropdown(
       {super.key,
       required this.props,
       required this.hint,
       required this.controller,
-      this.width});
+      this.width,
+      this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CustomDropdown extends StatelessWidget {
       menuStyle: MenuStyle(
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
+            side: BorderSide.none,
             borderRadius: RadiusConsts.instance.circularAll10,
           ),
         ),
@@ -33,8 +36,10 @@ class CustomDropdown extends StatelessWidget {
       },
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
+        hintStyle: style ?? TextConsts.instance.regularBlack16,
         fillColor: ColorConsts.instance.blurGrey,
         border: const OutlineInputBorder(
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),

@@ -20,4 +20,7 @@ final class Endpoints {
   //Search
   final String search = "/search";
   final String getSearchAds = "/search/get-search-ads";
+
+  //Address
+  final String mapKit = "/address/map-kit";
 }
