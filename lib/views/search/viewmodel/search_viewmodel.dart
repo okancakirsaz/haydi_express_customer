@@ -95,7 +95,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
 
   Future<List<SuggestionModel>> _searchRequest(String keyword) async {
     final List<SuggestionModel>? response =
-        await service.search(keyword.toLowerCase(), accessToken!);
+        await service.search(keyword, accessToken!);
     if (response == null) {
       showErrorDialog();
       return [];
@@ -104,7 +104,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
     }
   }
 
-  //TODO: Complate this function.
+  //TODO: Complete this function.
   Future<void> onSuggestionTap(SuggestionModel data) async {
     await _setNewFavSuggestion(data);
   }
