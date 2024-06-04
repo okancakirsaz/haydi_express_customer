@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:yandex_maps_mapkit_lite/yandex_map.dart';
 
 import '../../../../../core/consts/color_consts/color_consts.dart';
@@ -11,19 +12,36 @@ class MapComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 250,
-      decoration: BoxDecoration(
-        boxShadow: ColorConsts.instance.shadow,
-        borderRadius: RadiusConsts.instance.circularAll10,
-      ),
-      child: YandexMap(
-        platformViewType: PlatformViewType.TextureHybrid,
-        onMapCreated: (mapWindow) {
-          viewModel.mapWindow = mapWindow;
-        },
-      ),
-    );
+    try {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 250,
+        decoration: BoxDecoration(
+          boxShadow: ColorConsts.instance.shadow,
+          borderRadius: RadiusConsts.instance.circularAll10,
+        ),
+        child: YandexMap(
+          platformViewType: PlatformViewType.Hybrid,
+          onMapCreated: (mapWindow) {
+            viewModel.mapWindow = mapWindow;
+          },
+        ),
+      );
+    } catch (e) {
+      debugPrint("$e");
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 250,
+        decoration: BoxDecoration(
+          color: ColorConsts.instance.background,
+          boxShadow: ColorConsts.instance.shadow,
+          borderRadius: RadiusConsts.instance.circularAll10,
+        ),
+        child: Text(
+          "Harita getirilirken bir sorun oluştu.",
+          style: TextConsts.instance.regularThird16Bold,
+        ),
+      );
+    }
   }
 }

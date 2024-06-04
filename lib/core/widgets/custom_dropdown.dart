@@ -21,7 +21,7 @@ class CustomDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
-      textStyle: TextConsts.instance.regularWhite16,
+      textStyle: style ?? TextConsts.instance.regularBlack16,
       menuStyle: MenuStyle(
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(

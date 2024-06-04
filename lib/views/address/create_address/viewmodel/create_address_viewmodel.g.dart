@@ -9,10 +9,70 @@ part of 'create_address_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
+  late final _$cityDropdownItemsAtom = Atom(
+      name: '_CreateAddressViewModelBase.cityDropdownItems', context: context);
+
+  @override
+  ObservableList<DropdownMenuEntry<dynamic>> get cityDropdownItems {
+    _$cityDropdownItemsAtom.reportRead();
+    return super.cityDropdownItems;
+  }
+
+  @override
+  set cityDropdownItems(ObservableList<DropdownMenuEntry<dynamic>> value) {
+    _$cityDropdownItemsAtom.reportWrite(value, super.cityDropdownItems, () {
+      super.cityDropdownItems = value;
+    });
+  }
+
+  late final _$stateDropdownItemsAtom = Atom(
+      name: '_CreateAddressViewModelBase.stateDropdownItems', context: context);
+
+  @override
+  ObservableList<DropdownMenuEntry<dynamic>> get stateDropdownItems {
+    _$stateDropdownItemsAtom.reportRead();
+    return super.stateDropdownItems;
+  }
+
+  @override
+  set stateDropdownItems(ObservableList<DropdownMenuEntry<dynamic>> value) {
+    _$stateDropdownItemsAtom.reportWrite(value, super.stateDropdownItems, () {
+      super.stateDropdownItems = value;
+    });
+  }
+
+  late final _$_CreateAddressViewModelBaseActionController =
+      ActionController(name: '_CreateAddressViewModelBase', context: context);
+
+  @override
+  dynamic fetchCityAsDropdownMenuItem() {
+    final _$actionInfo =
+        _$_CreateAddressViewModelBaseActionController.startAction(
+            name: '_CreateAddressViewModelBase.fetchCityAsDropdownMenuItem');
+    try {
+      return super.fetchCityAsDropdownMenuItem();
+    } finally {
+      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic fetchStatesAsDropdownMenuItem() {
+    final _$actionInfo =
+        _$_CreateAddressViewModelBaseActionController.startAction(
+            name: '_CreateAddressViewModelBase.fetchStatesAsDropdownMenuItem');
+    try {
+      return super.fetchStatesAsDropdownMenuItem();
+    } finally {
+      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-
+cityDropdownItems: ${cityDropdownItems},
+stateDropdownItems: ${stateDropdownItems}
     ''';
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
@@ -60,7 +61,9 @@ class CreateAddressView extends StatelessWidget {
           model.setContext(context);
           model.init();
         },
-        onDispose: (model) {});
+        onDispose: (model) {
+          model.dispose();
+        });
   }
 
   Widget _buildPartTitle(String title, String subtitle) {

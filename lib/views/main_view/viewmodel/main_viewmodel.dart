@@ -40,6 +40,6 @@ abstract class _MainViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> replaceApiKeys() async {
-    await yandexInit.initMapkit(apiKey: "14ed6c2b-adf0-4449-959b-62ca9708f445");
+    await yandexInit.initMapkit(apiKey: apiKeys["mapKit"]!);
   }
 }

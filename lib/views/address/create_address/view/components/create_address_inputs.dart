@@ -3,6 +3,7 @@ part of '../create_address_view.dart';
 class CreateAddressInputs extends StatelessWidget {
   final CreateAddressViewModel viewModel;
   CreateAddressInputs({super.key, required this.viewModel});
+
   final TextStyle inputHintStyle = TextConsts.instance.regularBlack20;
 
   @override
@@ -24,19 +25,23 @@ class CreateAddressInputs extends StatelessWidget {
   Widget _buildProvinceInputs() {
     return Row(
       children: <Widget>[
-        CustomDropdown(
-          props: [],
-          hint: "Şehir",
-          controller: viewModel.city,
-          style: TextConsts.instance.regularBlack16Bold,
-        ),
+        Observer(builder: (context) {
+          return CustomDropdown(
+            props: viewModel.cityDropdownItems,
+            hint: "Şehir",
+            controller: viewModel.city,
+            style: TextConsts.instance.regularBlack16Bold,
+          );
+        }),
         const SizedBox(width: 10),
-        CustomDropdown(
-          props: [],
-          hint: "İlçe",
-          controller: viewModel.state,
-          style: TextConsts.instance.regularBlack16Bold,
-        ),
+        Observer(builder: (context) {
+          return CustomDropdown(
+            props: viewModel.stateDropdownItems,
+            hint: "İlçe",
+            controller: viewModel.state,
+            style: TextConsts.instance.regularBlack16Bold,
+          );
+        }),
       ],
     );
   }
