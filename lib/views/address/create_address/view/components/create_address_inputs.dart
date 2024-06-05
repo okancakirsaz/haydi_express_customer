@@ -80,7 +80,7 @@ class CreateAddressInputs extends StatelessWidget {
         CustomTextField(
           hintStyle: inputHintStyle,
           controller: viewModel.addressDirection,
-          hint: "Adres Tarifi",
+          hint: "Adresi Tarif Ediniz",
         ),
       ],
     );
