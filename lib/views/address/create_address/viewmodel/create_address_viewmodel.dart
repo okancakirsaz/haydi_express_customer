@@ -7,14 +7,14 @@ import 'package:haydi_express_customer/views/address/core/map_manager.dart';
 import 'package:haydi_express_customer/views/address/create_address/service/create_address_service.dart';
 import 'package:yandex_maps_mapkit_lite/mapkit.dart' as yandex;
 // ignore: implementation_imports
-import 'package:yandex_maps_mapkit_lite/src/bindings/image/image_provider.dart'
-    as image_provider;
+import 'package:yandex_maps_mapkit_lite/image.dart' as image_provider;
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 part 'create_address_viewmodel.g.dart';
 
+//import 'package:yandex_maps_mapkit_lite/src/bindings/image/image_provider.dart'
 class CreateAddressViewModel = _CreateAddressViewModelBase
     with _$CreateAddressViewModel;
 
@@ -82,8 +82,8 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
               AssetImage(AssetConsts.instance.placeMark),
             ),
           );
-
     placeMark.addTapListener(mapTapListener);
+    //TODO: Set placemark state
   }
 
   initMapListeners() {
