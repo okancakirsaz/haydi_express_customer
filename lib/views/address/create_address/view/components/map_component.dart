@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:yandex_maps_mapkit_lite/yandex_map.dart';
+import 'package:haydi_express_customer/views/map/view/map_view.dart';
 
 import '../../../../../core/consts/color_consts/color_consts.dart';
 import '../../../../../core/consts/radius_consts.dart';
@@ -24,9 +24,7 @@ class MapComponent extends StatelessWidget {
           ),
           child: Scaffold(
             backgroundColor: Colors.transparent,
-            body: YandexMap(
-              onMapCreated: (mapWindow) => viewModel.mapInit(mapWindow),
-            ),
+            body: const MapView(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.endDocked,
             floatingActionButton: FloatingActionButton(
