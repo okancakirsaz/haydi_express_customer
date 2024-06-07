@@ -36,6 +36,8 @@ dependencies:
   horizontal_stepper_flutter: ^1.0.3
   pinput: ^4.0.0
   skeletonizer: 1.1.2+1
+  flutter_map: ^6.1.0
+
   
   #Others
   shared_preferences: ^2.2.1
@@ -48,8 +50,9 @@ dependencies:
   dio:
   socket_io_client: ^2.0.3+1
   http_parser: ^4.0.2
-  yandex_maps_mapkit_lite: ^4.6.1-beta2
   open_geocoder: ^0.0.1
+  latlong2: ^0.9.1
+  
   
   
   

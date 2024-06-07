@@ -25,6 +25,38 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
     });
   }
 
+  late final _$currentLatAtom =
+      Atom(name: '_CreateAddressViewModelBase.currentLat', context: context);
+
+  @override
+  double get currentLat {
+    _$currentLatAtom.reportRead();
+    return super.currentLat;
+  }
+
+  @override
+  set currentLat(double value) {
+    _$currentLatAtom.reportWrite(value, super.currentLat, () {
+      super.currentLat = value;
+    });
+  }
+
+  late final _$currentLongAtom =
+      Atom(name: '_CreateAddressViewModelBase.currentLong', context: context);
+
+  @override
+  double get currentLong {
+    _$currentLongAtom.reportRead();
+    return super.currentLong;
+  }
+
+  @override
+  set currentLong(double value) {
+    _$currentLongAtom.reportWrite(value, super.currentLong, () {
+      super.currentLong = value;
+    });
+  }
+
   late final _$cityDropdownItemsAtom = Atom(
       name: '_CreateAddressViewModelBase.cityDropdownItems', context: context);
 
@@ -96,9 +128,23 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
   }
 
   @override
+  dynamic changePlaceMarkerState(double lat, double long) {
+    final _$actionInfo =
+        _$_CreateAddressViewModelBaseActionController.startAction(
+            name: '_CreateAddressViewModelBase.changePlaceMarkerState');
+    try {
+      return super.changePlaceMarkerState(lat, long);
+    } finally {
+      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 mapHeight: ${mapHeight},
+currentLat: ${currentLat},
+currentLong: ${currentLong},
 cityDropdownItems: ${cityDropdownItems},
 stateDropdownItems: ${stateDropdownItems}
     ''';

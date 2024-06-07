@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/widgets/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_dropdown.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_statefull_button.dart';
@@ -45,8 +46,10 @@ class CreateAddressView extends StatelessWidget {
                     ),
                     Padding(
                       padding: PaddingConsts.instance.top20,
-                      child: CustomStateFullButton(
-                        onPressed: () {},
+                      child: CustomButton(
+                        onPressed: () => showDialog(
+                            context: context,
+                            builder: (context) => _nameDialog(model)),
                         text: "Ekle",
                       ),
                     ),
@@ -77,5 +80,19 @@ class CreateAddressView extends StatelessWidget {
         style: TextConsts.instance.regularBlack16,
       ),
     );
+  }
+
+  Widget _nameDialog(CreateAddressViewModel model) {
+    return AlertDialog(
+        backgroundColor: ColorConsts.instance.background,
+        title: CustomTextField(
+          hintStyle: TextConsts.instance.regularBlack16,
+          controller: model.addressName,
+          hint: "Adrese bir isim veriniz",
+        ),
+        content: CustomStateFullButton(
+          onPressed: () async => await model.createAddress(),
+          text: "Onayla",
+        ));
   }
 }

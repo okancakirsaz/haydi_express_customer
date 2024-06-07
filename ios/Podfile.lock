@@ -10,10 +10,6 @@ PODS:
     - FlutterMacOS
   - smart_auth (0.0.1):
     - Flutter
-  - yandex_maps_mapkit_lite (1.0.0):
-    - Flutter
-    - YandexMapsMobile (= 4.6.1-beta1-lite-flutter)
-  - YandexMapsMobile (4.6.1-beta1-lite-flutter)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -21,11 +17,6 @@ DEPENDENCIES:
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
-  - yandex_maps_mapkit_lite (from `.symlinks/plugins/yandex_maps_mapkit_lite/ios`)
-
-SPEC REPOS:
-  trunk:
-    - YandexMapsMobile
 
 EXTERNAL SOURCES:
   Flutter:
@@ -38,8 +29,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   smart_auth:
     :path: ".symlinks/plugins/smart_auth/ios"
-  yandex_maps_mapkit_lite:
-    :path: ".symlinks/plugins/yandex_maps_mapkit_lite/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
@@ -47,8 +36,6 @@ SPEC CHECKSUMS:
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
   smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
-  yandex_maps_mapkit_lite: 99827598fe4d2a7f6f21ab0d80e422d10e84b6ab
-  YandexMapsMobile: 8d76d9a12229e77fc5f33917e5428b7b4cf1fd7a
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

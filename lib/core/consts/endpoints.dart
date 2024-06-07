@@ -22,5 +22,6 @@ final class Endpoints {
   final String getSearchAds = "/search/get-search-ads";
 
   //Address
-  final String mapKit = "/address/map-kit";
+  final String mapTile = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+  final String createAddress = "/address/create";
 }
