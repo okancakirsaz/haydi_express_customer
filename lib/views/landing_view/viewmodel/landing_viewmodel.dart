@@ -31,12 +31,14 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     return defaultWidget;
   }
 
+  final Connectivity connectivity = Connectivity();
   Widget defaultWidget = const SplashScreen();
 
   Future<void> _clearCache() async {
     await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
     await localeManager.removeData(LocaleKeysEnums.discover.name);
     await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
+    await localeManager.removeData(LocaleKeysEnums.addresses.name);
   }
 
   _checkLoggedInState() {
@@ -52,14 +54,12 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
   }
 
   listenConnectionState(LandingViewModel viewModel) {
-    Connectivity().onConnectivityChanged.listen(
+    connectivity.onConnectivityChanged.listen(
       (List<ConnectivityResult> result) {
         if (result.contains(ConnectivityResult.none)) {
           navigationManager.navigateAndRemoveUntil(
             LostConnectionScreen(viewModel: viewModel),
           );
-        } else {
-          //Nothing
         }
       },
     );
@@ -67,7 +67,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
 
   Future<void> checkConnectivity() async {
     final List<ConnectivityResult> result =
-        await Connectivity().checkConnectivity();
+        await connectivity.checkConnectivity();
     if (result.contains(ConnectivityResult.none)) {
       showErrorDialog("İnternet bağlantısı bulunamamkta");
     } else {

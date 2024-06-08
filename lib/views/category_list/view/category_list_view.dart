@@ -6,7 +6,7 @@ import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
-import 'package:haydi_express_customer/core/widgets/vertical_list_minimized_menu.dart';
+import 'package:haydi_express_customer/core/widgets/menu/vertical_list_minimized_menu.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../core/widgets/custom_statefull_text_button.dart';
 import '../viewmodel/category_list_viewmodel.dart';

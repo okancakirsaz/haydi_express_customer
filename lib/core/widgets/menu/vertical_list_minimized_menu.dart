@@ -4,11 +4,12 @@ import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 
-class MinimizedMenu extends StatelessWidget {
+class VerticalListMinimizedMenu extends StatelessWidget {
   final MenuModel data;
   final int? calculatedDiscountedPrice;
-  const MinimizedMenu(
+  const VerticalListMinimizedMenu(
       {super.key, required this.data, this.calculatedDiscountedPrice});
 
   @override
@@ -16,37 +17,18 @@ class MinimizedMenu extends StatelessWidget {
     return Container(
       margin: PaddingConsts.instance.all10,
       padding: PaddingConsts.instance.all5,
-      width: 250,
-      height: 140,
       decoration: BoxDecoration(
         color: ColorConsts.instance.background,
         borderRadius: RadiusConsts.instance.circularAll10,
         boxShadow: ColorConsts.instance.shadow,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildImage(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  _buildTitle(),
-                  Padding(
-                    padding: PaddingConsts.instance.left10,
-                    child: Padding(
-                      padding: PaddingConsts.instance.top10,
-                      child: _information(),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          _buildImage(context),
+          _buildTitle(context),
+          _information(),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Text(
@@ -61,38 +43,71 @@ class MinimizedMenu extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
-    return Container(
-      width: 90,
-      height: 80,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.background,
-        borderRadius: RadiusConsts.instance.circularAll10,
-        image: DecorationImage(
-          image: NetworkImage(
-            data.photoUrl,
+  Widget _buildImage(BuildContext context) {
+    return Stack(
+      alignment: Alignment.bottomLeft,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: 120,
+          decoration: BoxDecoration(
+            color: ColorConsts.instance.background,
+            borderRadius: RadiusConsts.instance.circularAll10,
+            image: DecorationImage(
+              image: NetworkImage(
+                data.photoUrl,
+              ),
+              fit: BoxFit.cover,
+            ),
           ),
-          fit: BoxFit.cover,
         ),
-      ),
+        _buildLikeRatio(context),
+      ],
     );
   }
 
-  Widget _buildTitle() {
+  Widget _buildLikeRatio(BuildContext context) {
+    if (data.stats.likeRatio ~/ 20 >= 1) {
+      return Container(
+        width: 100,
+        padding: PaddingConsts.instance.all3,
+        margin: PaddingConsts.instance.all5,
+        decoration: BoxDecoration(
+          color: ColorConsts.instance.third,
+          borderRadius: RadiusConsts.instance.circularAll5,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            MenuRatingStars(starCount: data.stats.likeRatio ~/ 20),
+            Text(
+              (data.stats.likeRatio / 20).toStringAsFixed(1),
+              style: TextConsts.instance.regularWhite12,
+            )
+          ],
+        ),
+      );
+    } else {
+      return const SizedBox();
+    }
+  }
+
+  Widget _buildTitle(BuildContext context) {
     return SizedBox(
-      width: 130,
+      width: MediaQuery.of(context).size.width,
       child: Text(
         textAlign: TextAlign.center,
         data.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: TextConsts.instance.regularBlack16Bold,
+        style: TextConsts.instance.regularBlack18Bold,
       ),
     );
   }
 
   Widget _information() {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         calculatedDiscountedPrice != null ? _discountedPrice() : _normalPrice(),
         calculatedDiscountedPrice != null

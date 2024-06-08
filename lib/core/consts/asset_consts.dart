@@ -7,6 +7,6 @@ class AssetConsts {
   final String profile = "assets/icons/profile.svg";
   final String mapMarker = "assets/icons/map_marker.svg";
   final String boostIcon = "assets/icons/boost_icon.svg";
-  final String placeMark = "assets/icons/marker.png";
   final String lostConnection = "assets/icons/lost_connection.svg";
+  final String star = "assets/icons/star.svg";
 }

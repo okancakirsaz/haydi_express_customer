@@ -4,7 +4,7 @@ import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dar
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 
-import '../consts/text_consts.dart';
+import '../../consts/text_consts.dart';
 
 class CustomStateFullButton extends StatelessWidget {
   final VoidCallback onPressed;

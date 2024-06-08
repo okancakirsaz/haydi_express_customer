@@ -4,11 +4,12 @@ import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 
-class VerticalListMinimizedMenu extends StatelessWidget {
+class MinimizedMenu extends StatelessWidget {
   final MenuModel data;
   final int? calculatedDiscountedPrice;
-  const VerticalListMinimizedMenu(
+  const MinimizedMenu(
       {super.key, required this.data, this.calculatedDiscountedPrice});
 
   @override
@@ -16,18 +17,37 @@ class VerticalListMinimizedMenu extends StatelessWidget {
     return Container(
       margin: PaddingConsts.instance.all10,
       padding: PaddingConsts.instance.all5,
+      width: 250,
+      height: 140,
       decoration: BoxDecoration(
         color: ColorConsts.instance.background,
         borderRadius: RadiusConsts.instance.circularAll10,
         boxShadow: ColorConsts.instance.shadow,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _buildImage(context),
-          _buildTitle(context),
-          _information(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              _buildImage(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  _buildTitle(),
+                  Padding(
+                    padding: PaddingConsts.instance.left10,
+                    child: Padding(
+                      padding: PaddingConsts.instance.top10,
+                      child: _information(),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Text(
@@ -42,39 +62,44 @@ class VerticalListMinimizedMenu extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 120,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.background,
-        borderRadius: RadiusConsts.instance.circularAll10,
-        image: DecorationImage(
-          image: NetworkImage(
-            data.photoUrl,
+  Widget _buildImage() {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        Container(
+          width: 90,
+          height: 80,
+          decoration: BoxDecoration(
+            color: ColorConsts.instance.background,
+            borderRadius: RadiusConsts.instance.circularAll10,
+            image: DecorationImage(
+              image: NetworkImage(
+                data.photoUrl,
+              ),
+              fit: BoxFit.cover,
+            ),
           ),
-          fit: BoxFit.cover,
         ),
-      ),
+        MenuRatingStars(starCount: data.stats.likeRatio ~/ 20),
+      ],
     );
   }
 
-  Widget _buildTitle(BuildContext context) {
+  Widget _buildTitle() {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: 130,
       child: Text(
         textAlign: TextAlign.center,
         data.name,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
-        style: TextConsts.instance.regularBlack18Bold,
+        style: TextConsts.instance.regularBlack16Bold,
       ),
     );
   }
 
   Widget _information() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         calculatedDiscountedPrice != null ? _discountedPrice() : _normalPrice(),
         calculatedDiscountedPrice != null

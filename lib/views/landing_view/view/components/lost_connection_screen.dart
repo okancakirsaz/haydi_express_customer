@@ -4,7 +4,7 @@ import 'package:haydi_express_customer/core/consts/asset_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/core/widgets/custom_statefull_button.dart';
+import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';
 import 'package:haydi_express_customer/views/landing_view/viewmodel/landing_viewmodel.dart';
 
 class LostConnectionScreen extends StatefulWidget {
@@ -36,6 +36,7 @@ class _LostConnectionScreenState extends State<LostConnectionScreen> {
             Padding(
               padding: PaddingConsts.instance.all10,
               child: Text(
+                textAlign: TextAlign.center,
                 "Cihazınız internete bağlı değil.\nLütfen bağlantınızı kontrol ediniz.",
                 style: TextConsts.instance.regularThird16Bold,
               ),

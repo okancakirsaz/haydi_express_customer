@@ -4,10 +4,10 @@ import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dar
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:haydi_express_customer/core/widgets/custom_button.dart';
+import 'package:haydi_express_customer/core/widgets/button/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/core/widgets/custom_text_button.dart';
-import 'package:haydi_express_customer/core/widgets/minimized_menu.dart';
+import 'package:haydi_express_customer/core/widgets/button/custom_text_button.dart';
+import 'package:haydi_express_customer/core/widgets/menu/minimized_menu.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
 import 'package:haydi_express_customer/views/address/create_address/view/create_address_view.dart';
 import 'package:haydi_express_customer/views/category_list/view/category_list_view.dart';
