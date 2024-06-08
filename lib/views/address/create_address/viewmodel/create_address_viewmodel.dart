@@ -42,6 +42,7 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
     outDoorNumber.dispose();
     doorNumber.dispose();
     addressDirection.dispose();
+    addressName.dispose();
   }
 
   final TextEditingController city = TextEditingController();

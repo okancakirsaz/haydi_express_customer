@@ -25,6 +25,7 @@ class LandingView extends StatelessWidget {
         onModelReady: (model) {
           model.init();
           model.setContext(context);
+          model.listenConnectionState(model);
         },
         onDispose: (model) {
           WebSocketManager.instance.disconnectFromSocket();

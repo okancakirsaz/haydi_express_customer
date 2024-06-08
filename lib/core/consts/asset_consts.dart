@@ -8,4 +8,5 @@ class AssetConsts {
   final String mapMarker = "assets/icons/map_marker.svg";
   final String boostIcon = "assets/icons/boost_icon.svg";
   final String placeMark = "assets/icons/marker.png";
+  final String lostConnection = "assets/icons/lost_connection.svg";
 }

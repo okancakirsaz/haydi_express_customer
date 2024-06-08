@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/managers/web_socket_manager.dart';
+import 'package:haydi_express_customer/views/landing_view/view/components/lost_connection_screen.dart';
 import 'package:haydi_express_customer/views/landing_view/view/components/splash_screen.dart';
+import 'package:haydi_express_customer/views/landing_view/view/landing_view.dart';
 import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
@@ -15,6 +20,7 @@ class LandingViewModel = _LandingViewModelBase with _$LandingViewModel;
 abstract class _LandingViewModelBase with Store, BaseViewModel {
   @override
   void setContext(BuildContext context) => viewModelContext = context;
+
   @override
   Future<Widget?> init() async {
     WebSocketManager.instance.initializeSocketConnection();
@@ -25,13 +31,13 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     return defaultWidget;
   }
 
+  Widget defaultWidget = const SplashScreen();
+
   Future<void> _clearCache() async {
     await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
     await localeManager.removeData(LocaleKeysEnums.discover.name);
     await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
   }
-
-  Widget defaultWidget = const SplashScreen();
 
   _checkLoggedInState() {
     String? userId =
@@ -42,6 +48,30 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     } else {
       //Main Screen
       defaultWidget = const MainView();
+    }
+  }
+
+  listenConnectionState(LandingViewModel viewModel) {
+    Connectivity().onConnectivityChanged.listen(
+      (List<ConnectivityResult> result) {
+        if (result.contains(ConnectivityResult.none)) {
+          navigationManager.navigateAndRemoveUntil(
+            LostConnectionScreen(viewModel: viewModel),
+          );
+        } else {
+          //Nothing
+        }
+      },
+    );
+  }
+
+  Future<void> checkConnectivity() async {
+    final List<ConnectivityResult> result =
+        await Connectivity().checkConnectivity();
+    if (result.contains(ConnectivityResult.none)) {
+      showErrorDialog("İnternet bağlantısı bulunamamkta");
+    } else {
+      navigationManager.navigateAndRemoveUntil(const LandingView());
     }
   }
 }
