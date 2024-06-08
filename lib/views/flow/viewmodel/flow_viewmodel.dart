@@ -5,6 +5,8 @@ import 'package:haydi_express_customer/core/consts/app_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/services/public_service.dart';
+import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
+import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/flow/service/flow_service.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
@@ -21,7 +23,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   @override
   init() async {
-    checkIsUserHaveAnyAddress(viewModelInstance);
+    await checkIsUserHaveAnyAddress(viewModelInstance);
   }
 
   late final FlowViewModel viewModelInstance;
@@ -31,6 +33,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   final PublicService publicService = PublicService();
   final FlowService service = FlowService();
+  final AddressesService addressService = AddressesService();
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {
     final List<MenuModel>? response =
@@ -91,20 +94,49 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
     return discover;
   }
 
-  checkIsUserHaveAnyAddress(FlowViewModel viewModel) {
-    final addresses =
+  Future<void> checkIsUserHaveAnyAddress(FlowViewModel viewModel) async {
+    await bringDataFromCacheOrApi(
+      LocaleKeysEnums.addresses.name,
+      getFromApi: () async {
+        await _getUserAddressesFromApi();
+      },
+      getFromCache: () {
+        //Nothing
+      },
+    );
+    final List<dynamic>? addresses =
         localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name);
-    //TODO: If addresses is null in cache.
-    //Try to look database. Then if is null show bottom sheet
-    if (addresses == null) {
-      //Wait for build page
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        showBottomSheet(
-            context: viewModelContext,
-            builder: (context) =>
-                CreateAddressBottomSheet(viewModel: viewModel));
-      });
+    if (addresses == [] || addresses == null) {
+      _buildCreateAddressSheet(viewModel);
     }
+  }
+
+  Future<void> _getUserAddressesFromApi() async {
+    final List<AddressModel>? response = await addressService.getUserAddresses(
+      localeManager.getStringData(LocaleKeysEnums.id.name),
+      accessToken!,
+    );
+    if (response == null || response.isEmpty) {
+      debugPrint("User addresses is empty");
+      return;
+    }
+    await localeManager.setJsonData(
+      LocaleKeysEnums.addresses.name,
+      response
+          .map(
+            (e) => e.toJson(),
+          )
+          .toList(),
+    );
+  }
+
+  _buildCreateAddressSheet(FlowViewModel viewModel) {
+    //Wait for build page
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      showBottomSheet(
+          context: viewModelContext,
+          builder: (context) => CreateAddressBottomSheet(viewModel: viewModel));
+    });
   }
 
   navigateToSeeAll(String category, Widget page) {

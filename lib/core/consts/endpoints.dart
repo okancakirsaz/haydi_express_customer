@@ -24,4 +24,5 @@ final class Endpoints {
   //Address
   final String mapTile = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
   final String createAddress = "/address/create";
+  final String getUserAddresses = "/address/get-user-addresses";
 }
