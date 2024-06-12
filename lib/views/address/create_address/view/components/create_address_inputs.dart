@@ -62,6 +62,18 @@ class CreateAddressInputs extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
+              flex: 1,
+              child: CustomTextField(
+                maxLength: 3,
+                hintStyle: TextConsts.instance.regularBlack16,
+                keyboardType: TextInputType.number,
+                controller: viewModel.floor,
+                customInputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                hint: "Kat",
+              ),
+            ),
+            Expanded(
+              flex: 2,
               child: CustomTextField(
                 hintStyle: TextConsts.instance.regularBlack16,
                 controller: viewModel.outDoorNumber,
@@ -69,6 +81,7 @@ class CreateAddressInputs extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 2,
               child: CustomTextField(
                 hintStyle: TextConsts.instance.regularBlack16,
                 controller: viewModel.doorNumber,

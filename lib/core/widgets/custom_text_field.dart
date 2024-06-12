@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final TextStyle? hintStyle;
   final bool? isReadOnly;
   final int? maxLength;
+  final TextInputType? keyboardType;
   final List<TextInputFormatter>? customInputFormatters;
 
   const CustomTextField({
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.hintStyle,
     this.customInputFormatters,
     this.maxLength,
+    this.keyboardType,
   });
 
   @override
@@ -58,6 +60,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 _isFocused = true;
                 setState(() {});
               },
+              keyboardType: widget.keyboardType,
               maxLength: widget.maxLength,
               textInputAction: TextInputAction.next,
               readOnly: widget.isReadOnly ?? false,

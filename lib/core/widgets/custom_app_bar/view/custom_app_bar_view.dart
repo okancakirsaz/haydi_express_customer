@@ -98,6 +98,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
   Widget _liveSupportButton() {
     return FloatingActionButton(
+      heroTag: "app-bar-btn",
       onPressed: () {
         //NOTE: Do navigating with main page viewModelContext
       },

@@ -43,6 +43,7 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
     doorNumber.dispose();
     addressDirection.dispose();
     addressName.dispose();
+    floor.dispose();
   }
 
   final TextEditingController city = TextEditingController();
@@ -51,6 +52,7 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
   final TextEditingController street = TextEditingController();
   final TextEditingController outDoorNumber = TextEditingController();
   final TextEditingController doorNumber = TextEditingController();
+  final TextEditingController floor = TextEditingController();
   final TextEditingController addressDirection = TextEditingController();
   final TextEditingController addressName = TextEditingController();
 
@@ -203,6 +205,10 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
       showErrorDialog("Daire Numarası Giriniz.");
       return false;
     }
+    if (floor.text.isEmpty) {
+      showErrorDialog("Kat Bilgisi Giriniz.");
+      return false;
+    }
     if (addressDirection.text.isEmpty) {
       showErrorDialog("Adresinizi Tarif Ediniz.");
       return false;
@@ -249,6 +255,7 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
         street: street.text,
         buildingNumber: outDoorNumber.text,
         doorNumber: doorNumber.text,
+        floor: floor.text,
         addressDirection: addressDirection.text,
         isVerifiedFromCourier: false,
         uid: const Uuid().v8(),

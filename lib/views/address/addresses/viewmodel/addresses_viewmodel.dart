@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
@@ -18,7 +19,8 @@ abstract class _AddressesViewModelBase with Store, BaseViewModel {
 
   final AddressesService service = AddressesService();
 
-  List<AddressModel> addresses = [];
+  @observable
+  ObservableList<AddressModel> addresses = ObservableList.of([]);
 
   Future<int> getAddresses() async {
     try {
@@ -41,12 +43,46 @@ abstract class _AddressesViewModelBase with Store, BaseViewModel {
       showErrorDialog();
       return;
     }
-    addresses = response;
+    addresses = ObservableList.of(response);
   }
 
   _getAddressFromCache() {
     final List<dynamic> cachedList =
         localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name) ?? [];
-    addresses = cachedList.map((e) => AddressModel.fromJson(e)).toList();
+    addresses = ObservableList.of(
+      cachedList.map((e) => AddressModel.fromJson(e)).toList(),
+    );
+  }
+
+  @action
+  Future<void> deleteAddress(String addressId) async {
+    showWaitDialog();
+    final bool? response = await service.deleteAddress(addressId, accessToken!);
+    if (response == false || response == null) {
+      showErrorDialog();
+      return;
+    }
+    AddressModel deletedAddress =
+        addresses.firstWhere((element) => element.uid == addressId);
+    int deletedAddressIndex = addresses.indexOf(deletedAddress);
+    addresses.removeAt(deletedAddressIndex);
+
+    await localeManager.setJsonData(
+      LocaleKeysEnums.addresses.name,
+      addresses.map((element) => element.toJson()).toList(),
+    );
+    navigatorPop();
+  }
+
+  showWaitDialog() {
+    showDialog(
+      context: viewModelContext,
+      builder: (context) => AlertDialog(
+        content: Text(
+          "Lütfen Bekleyiniz...",
+          style: TextConsts.instance.regularBlack16,
+        ),
+      ),
+    );
   }
 }

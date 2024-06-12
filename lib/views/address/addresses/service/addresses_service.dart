@@ -21,4 +21,16 @@ final class AddressesService extends NetworkManager {
       return null;
     }
   }
+
+  Future<bool?> deleteAddress(String id, String accessToken) async {
+    try {
+      final response = await network.get(Endpoints.instance.deleteAddress,
+          queryParameters: {"id": id},
+          options: Options(headers: setHeaderAccessToken(accessToken)));
+
+      return bool.parse(response.data);
+    } catch (e) {
+      return null;
+    }
+  }
 }

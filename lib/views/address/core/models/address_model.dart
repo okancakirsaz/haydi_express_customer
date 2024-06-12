@@ -7,6 +7,7 @@ class AddressModel {
   String buildingNumber;
   String doorNumber;
   String addressDirection;
+  String floor;
   double? lat;
   double? long;
   bool isVerifiedFromCourier;
@@ -22,6 +23,7 @@ class AddressModel {
     required this.street,
     required this.buildingNumber,
     required this.doorNumber,
+    required this.floor,
     required this.addressDirection,
     this.lat,
     this.long,
@@ -40,6 +42,7 @@ class AddressModel {
       'street': street,
       'buildingNumber': buildingNumber,
       'doorNumber': doorNumber,
+      'floor': floor,
       'addressDirection': addressDirection,
       'lat': lat,
       'long': long,
@@ -59,6 +62,7 @@ class AddressModel {
       street: json['street'] as String,
       buildingNumber: json['buildingNumber'] as String,
       doorNumber: json['doorNumber'] as String,
+      floor: json['floor'] as String,
       addressDirection: json['addressDirection'] as String,
       lat: json['lat'] as double?,
       long: json['long'] as double?,
