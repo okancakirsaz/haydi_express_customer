@@ -6,6 +6,7 @@ import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/widgets/custom_app_bar/viewmodel/custom_app_bar_viewmodel.dart';
+import 'package:haydi_express_customer/views/address/addresses/view/addresses_view.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import 'package:haydi_express_customer/views/main_view/viewmodel/main_viewmodel.dart';
 
@@ -51,8 +52,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _buildAppBarElement(const FlowView(), 0, AssetConsts.instance.home),
-          _buildAppBarElement(const Center(child: Text("Addresses")), 1,
-              AssetConsts.instance.mapMarker),
+          _buildAppBarElement(
+              const AddressesView(), 1, AssetConsts.instance.mapMarker),
           _buildAppBarElement(const Center(child: Text("Orders")), 2,
               AssetConsts.instance.orders),
           _buildAppBarElement(const Center(child: Text("Profile")), 3,
