@@ -5,7 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
-import 'package:haydi_express_customer/views/address/create_address/service/create_address_service.dart';
+import 'package:haydi_express_customer/views/address/create_edit_address/service/create_edit_address_service.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:open_geocoder/model/geo_address.dart';
 import 'package:uuid/uuid.dart';
@@ -16,12 +16,12 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import '../../core/map_manager.dart';
 
-part 'create_address_viewmodel.g.dart';
+part 'create_edit_address_viewmodel.g.dart';
 
-class CreateAddressViewModel = _CreateAddressViewModelBase
-    with _$CreateAddressViewModel;
+class CreateEditAddressViewModel = _CreateEditAddressViewModelBase
+    with _$CreateEditAddressViewModel;
 
-abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
+abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
   @override
   void setContext(BuildContext context) => viewModelContext = context;
 

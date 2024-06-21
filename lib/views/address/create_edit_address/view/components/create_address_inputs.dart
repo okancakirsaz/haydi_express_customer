@@ -1,7 +1,7 @@
-part of '../create_address_view.dart';
+part of '../create_edit_address_view.dart';
 
 class CreateAddressInputs extends StatelessWidget {
-  final CreateAddressViewModel viewModel;
+  final CreateEditAddressViewModel viewModel;
   CreateAddressInputs({super.key, required this.viewModel});
 
   final TextStyle inputHintStyle = TextConsts.instance.regularBlack20;

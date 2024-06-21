@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'create_address_viewmodel.dart';
+part of 'create_edit_address_viewmodel.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'create_address_viewmodel.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
+mixin _$CreateEditAddressViewModel on _CreateEditAddressViewModelBase, Store {
   late final _$mapHeightAtom =
-      Atom(name: '_CreateAddressViewModelBase.mapHeight', context: context);
+      Atom(name: '_CreateEditAddressViewModelBase.mapHeight', context: context);
 
   @override
   double get mapHeight {
@@ -25,8 +25,8 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
     });
   }
 
-  late final _$currentLatAtom =
-      Atom(name: '_CreateAddressViewModelBase.currentLat', context: context);
+  late final _$currentLatAtom = Atom(
+      name: '_CreateEditAddressViewModelBase.currentLat', context: context);
 
   @override
   double get currentLat {
@@ -41,8 +41,8 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
     });
   }
 
-  late final _$currentLongAtom =
-      Atom(name: '_CreateAddressViewModelBase.currentLong', context: context);
+  late final _$currentLongAtom = Atom(
+      name: '_CreateEditAddressViewModelBase.currentLong', context: context);
 
   @override
   double get currentLong {
@@ -58,7 +58,8 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
   }
 
   late final _$cityDropdownItemsAtom = Atom(
-      name: '_CreateAddressViewModelBase.cityDropdownItems', context: context);
+      name: '_CreateEditAddressViewModelBase.cityDropdownItems',
+      context: context);
 
   @override
   ObservableList<DropdownMenuEntry<dynamic>> get cityDropdownItems {
@@ -74,7 +75,8 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
   }
 
   late final _$stateDropdownItemsAtom = Atom(
-      name: '_CreateAddressViewModelBase.stateDropdownItems', context: context);
+      name: '_CreateEditAddressViewModelBase.stateDropdownItems',
+      context: context);
 
   @override
   ObservableList<DropdownMenuEntry<dynamic>> get stateDropdownItems {
@@ -89,53 +91,56 @@ mixin _$CreateAddressViewModel on _CreateAddressViewModelBase, Store {
     });
   }
 
-  late final _$_CreateAddressViewModelBaseActionController =
-      ActionController(name: '_CreateAddressViewModelBase', context: context);
+  late final _$_CreateEditAddressViewModelBaseActionController =
+      ActionController(
+          name: '_CreateEditAddressViewModelBase', context: context);
 
   @override
   dynamic fetchCityAsDropdownMenuItem() {
     final _$actionInfo =
-        _$_CreateAddressViewModelBaseActionController.startAction(
-            name: '_CreateAddressViewModelBase.fetchCityAsDropdownMenuItem');
+        _$_CreateEditAddressViewModelBaseActionController.startAction(
+            name:
+                '_CreateEditAddressViewModelBase.fetchCityAsDropdownMenuItem');
     try {
       return super.fetchCityAsDropdownMenuItem();
     } finally {
-      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+      _$_CreateEditAddressViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic fetchStatesAsDropdownMenuItem() {
     final _$actionInfo =
-        _$_CreateAddressViewModelBaseActionController.startAction(
-            name: '_CreateAddressViewModelBase.fetchStatesAsDropdownMenuItem');
+        _$_CreateEditAddressViewModelBaseActionController.startAction(
+            name:
+                '_CreateEditAddressViewModelBase.fetchStatesAsDropdownMenuItem');
     try {
       return super.fetchStatesAsDropdownMenuItem();
     } finally {
-      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+      _$_CreateEditAddressViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changeMapExtend() {
-    final _$actionInfo = _$_CreateAddressViewModelBaseActionController
-        .startAction(name: '_CreateAddressViewModelBase.changeMapExtend');
+    final _$actionInfo = _$_CreateEditAddressViewModelBaseActionController
+        .startAction(name: '_CreateEditAddressViewModelBase.changeMapExtend');
     try {
       return super.changeMapExtend();
     } finally {
-      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+      _$_CreateEditAddressViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   dynamic changePlaceMarkerState(double lat, double long) {
     final _$actionInfo =
-        _$_CreateAddressViewModelBaseActionController.startAction(
-            name: '_CreateAddressViewModelBase.changePlaceMarkerState');
+        _$_CreateEditAddressViewModelBaseActionController.startAction(
+            name: '_CreateEditAddressViewModelBase.changePlaceMarkerState');
     try {
       return super.changePlaceMarkerState(lat, long);
     } finally {
-      _$_CreateAddressViewModelBaseActionController.endAction(_$actionInfo);
+      _$_CreateEditAddressViewModelBaseActionController.endAction(_$actionInfo);
     }
   }
 

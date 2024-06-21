@@ -9,10 +9,10 @@ import 'package:latlong2/latlong.dart';
 
 import '../../../../../core/consts/color_consts/color_consts.dart';
 import '../../../../../core/consts/radius_consts.dart';
-import '../../viewmodel/create_address_viewmodel.dart';
+import '../../viewmodel/create_edit_address_viewmodel.dart';
 
 class MapComponent extends StatelessWidget {
-  final CreateAddressViewModel viewModel;
+  final CreateEditAddressViewModel viewModel;
   const MapComponent({super.key, required this.viewModel});
 
   @override

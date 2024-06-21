@@ -11,19 +11,19 @@ import 'package:haydi_express_customer/core/widgets/button/custom_statefull_butt
 import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../viewmodel/create_address_viewmodel.dart';
+import '../viewmodel/create_edit_address_viewmodel.dart';
 import 'components/map_component.dart';
 
-part './components/create_address_inputs.dart';
+part 'components/create_address_inputs.dart';
 
-class CreateAddressView extends StatelessWidget {
+class CreateEditAddressView extends StatelessWidget {
   final AddressModel? data;
-  const CreateAddressView({super.key, this.data});
+  const CreateEditAddressView({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<CreateAddressViewModel>(
-        viewModel: CreateAddressViewModel(),
+    return BaseView<CreateEditAddressViewModel>(
+        viewModel: CreateEditAddressViewModel(),
         onPageBuilder: (context, model) {
           return CustomScaffold(
             appBar: AppBar(
@@ -86,7 +86,7 @@ class CreateAddressView extends StatelessWidget {
     );
   }
 
-  Widget _nameDialog(CreateAddressViewModel model) {
+  Widget _nameDialog(CreateEditAddressViewModel model) {
     return AlertDialog(
         backgroundColor: ColorConsts.instance.background,
         title: CustomTextField(

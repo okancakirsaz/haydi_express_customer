@@ -8,7 +8,7 @@ import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_text_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/views/address/create_address/view/create_address_view.dart';
+import 'package:haydi_express_customer/views/address/create_edit_address/view/create_edit_address_view.dart';
 import 'package:latlong2/latlong.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../../core/consts/asset_consts.dart';
@@ -42,7 +42,7 @@ class AddressesView extends StatelessWidget {
                       ),
                       CustomTextButton(
                         onPressed: () => model.navigationManager.navigate(
-                          const CreateAddressView(),
+                          const CreateEditAddressView(),
                         ),
                         style: TextConsts.instance.regularBlack16Underlined,
                         text: "Adres Ekle",

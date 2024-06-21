@@ -38,7 +38,7 @@ class CreateAddressBottomSheet extends StatelessWidget {
                         onPressed: () {
                           viewModel.navigatorPop();
                           viewModel.navigationManager
-                              .navigate(const CreateAddressView());
+                              .navigate(const CreateEditAddressView());
                         },
                         text: "Evet",
                         style: TextConsts.instance.regularWhite16,
