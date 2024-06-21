@@ -36,7 +36,7 @@ Adres Tarifi: ${address.addressDirection}
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () => viewModel.navigateToEditAddress(address),
               icon: Icon(
                 Icons.edit,
                 size: 30,

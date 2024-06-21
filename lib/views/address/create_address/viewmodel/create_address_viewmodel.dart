@@ -31,7 +31,15 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
     await getProvinceJson();
     fetchCityAsDropdownMenuItem();
     fetchStatesAsDropdownMenuItem();
+    fetchInputsFromEditingAddressData();
     inputListeners();
+  }
+
+  fetchIsEditMode(AddressModel? data) {
+    if (data != null) {
+      isOnEditMode = true;
+      editingAddress = data;
+    }
   }
 
   dispose() {
@@ -73,11 +81,29 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
   @observable
   double currentLong = 30.5387044;
   bool isOnMapSelection = false;
+  bool isOnEditMode = false;
+  AddressModel? editingAddress;
 
   @observable
   ObservableList<DropdownMenuEntry> cityDropdownItems = ObservableList.of([]);
   @observable
   ObservableList<DropdownMenuEntry> stateDropdownItems = ObservableList.of([]);
+
+  fetchInputsFromEditingAddressData() {
+    if (isOnEditMode) {
+      city.text = editingAddress!.city;
+      state.text = editingAddress!.state;
+      neighborhood.text = editingAddress!.neighborhood;
+      street.text = editingAddress!.street;
+      outDoorNumber.text = editingAddress!.buildingNumber;
+      doorNumber.text = editingAddress!.doorNumber;
+      floor.text = editingAddress!.floor;
+      addressName.text = editingAddress!.name;
+      addressDirection.text = editingAddress!.addressDirection;
+      currentLat = editingAddress!.lat ?? currentLat;
+      currentLong = editingAddress!.long ?? currentLong;
+    }
+  }
 
   showNotificationDialog() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -220,6 +246,14 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
     return true;
   }
 
+  Future<void> sendCreateOrEditRequest() async {
+    if (isOnEditMode) {
+      await editAddress();
+    } else {
+      await createAddress();
+    }
+  }
+
   Future<void> createAddress() async {
     if (_inputValidation) {
       final bool response =
@@ -233,6 +267,38 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
       showSuccessDialog("Adres başarıyla eklendi");
       await cacheNewAddress();
     }
+  }
+
+  Future<void> editAddress() async {
+    if (_inputValidation) {
+      final bool response =
+          await service.editAddress(_fetchAddressModel, accessToken!);
+      if (!response) {
+        showErrorDialog();
+        return;
+      }
+      navigatorPop();
+      navigatorPop();
+      showSuccessDialog("Adres başarıyla düzenlendi.");
+      await cacheEditedAddress();
+    }
+  }
+
+  Future<void> cacheEditedAddress() async {
+    List<dynamic>? addresses =
+        localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name);
+    if (addresses != null) {
+      List<AddressModel> asModel =
+          addresses.map((e) => AddressModel.fromJson(e)).toList();
+      AddressModel address =
+          asModel.where((e) => e.uid == _fetchAddressModel.uid).first;
+      asModel.remove(address);
+      asModel.add(_fetchAddressModel);
+      addresses = asModel.map((e) => e.toJson()).toList();
+    } else {
+      addresses = [_fetchAddressModel.toJson()];
+    }
+    await localeManager.setJsonData(LocaleKeysEnums.addresses.name, addresses);
   }
 
   Future<void> cacheNewAddress() async {
@@ -258,7 +324,7 @@ abstract class _CreateAddressViewModelBase with Store, BaseViewModel {
         floor: floor.text,
         addressDirection: addressDirection.text,
         isVerifiedFromCourier: false,
-        uid: const Uuid().v8(),
+        uid: isOnEditMode ? editingAddress!.uid : const Uuid().v8(),
         addressOwner: localeManager.getStringData(LocaleKeysEnums.id.name),
         lat: searchManager.lat,
         long: searchManager.long,

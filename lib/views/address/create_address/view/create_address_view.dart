@@ -9,6 +9,7 @@ import 'package:haydi_express_customer/core/widgets/custom_dropdown.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
+import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../viewmodel/create_address_viewmodel.dart';
 import 'components/map_component.dart';
@@ -16,7 +17,8 @@ import 'components/map_component.dart';
 part './components/create_address_inputs.dart';
 
 class CreateAddressView extends StatelessWidget {
-  const CreateAddressView({super.key});
+  final AddressModel? data;
+  const CreateAddressView({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class CreateAddressView extends StatelessWidget {
                         onPressed: () => showDialog(
                             context: context,
                             builder: (context) => _nameDialog(model)),
-                        text: "Ekle",
+                        text: "Onayla",
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -63,6 +65,7 @@ class CreateAddressView extends StatelessWidget {
         },
         onModelReady: (model) {
           model.setContext(context);
+          model.fetchIsEditMode(data);
           model.init();
         },
         onDispose: (model) {
@@ -92,7 +95,7 @@ class CreateAddressView extends StatelessWidget {
           hint: "Adrese bir isim veriniz",
         ),
         content: CustomStateFullButton(
-          onPressed: () async => await model.createAddress(),
+          onPressed: () async => await model.sendCreateOrEditRequest(),
           text: "Onayla",
         ));
   }

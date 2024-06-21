@@ -15,4 +15,15 @@ final class CreateAddressService extends NetworkManager {
       return false;
     }
   }
+
+  Future<bool> editAddress(AddressModel data, String accessToken) async {
+    try {
+      final response = await network.post(Endpoints.instance.editAddress,
+          data: data.toJson(),
+          options: Options(headers: setHeaderAccessToken(accessToken)));
+      return bool.parse(response.data);
+    } catch (e) {
+      return false;
+    }
+  }
 }
