@@ -18,6 +18,9 @@ import '../../core/map_manager.dart';
 
 part 'create_edit_address_viewmodel.g.dart';
 
+//TODO: Fix UI state bug after create and edit
+//TODO: Fix lat,long problem after edit
+
 class CreateEditAddressViewModel = _CreateEditAddressViewModelBase
     with _$CreateEditAddressViewModel;
 
