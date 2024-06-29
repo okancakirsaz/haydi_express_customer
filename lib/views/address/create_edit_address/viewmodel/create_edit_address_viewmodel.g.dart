@@ -91,6 +91,15 @@ mixin _$CreateEditAddressViewModel on _CreateEditAddressViewModelBase, Store {
     });
   }
 
+  late final _$cacheNewAddressAsyncAction = AsyncAction(
+      '_CreateEditAddressViewModelBase.cacheNewAddress',
+      context: context);
+
+  @override
+  Future<void> cacheNewAddress() {
+    return _$cacheNewAddressAsyncAction.run(() => super.cacheNewAddress());
+  }
+
   late final _$_CreateEditAddressViewModelBaseActionController =
       ActionController(
           name: '_CreateEditAddressViewModelBase', context: context);

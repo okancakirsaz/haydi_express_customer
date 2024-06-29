@@ -6,6 +6,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/address/create_edit_address/service/create_edit_address_service.dart';
+import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:open_geocoder/model/geo_address.dart';
 import 'package:uuid/uuid.dart';
@@ -17,9 +18,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../../core/map_manager.dart';
 
 part 'create_edit_address_viewmodel.g.dart';
-
-//TODO: Fix UI state bug after create and edit
-//TODO: Fix lat,long problem after edit
 
 class CreateEditAddressViewModel = _CreateEditAddressViewModelBase
     with _$CreateEditAddressViewModel;
@@ -86,6 +84,7 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
   bool isOnMapSelection = false;
   bool isOnEditMode = false;
   AddressModel? editingAddress;
+  String addressUniqueId = const Uuid().v8();
 
   @observable
   ObservableList<DropdownMenuEntry> cityDropdownItems = ObservableList.of([]);
@@ -266,7 +265,7 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
         return;
       }
       navigatorPop();
-      navigatorPop();
+      navigateToMainPage();
       showSuccessDialog("Adres başarıyla eklendi");
       await cacheNewAddress();
     }
@@ -281,11 +280,13 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
         return;
       }
       navigatorPop();
-      navigatorPop();
+      navigateToMainPage();
       showSuccessDialog("Adres başarıyla düzenlendi.");
       await cacheEditedAddress();
     }
   }
+
+  navigateToMainPage() => navigationManager.navigate(const MainView());
 
   Future<void> cacheEditedAddress() async {
     List<dynamic>? addresses =
@@ -304,6 +305,7 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
     await localeManager.setJsonData(LocaleKeysEnums.addresses.name, addresses);
   }
 
+  @action
   Future<void> cacheNewAddress() async {
     List<dynamic>? addresses =
         localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name);
@@ -327,7 +329,7 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
         floor: floor.text,
         addressDirection: addressDirection.text,
         isVerifiedFromCourier: false,
-        uid: isOnEditMode ? editingAddress!.uid : const Uuid().v8(),
+        uid: isOnEditMode ? editingAddress!.uid : addressUniqueId,
         addressOwner: localeManager.getStringData(LocaleKeysEnums.id.name),
         lat: searchManager.lat,
         long: searchManager.long,

@@ -3,7 +3,7 @@ final class AppBarElements {
   List<String> elements = [
     "Ana Sayfa",
     "Adreslerim",
-    "Siparişlerim",
+    "Sepetim",
     "Profil",
     "Canlı Destek",
   ];

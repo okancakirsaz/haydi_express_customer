@@ -16,11 +16,13 @@ final class MapSearchManager {
     await getAddressWithLatLang(lat, long);
   }
 
-  Future<void> getAddressWithLatLang(double lat, double long) async {
+  Future<void> getAddressWithLatLang(double cLat, double cLong) async {
     GeoLatLang? geoLatLang = await OpenGeocoder.getAddressWithLatLong(
-        latitude: lat, longitude: long);
+        latitude: cLat, longitude: cLong);
     if (geoLatLang != null) {
       address = geoLatLang;
+      lat = cLat;
+      long = cLong;
       debugPrint(address!.displayName);
     }
   }

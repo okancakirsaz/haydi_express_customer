@@ -63,6 +63,7 @@ abstract class _AddressesViewModelBase with Store, BaseViewModel {
       showErrorDialog();
       return;
     }
+
     AddressModel deletedAddress =
         addresses.firstWhere((element) => element.uid == addressId);
     int deletedAddressIndex = addresses.indexOf(deletedAddress);
@@ -72,6 +73,7 @@ abstract class _AddressesViewModelBase with Store, BaseViewModel {
       LocaleKeysEnums.addresses.name,
       addresses.map((element) => element.toJson()).toList(),
     );
+
     navigatorPop();
   }
 
