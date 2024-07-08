@@ -4,7 +4,8 @@ import 'package:haydi_express_customer/core/consts/asset_consts.dart';
 
 class MenuRatingStars extends StatelessWidget {
   final int starCount;
-  const MenuRatingStars({super.key, required this.starCount});
+  final double? starSize;
+  const MenuRatingStars({super.key, required this.starCount, this.starSize});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class MenuRatingStars extends StatelessWidget {
         starCount,
         growable: false,
         (index) => SvgPicture.asset(
-          width: 15,
+          width: starSize ?? 15,
           AssetConsts.instance.star,
         ),
       ),

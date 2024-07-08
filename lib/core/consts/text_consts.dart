@@ -134,6 +134,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularBlack18 {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      color: Colors.black,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
   TextStyle get regularBlack18Underlined {
     return GoogleFonts.montserrat(
       fontSize: 18,
@@ -221,6 +229,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularPrimary20Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 20,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   TextStyle get regularPrimary18Bold {
     return GoogleFonts.montserrat(
       fontSize: 18,
@@ -233,6 +249,16 @@ class TextConsts {
     return GoogleFonts.montserrat(
       fontSize: 16,
       color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary18LineThrough {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      decoration: TextDecoration.lineThrough,
+      color: ColorConsts.instance.primary,
+      decorationColor: ColorConsts.instance.primary,
       fontWeight: FontWeight.normal,
     );
   }

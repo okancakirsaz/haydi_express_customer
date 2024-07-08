@@ -152,6 +152,7 @@ class FlowView extends StatelessWidget {
           } else {
             return SkeletonWidget(
                 widget: MinimizedMenu(
+              viewModel: model,
               data: AppConst.instance.mockMenuModel,
             ));
           }

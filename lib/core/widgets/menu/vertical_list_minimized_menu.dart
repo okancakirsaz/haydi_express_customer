@@ -4,41 +4,52 @@ import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
 import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
+
+import '../../base/viewmodel/base_viewmodel.dart';
 
 class VerticalListMinimizedMenu extends StatelessWidget {
   final MenuModel data;
   final int? calculatedDiscountedPrice;
+  final BaseViewModel viewModel;
   const VerticalListMinimizedMenu(
-      {super.key, required this.data, this.calculatedDiscountedPrice});
+      {super.key,
+      required this.data,
+      this.calculatedDiscountedPrice,
+      required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: PaddingConsts.instance.all10,
-      padding: PaddingConsts.instance.all5,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.background,
-        borderRadius: RadiusConsts.instance.circularAll10,
-        boxShadow: ColorConsts.instance.shadow,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _buildImage(context),
-          _buildTitle(context),
-          _information(),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Text(
-              data.content,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextConsts.instance.regularBlack14,
-            ),
-          )
-        ],
+    return InkWell(
+      onTap: () => viewModel.navigateToMenu(data,
+          calcDiscountPrice: calculatedDiscountedPrice),
+      child: Container(
+        margin: PaddingConsts.instance.all10,
+        padding: PaddingConsts.instance.all5,
+        decoration: BoxDecoration(
+          color: ColorConsts.instance.background,
+          borderRadius: RadiusConsts.instance.circularAll10,
+          boxShadow: ColorConsts.instance.shadow,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _buildImage(context),
+            _buildTitle(context),
+            _information(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                data.content,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextConsts.instance.regularBlack14,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -111,7 +122,7 @@ class VerticalListMinimizedMenu extends StatelessWidget {
       children: <Widget>[
         calculatedDiscountedPrice != null ? _discountedPrice() : _normalPrice(),
         calculatedDiscountedPrice != null
-            ? _discountAmount()
+            ? DiscountContainer(discountAmount: data.discountAmount!)
             : const SizedBox(),
       ],
     );
@@ -139,24 +150,6 @@ class VerticalListMinimizedMenu extends StatelessWidget {
       child: Text(
         "${data.price}₺",
         style: TextConsts.instance.regularBlack20,
-      ),
-    );
-  }
-
-  Widget _discountAmount() {
-    return Container(
-      margin: PaddingConsts.instance.left30,
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.third,
-        borderRadius: RadiusConsts.instance.circularAll10,
-      ),
-      child: Center(
-        child: Text(
-          "%${data.discountAmount}",
-          style: TextConsts.instance.regularWhite16Bold,
-        ),
       ),
     );
   }

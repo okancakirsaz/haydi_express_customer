@@ -7,17 +7,20 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final TextStyle? style;
   final String text;
-  final Color? backGroundColor;
+  final Color? backgroundColor;
+  final Gradient? gradient;
   final double? width;
   final double? height;
-  const CustomButton({
+  final BorderRadiusGeometry radius = RadiusConsts.instance.circularAll10;
+  CustomButton({
     super.key,
     required this.onPressed,
     this.style,
     required this.text,
     this.width,
     this.height,
-    this.backGroundColor,
+    this.backgroundColor,
+    this.gradient,
   });
 
   @override
@@ -29,15 +32,18 @@ class CustomButton extends StatelessWidget {
         minHeight: 40,
         minWidth: 130,
       ),
+      decoration: BoxDecoration(
+        boxShadow: ColorConsts.instance.shadow,
+        color: backgroundColor ?? ColorConsts.instance.primary,
+        borderRadius: radius,
+        gradient: gradient,
+      ),
       child: ElevatedButton(
           style: ButtonStyle(
-            elevation: const MaterialStatePropertyAll(2),
-            backgroundColor: MaterialStatePropertyAll(
-                backGroundColor ?? ColorConsts.instance.primary),
+            elevation: const MaterialStatePropertyAll(0),
+            backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: RadiusConsts.instance.circularAll10,
-              ),
+              RoundedRectangleBorder(borderRadius: radius),
             ),
           ),
           onPressed: onPressed,

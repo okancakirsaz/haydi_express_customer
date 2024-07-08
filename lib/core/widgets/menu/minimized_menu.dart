@@ -1,63 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/core/base/viewmodel/base_viewmodel.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
 import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 
 class MinimizedMenu extends StatelessWidget {
   final MenuModel data;
+  final BaseViewModel viewModel;
   final int? calculatedDiscountedPrice;
   const MinimizedMenu(
-      {super.key, required this.data, this.calculatedDiscountedPrice});
+      {super.key,
+      required this.data,
+      this.calculatedDiscountedPrice,
+      required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: PaddingConsts.instance.all10,
-      padding: PaddingConsts.instance.all5,
-      width: 250,
-      height: 140,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.background,
-        borderRadius: RadiusConsts.instance.circularAll10,
-        boxShadow: ColorConsts.instance.shadow,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              _buildImage(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  _buildTitle(),
-                  Padding(
-                    padding: PaddingConsts.instance.left10,
-                    child: Padding(
-                      padding: PaddingConsts.instance.top10,
-                      child: _information(),
+    return InkWell(
+      onTap: () => viewModel.navigateToMenu(data,
+          calcDiscountPrice: calculatedDiscountedPrice),
+      child: Container(
+        margin: PaddingConsts.instance.all10,
+        padding: PaddingConsts.instance.all5,
+        width: 250,
+        height: 140,
+        decoration: BoxDecoration(
+          color: ColorConsts.instance.background,
+          borderRadius: RadiusConsts.instance.circularAll10,
+          boxShadow: ColorConsts.instance.shadow,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _buildImage(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    _buildTitle(),
+                    Padding(
+                      padding: PaddingConsts.instance.left10,
+                      child: Padding(
+                        padding: PaddingConsts.instance.top10,
+                        child: _information(),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Text(
-              data.content,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextConsts.instance.regularBlack14,
+                  ],
+                ),
+              ],
             ),
-          )
-        ],
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: Text(
+                data.content,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextConsts.instance.regularBlack14,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -103,7 +113,7 @@ class MinimizedMenu extends StatelessWidget {
       children: <Widget>[
         calculatedDiscountedPrice != null ? _discountedPrice() : _normalPrice(),
         calculatedDiscountedPrice != null
-            ? _discountAmount()
+            ? DiscountContainer(discountAmount: data.discountAmount!)
             : const SizedBox(),
       ],
     );
@@ -131,24 +141,6 @@ class MinimizedMenu extends StatelessWidget {
       child: Text(
         "${data.price}₺",
         style: TextConsts.instance.regularBlack20,
-      ),
-    );
-  }
-
-  Widget _discountAmount() {
-    return Container(
-      margin: PaddingConsts.instance.left30,
-      width: 45,
-      height: 45,
-      decoration: BoxDecoration(
-        color: ColorConsts.instance.third,
-        borderRadius: RadiusConsts.instance.circularAll10,
-      ),
-      child: Center(
-        child: Text(
-          "%${data.discountAmount}",
-          style: TextConsts.instance.regularWhite16Bold,
-        ),
       ),
     );
   }

@@ -12,13 +12,17 @@ class CustomStateFullButton extends StatelessWidget {
   final String text;
   final double? width;
   final double? height;
+  final Color? backgroundColor;
+  final Gradient? gradient;
   const CustomStateFullButton(
       {super.key,
       required this.onPressed,
       this.style,
       required this.text,
       this.width,
-      this.height});
+      this.height,
+      this.gradient,
+      this.backgroundColor});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +33,9 @@ class CustomStateFullButton extends StatelessWidget {
         minWidth: 150,
       ),
       decoration: BoxDecoration(
-        color: ColorConsts.instance.primary,
+        gradient: gradient,
+        boxShadow: ColorConsts.instance.shadow,
+        color: backgroundColor ?? ColorConsts.instance.primary,
         border: Border.all(color: Colors.transparent),
         borderRadius: RadiusConsts.instance.circularAll10,
       ),

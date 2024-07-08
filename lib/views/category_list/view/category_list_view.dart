@@ -87,6 +87,7 @@ class CategoryListView extends StatelessWidget {
             );
           } else if (model.dataList.isNotEmpty) {
             return VerticalListMinimizedMenu(
+              viewModel: model,
               data: model.dataList[index],
               calculatedDiscountedPrice: model.dataList[index].isOnDiscount
                   ? model.calculateDiscount(model.dataList[index].price,
@@ -104,7 +105,8 @@ class CategoryListView extends StatelessWidget {
   Widget _buildSkeleton(CategoryListViewModel model) {
     return SkeletonWidget(
       scrollDirection: Axis.vertical,
-      widget: VerticalListMinimizedMenu(data: AppConst.instance.mockMenuModel),
+      widget: VerticalListMinimizedMenu(
+          viewModel: model, data: AppConst.instance.mockMenuModel),
     );
   }
 }

@@ -12,6 +12,15 @@ class ColorConsts {
   final Color lightThird = const Color(0xFF6230AD);
   final Color blurGrey = const Color(0xB4CCCCCC);
   final Color darkBlurGrey = const Color(0xB4989898);
+  Gradient get primaryGradient => LinearGradient(colors: [
+        lightSecondary,
+        secondary,
+        primary,
+      ]);
+  Gradient get thirdGradient => LinearGradient(colors: [
+        third,
+        const Color(0xFF7A3BD7),
+      ]);
   final List<BoxShadow> shadow = [
     const BoxShadow(
       offset: Offset(3, 3),
