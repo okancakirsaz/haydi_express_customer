@@ -2,8 +2,8 @@ part of '../menu_view.dart';
 
 class SimilarFoods extends StatelessWidget {
   final MenuViewModel viewModel;
-  final List tags;
-  const SimilarFoods({super.key, required this.viewModel, required this.tags});
+  final MenuModel data;
+  const SimilarFoods({super.key, required this.viewModel, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class SimilarFoods extends StatelessWidget {
 
   Widget _buildSimilarFoods() {
     return FutureBuilder<List<MenuModel>>(
-      future: viewModel.getSimilarFoods(tags),
+      future: viewModel.getSimilarFoods(data.tags, data.menuId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {
@@ -48,7 +48,13 @@ class SimilarFoods extends StatelessWidget {
               ),
             );
           } else {
-            return _menuList(snapshot.data!);
+            return Padding(
+              padding: PaddingConsts.instance.bottom40,
+              child: Padding(
+                padding: PaddingConsts.instance.top10,
+                child: _menuList(snapshot.data!),
+              ),
+            );
           }
         } else {
           return Center(

@@ -44,7 +44,7 @@ class MenuView extends StatelessWidget {
                     viewModel: model,
                   ),
                   SimilarFoods(
-                    tags: data.tags,
+                    data: data,
                     viewModel: model,
                   ),
                 ],

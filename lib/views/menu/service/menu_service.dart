@@ -8,11 +8,11 @@ import '../../../core/init/model/menu_model.dart';
 
 final class MenuService extends NetworkManager {
   Future<List<MenuModel>?> getSimilarFoods(
-      List tags, String accessToken) async {
+      List tags, String menuId, String accessToken) async {
     try {
       final response = await network.get(
         Endpoints.instance.getSimilarFoods,
-        queryParameters: {"tags": jsonEncode(tags)},
+        queryParameters: {"tags": jsonEncode(tags), "menuId": menuId},
         options: Options(
           headers: setHeaderAccessToken(accessToken),
         ),

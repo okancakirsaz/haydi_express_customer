@@ -37,9 +37,9 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
     }
   }
 
-  Future<List<MenuModel>> getSimilarFoods(List tags) async {
+  Future<List<MenuModel>> getSimilarFoods(List tags, String menuId) async {
     final List<MenuModel> response =
-        await service.getSimilarFoods(tags, accessToken!) ?? [];
+        await service.getSimilarFoods(tags, menuId, accessToken!) ?? [];
     return response;
   }
 }
