@@ -13,13 +13,13 @@ mixin _$BucketViewModel on _BucketViewModelBase, Store {
       Atom(name: '_BucketViewModelBase.bucket', context: context);
 
   @override
-  ObservableList<MenuModel> get bucket {
+  ObservableList<BucketElementModel> get bucket {
     _$bucketAtom.reportRead();
     return super.bucket;
   }
 
   @override
-  set bucket(ObservableList<MenuModel> value) {
+  set bucket(ObservableList<BucketElementModel> value) {
     _$bucketAtom.reportWrite(value, super.bucket, () {
       super.bucket = value;
     });

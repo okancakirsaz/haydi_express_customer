@@ -3,7 +3,7 @@ part of '../bucket_view.dart';
 class BucketElement extends StatelessWidget {
   final BucketViewModel viewModel;
   final int index;
-  final MenuModel data;
+  final BucketElementModel data;
   const BucketElement(
       {super.key,
       required this.index,
@@ -19,7 +19,7 @@ class BucketElement extends StatelessWidget {
         child: ListTile(
           minVerticalPadding: 0,
           title: Text(
-            data.name,
+            "${data.menuElement.name} x${data.count}",
             overflow: TextOverflow.ellipsis,
             style: TextConsts.instance.regularBlack18Bold,
           ),
@@ -50,7 +50,7 @@ class BucketElement extends StatelessWidget {
   }
 
   Widget _buildPrice() {
-    if (data.isOnDiscount) {
+    if (data.menuElement.isOnDiscount) {
       return SizedBox(
         width: 100,
         height: 65,
@@ -62,24 +62,23 @@ class BucketElement extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "${data.price}₺",
+                  "${data.menuElement.price * data.count}₺",
                   style: TextConsts.instance.regularPrimary16LineThrough,
                 ),
-                Text(
-                    "${viewModel.calculateDiscount(data.price, data.discountAmount ?? 0)}₺",
+                Text("${viewModel.getBucketElementPrice(index)}₺",
                     style: TextConsts.instance.regularBlack16)
               ],
             ),
             DiscountContainer(
               margin: PaddingConsts.instance.left5,
-              discountAmount: data.discountAmount!,
+              discountAmount: data.menuElement.discountAmount!,
             ),
           ],
         ),
       );
     } else {
       return Text(
-        "${data.price}₺",
+        "${viewModel.getBucketElementPrice(index)}₺",
         style: TextConsts.instance.regularBlack18Bold,
       );
     }

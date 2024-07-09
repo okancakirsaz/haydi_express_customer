@@ -9,6 +9,7 @@ import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
 import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 import 'package:haydi_express_customer/core/widgets/menu/minimized_menu.dart';
+import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../../../core/consts/radius_consts.dart';
 import '../../../core/init/model/comment_model.dart';

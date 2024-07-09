@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -19,15 +19,16 @@ abstract class _BucketViewModelBase with Store, BaseViewModel {
   }
 
   @observable
-  ObservableList<MenuModel> bucket = ObservableList<MenuModel>.of([]);
+  ObservableList<BucketElementModel> bucket =
+      ObservableList<BucketElementModel>.of([]);
   @observable
   int totalPrice = 0;
 
   getBucket() {
     final List rawBucket =
         localeManager.getNullableJsonData(LocaleKeysEnums.bucket.name) ?? [];
-    bucket = ObservableList<MenuModel>.of(
-      rawBucket.map((e) => MenuModel.fromJson(e)).toList(),
+    bucket = ObservableList<BucketElementModel>.of(
+      rawBucket.map((e) => BucketElementModel.fromJson(e)).toList(),
     );
   }
 
@@ -49,9 +50,11 @@ abstract class _BucketViewModelBase with Store, BaseViewModel {
   }
 
   int getBucketElementPrice(int index) {
-    return bucket[index].isOnDiscount
-        ? calculateDiscount(bucket[index].price, bucket[index].discountAmount!)
-        : bucket[index].price;
+    return bucket[index].menuElement.isOnDiscount
+        ? calculateDiscount(
+            (bucket[index].menuElement.price * bucket[index].count),
+            bucket[index].menuElement.discountAmount!)
+        : bucket[index].menuElement.price * bucket[index].count;
   }
 
   //TODO: Check is totalPrice == 0 before navigate to create order views.

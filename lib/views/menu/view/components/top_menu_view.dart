@@ -34,7 +34,8 @@ class TopMenuView extends StatelessWidget {
           ),
         ),
         CustomStateFullButton(
-          onPressed: () async => await viewModel.addToBucket(data),
+          onPressed: () async => await viewModel.addToBucket(
+              BucketElementModel(menuElement: data, count: viewModel.counter)),
           width: 200,
           gradient: ColorConsts.instance.primaryGradient,
           text: "Sepete Ekle",
