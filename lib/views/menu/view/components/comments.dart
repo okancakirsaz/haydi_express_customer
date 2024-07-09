@@ -90,7 +90,7 @@ class Comments extends StatelessWidget {
               children: <Widget>[
                 MenuRatingStars(
                   starSize: 18,
-                  starCount: comment.like.toInt(),
+                  starCount: comment.like,
                 ),
                 Text(
                   comment.like.toStringAsFixed(1),
