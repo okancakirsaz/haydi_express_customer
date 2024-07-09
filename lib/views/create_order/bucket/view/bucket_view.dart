@@ -90,7 +90,7 @@ class BucketView extends StatelessWidget {
           },
         ),
         CustomButton(
-          onPressed: () {},
+          onPressed: () => model.navigateToCreateOrder(),
           text: "Sepeti Onayla",
           width: 200,
           style: TextConsts.instance.regularWhite20,

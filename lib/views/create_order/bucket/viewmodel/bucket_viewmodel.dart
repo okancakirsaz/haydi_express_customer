@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
+import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -57,5 +58,9 @@ abstract class _BucketViewModelBase with Store, BaseViewModel {
         : bucket[index].menuElement.price * bucket[index].count;
   }
 
-  //TODO: Check is totalPrice == 0 before navigate to create order views.
+  navigateToCreateOrder() {
+    if (totalPrice > 0) {
+      navigationManager.navigate(const OrderStepsView());
+    }
+  }
 }
