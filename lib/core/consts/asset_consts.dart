@@ -9,4 +9,5 @@ class AssetConsts {
   final String boostIcon = "assets/icons/boost_icon.svg";
   final String lostConnection = "assets/icons/lost_connection.svg";
   final String star = "assets/icons/star.svg";
+  final String bucket = "assets/icons/bucket.svg";
 }

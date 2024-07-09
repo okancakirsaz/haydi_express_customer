@@ -67,17 +67,9 @@ class Suggestion extends StatelessWidget {
                 )
               ],
             ),
-            Container(
-              width: 50,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: ColorConsts.instance.third,
-                  borderRadius: RadiusConsts.instance.circularAll10),
-              child: Text(
-                "%${data.discountAmount}",
-                style: TextConsts.instance.regularWhite14Bold,
-              ),
+            DiscountContainer(
+              margin: PaddingConsts.instance.left5,
+              discountAmount: data.discountAmount,
             ),
           ],
         ),

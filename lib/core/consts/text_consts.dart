@@ -245,20 +245,30 @@ class TextConsts {
     );
   }
 
-  TextStyle get regularPrimary16 {
-    return GoogleFonts.montserrat(
-      fontSize: 16,
-      color: ColorConsts.instance.primary,
-      fontWeight: FontWeight.normal,
-    );
-  }
-
   TextStyle get regularPrimary18LineThrough {
     return GoogleFonts.montserrat(
       fontSize: 18,
       decoration: TextDecoration.lineThrough,
       color: ColorConsts.instance.primary,
       decorationColor: ColorConsts.instance.primary,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularPrimary18BoldUnderlined {
+    return GoogleFonts.montserrat(
+      fontSize: 18,
+      decoration: TextDecoration.underline,
+      color: ColorConsts.instance.primary,
+      decorationColor: ColorConsts.instance.primary,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  TextStyle get regularPrimary16 {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: ColorConsts.instance.primary,
       fontWeight: FontWeight.normal,
     );
   }

@@ -7,5 +7,6 @@ enum LocaleKeysEnums {
   discover,
   addresses,
   favSuggestions,
-  advertSuggestions
+  advertSuggestions,
+  bucket
 }
