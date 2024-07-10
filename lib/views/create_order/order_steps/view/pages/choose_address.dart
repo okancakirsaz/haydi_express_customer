@@ -14,7 +14,6 @@ class ChooseAddress extends StatelessWidget {
             CustomStepper(
               steps: viewModel.steps,
               currentStep: 1,
-              width: double.infinity,
               height: 150,
             ),
             Text(
@@ -49,7 +48,8 @@ class ChooseAddress extends StatelessWidget {
                 return Padding(
                   padding: PaddingConsts.instance.all10,
                   child: CustomButton(
-                    onPressed: () {},
+                    onPressed: () => viewModel.chooseAddress(
+                        snapshot.data![index], viewModel),
                     text: viewModel.fetchAddressToUi(snapshot.data![index]),
                     style: TextConsts.instance.regularWhite14,
                     gradient: ColorConsts.instance.primaryGradient,

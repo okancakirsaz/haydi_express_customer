@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
+import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/radius_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 
 class AreYouSure extends StatelessWidget {
   final VoidCallback onPressed;
   final String? question;
-  const AreYouSure({super.key, required this.onPressed, this.question});
+  final Widget? description;
+  const AreYouSure(
+      {super.key, required this.onPressed, this.question, this.description});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorConsts.instance.third,
       content: SizedBox(
-        height: 150,
+        height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               question ?? "Emin misiniz? ",
               style: TextConsts.instance.regularWhite20Bold,
+            ),
+            Padding(
+              padding: PaddingConsts.instance.top10,
+              child: description ?? const SizedBox(),
             ),
             const SizedBox(height: 20),
             Row(

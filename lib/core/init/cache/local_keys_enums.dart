@@ -8,5 +8,6 @@ enum LocaleKeysEnums {
   addresses,
   favSuggestions,
   advertSuggestions,
-  bucket
+  bucket,
+  creditCard,
 }
