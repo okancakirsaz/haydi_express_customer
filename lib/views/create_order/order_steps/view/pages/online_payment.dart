@@ -9,7 +9,15 @@ class OnlinePayment extends StatelessWidget {
     return CustomScaffold(
         appBar: OrderStepsAppBar().build(),
         body: Column(
-          children: <Widget>[buildCreditCard(), buildInputs()],
+          children: <Widget>[
+            CustomStepper(
+              steps: viewModel.steps,
+              currentStep: 2,
+              height: 150,
+            ),
+            buildCreditCard(),
+            buildInputs()
+          ],
         ));
   }
 

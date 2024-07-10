@@ -4,6 +4,7 @@ import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
+import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/constants/payment_methods.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/card_model.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
@@ -11,6 +12,7 @@ import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../../core/widgets/dialog/are_you_sure_dialog.dart';
+import '../service/order_steps_service.dart';
 
 part 'order_steps_viewmodel.g.dart';
 
@@ -24,6 +26,12 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   init() {
     getCachedCardData();
   }
+
+  getTotalPrice(int data) => totalPrice = data;
+
+  int totalPrice = 0;
+  final TextEditingController note = TextEditingController();
+  final OrderStepsService service = OrderStepsService();
 
   final List<String> steps = [
     "Adres Bilgileri",
@@ -65,10 +73,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   String fetchAddressToUi(AddressModel data) {
-    return '''
-    ${data.name}
-    ${data.city}/${data.state}-${data.neighborhood},${data.street},Bina No: ${data.buildingNumber},Kat: ${data.floor},Daire: ${data.doorNumber}
-    ''';
+    return '${data.name} - ${data.city}/${data.state}-${data.neighborhood},${data.street},Bina No: ${data.buildingNumber},Kat: ${data.floor},Daire: ${data.doorNumber}';
   }
 
   chooseAddress(AddressModel data, OrderStepsViewModel viewModel) {
@@ -90,7 +95,6 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   //Online Payment
-  late final int totalPrice;
   @observable
   String cardNumber = "";
   @observable
@@ -157,5 +161,45 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
       _fetchCardModel.toJson(),
     );
     navigatorPop();
+  }
+
+  //Details
+
+  List<Widget> get fetchBucketToDetails {
+    List<BucketElementModel> bucket = _getBucket;
+    List<Widget> bucketAsWidget = bucket
+        .map(
+          (e) => OrderDetailsBucketElement(
+              menuName: e.menuElement.name,
+              price: e.menuElement.isOnDiscount
+                  ? calculateDiscount(
+                      e.menuElement.price, e.menuElement.discountAmount!)
+                  : e.menuElement.price,
+              count: e.count),
+        )
+        .toList();
+    return bucketAsWidget;
+  }
+
+  List<BucketElementModel> get _getBucket =>
+      (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List<dynamic>)
+          .map((e) => BucketElementModel.fromJson(e))
+          .toList();
+
+  Future<bool> checkIsAnyRestaurantUsesHe() async {
+    List<BucketElementModel> bucket = _getBucket;
+    List<String> ids = bucket.map((e) => e.menuElement.restaurantUid).toList();
+    List result = await _isRestaurantsUsesHe(ids);
+    if (result.contains(false) || result.isEmpty) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  Future<List> _isRestaurantsUsesHe(List<String> ids) async {
+    final List response =
+        await service.isRestaurantsUsesHe(ids, accessToken!) ?? [];
+    return response;
   }
 }

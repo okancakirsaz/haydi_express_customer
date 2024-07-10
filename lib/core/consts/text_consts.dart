@@ -273,6 +273,14 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularPrimary16Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 16,
+      color: ColorConsts.instance.primary,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   TextStyle get regularPrimary16 {
     return GoogleFonts.montserrat(
       fontSize: 16,

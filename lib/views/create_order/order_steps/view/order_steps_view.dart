@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:haydi_express_customer/core/consts/asset_consts.dart';
 import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
 import 'package:haydi_express_customer/core/consts/padding_consts.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_stepper.dart';
+import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/address/create_edit_address/view/create_edit_address_view.dart';
 import 'package:haydi_express_customer/views/create_order/core/constants/payment_methods.dart';
@@ -20,9 +24,13 @@ part './pages/choose_address.dart';
 part './pages/payment_method.dart';
 part './pages/order_details.dart';
 part './pages/online_payment.dart';
+part './components/order_details_bucket_element.dart';
+part './components/order_details_menus.dart';
+part './components/service_information.dart';
 
 class OrderStepsView extends StatelessWidget {
-  const OrderStepsView({super.key});
+  final int totalPrice;
+  const OrderStepsView({super.key, required this.totalPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +41,7 @@ class OrderStepsView extends StatelessWidget {
         },
         onModelReady: (model) {
           model.init();
+          model.getTotalPrice(totalPrice);
           model.setContext(context);
         },
         onDispose: (model) {});

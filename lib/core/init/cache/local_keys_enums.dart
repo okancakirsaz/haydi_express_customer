@@ -3,6 +3,7 @@ enum LocaleKeysEnums {
   accessToken,
   password,
   email,
+  phoneNumber,
   haydiFirsatlar,
   discover,
   addresses,

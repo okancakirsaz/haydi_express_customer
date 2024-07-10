@@ -28,4 +28,7 @@ final class Endpoints {
   final String editAddress = "/address/edit";
   final String getUserAddresses = "/address/get-user-addresses";
   final String deleteAddress = "/address/delete-address";
+
+  //Order
+  final String isRestaurantUsesHe = "/order/is-restaurants-uses-he";
 }

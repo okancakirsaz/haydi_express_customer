@@ -60,7 +60,11 @@ abstract class _BucketViewModelBase with Store, BaseViewModel {
 
   navigateToCreateOrder() {
     if (totalPrice > 0) {
-      navigationManager.navigate(const OrderStepsView());
+      navigationManager.navigate(
+        OrderStepsView(
+          totalPrice: totalPrice,
+        ),
+      );
     }
   }
 }
