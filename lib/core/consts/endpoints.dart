@@ -31,4 +31,5 @@ final class Endpoints {
 
   //Order
   final String isRestaurantUsesHe = "/order/is-restaurants-uses-he";
+  final String createOrder = "/order/create-order";
 }

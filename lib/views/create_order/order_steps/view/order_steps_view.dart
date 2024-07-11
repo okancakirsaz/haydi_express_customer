@@ -27,6 +27,7 @@ part './pages/online_payment.dart';
 part './components/order_details_bucket_element.dart';
 part './components/order_details_menus.dart';
 part './components/service_information.dart';
+part './pages/order_steps_final_page.dart';
 
 class OrderStepsView extends StatelessWidget {
   final int totalPrice;

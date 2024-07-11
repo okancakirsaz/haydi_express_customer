@@ -82,6 +82,8 @@ abstract class _LogInViewModelBase with Store, BaseViewModel {
         LocaleKeysEnums.email.name, response.mail);
     await localeManager.setStringData(
         LocaleKeysEnums.phoneNumber.name, response.customerData!.phoneNumber);
+    await localeManager.setStringData(
+        LocaleKeysEnums.name.name, response.customerData!.name);
   }
 
   Future<List<MenuModel>?> _getAdvertsFromApi() async {

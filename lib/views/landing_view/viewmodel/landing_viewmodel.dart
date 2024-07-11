@@ -26,6 +26,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     WebSocketManager.instance.initializeSocketConnection();
     await localeManager.getSharedPreferencesInstance();
     //await localeManager.removeData(LocaleKeysEnums.id.name);
+
     await _clearCache();
     _checkLoggedInState();
     return defaultWidget;
@@ -39,6 +40,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     await localeManager.removeData(LocaleKeysEnums.discover.name);
     await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
     await localeManager.removeData(LocaleKeysEnums.addresses.name);
+    await localeManager.removeData(LocaleKeysEnums.bucket.name);
   }
 
   _checkLoggedInState() {

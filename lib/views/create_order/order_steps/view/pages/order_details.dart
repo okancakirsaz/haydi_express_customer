@@ -55,7 +55,8 @@ class OrderDetails extends StatelessWidget {
                   child: CustomStateFullButton(
                     width: 200,
                     style: TextConsts.instance.regularWhite20,
-                    onPressed: () {},
+                    onPressed: () async =>
+                        await viewModel.createOrder(viewModel),
                     text: "Haydi Gelsin!",
                     gradient: ColorConsts.instance.primaryGradient,
                   ),

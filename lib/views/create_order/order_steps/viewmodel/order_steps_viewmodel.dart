@@ -2,12 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
+import 'package:haydi_express_customer/core/init/model/http_exception_model.dart';
+import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/constants/payment_methods.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/card_model.dart';
+import 'package:haydi_express_customer/views/create_order/core/models/order_model.dart';
+import 'package:haydi_express_customer/views/create_order/core/models/payment_model.dart';
+import 'package:haydi_express_customer/views/create_order/core/models/revenue_model.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
+import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
+import 'package:uuid/uuid.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -219,5 +226,88 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
     final List response =
         await service.isRestaurantsUsesHe(ids, accessToken!) ?? [];
     return response;
+  }
+
+  //Create order
+  OrderModel get _fetchOrderModel => OrderModel(
+        paymentData: PaymentModel(
+          cardData: chosenMethod == PaymentMethods.online
+              ? CardModel(
+                  cardHolder: cardHolderName,
+                  cardNumber: cardNumber,
+                  cvv: cvvCode,
+                  expireDate: expireDate)
+              : null,
+          revenues: _fetchRestaurantRevenues(),
+          totalPrice: totalPrice,
+        ),
+        customerId: localeManager.getStringData(LocaleKeysEnums.id.name),
+        menuData:
+            (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
+                .map((e) => MenuModel.fromJson(e["menuElement"]))
+                .toList(),
+        addressData: chosenAddress!,
+        paymentMethod: chosenMethod!.value,
+        isPaidSuccess: chosenMethod == PaymentMethods.online ? false : null,
+        orderState: "Restoran Onayı Bekleniyor",
+        orderCreationDate: DateTime.now().toIso8601String(),
+        customerName: localeManager.getStringData(LocaleKeysEnums.name.name),
+        customerPhoneNumber:
+            localeManager.getStringData(LocaleKeysEnums.phoneNumber.name),
+        note: note.text,
+        orderId: const Uuid().v1(),
+      );
+
+  List<RevenueModel> _fetchRestaurantRevenues() {
+    List<BucketElementModel> bucket =
+        (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
+            .map((e) => BucketElementModel.fromJson(e))
+            .toList();
+    List<String> ids = [];
+    List<RevenueModel> revenues = [];
+    for (int i = 0; i <= bucket.length - 1; i++) {
+      final String id = bucket[i].menuElement.restaurantUid;
+      if (!ids.contains(id)) {
+        ids.add(id);
+        revenues.add(
+          RevenueModel(
+              restaurantId: id,
+              revenue: bucket[i].menuElement.isOnDiscount
+                  ? calculateDiscount(
+                      (bucket[i].menuElement.price * bucket[i].count),
+                      bucket[i].menuElement.discountAmount!)
+                  : bucket[i].menuElement.price * bucket[i].count),
+        );
+      }
+    }
+    return revenues;
+  }
+
+  Future<void> createOrder(OrderStepsViewModel viewModel) async {
+    final response = await service.createOrder(_fetchOrderModel, accessToken!);
+    bool isSuccess = false;
+    if (response == null) {
+      isSuccess = false;
+      return;
+    }
+    if (response is HttpExceptionModel) {
+      isSuccess = false;
+    } else {
+      isSuccess = true;
+    }
+    navigationManager.navigate(
+      OrderStepsFinalPage(
+        isSuccess: isSuccess,
+        viewModel: viewModel,
+        errorReason: isSuccess == false
+            ? (response as HttpExceptionModel).message
+            : null,
+      ),
+    );
+  }
+
+  Future<void> returnToMainView() async {
+    await localeManager.removeData(LocaleKeysEnums.bucket.name);
+    navigationManager.navigate(const MainView());
   }
 }

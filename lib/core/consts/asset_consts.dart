@@ -11,4 +11,6 @@ class AssetConsts {
   final String star = "assets/icons/star.svg";
   final String bucket = "assets/icons/bucket.svg";
   final String addition = "assets/icons/addition.svg";
+  final String error = "assets/icons/error.svg";
+  final String success = "assets/icons/success.svg";
 }
