@@ -135,13 +135,27 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> goToDetailsPage(OrderStepsViewModel viewModel) async {
-    await _openCardSaveDialog();
-    navigationManager.navigate(OrderDetails(viewModel: viewModel));
+    if (formKey.currentState?.validate() ?? false) {
+      await _openCardSaveDialog();
+      navigationManager.navigate(OrderDetails(viewModel: viewModel));
+    } else {
+      showErrorDialog("Lütfen istenilen bilgileri eksiksiz giriniz.");
+    }
+  }
+
+  @action
+  Future<void> deleteSavedCardData() async {
+    await localeManager.removeData(LocaleKeysEnums.creditCard.name);
+    cardHolderName = "";
+    cardNumber = "";
+    cvvCode = "";
+    expireDate = "";
   }
 
   Future<void> _openCardSaveDialog() async {
     if (localeManager.getNullableJsonData(LocaleKeysEnums.creditCard.name) ==
-        null) {
+            null &&
+        (formKey.currentState?.validate() ?? false)) {
       await showDialog(
         context: viewModelContext,
         builder: (context) => AreYouSure(

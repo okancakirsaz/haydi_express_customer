@@ -8,16 +8,18 @@ class OnlinePayment extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScaffold(
         appBar: OrderStepsAppBar().build(),
-        body: Column(
-          children: <Widget>[
-            CustomStepper(
-              steps: viewModel.steps,
-              currentStep: 2,
-              height: 150,
-            ),
-            buildCreditCard(),
-            buildInputs()
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              CustomStepper(
+                steps: viewModel.steps,
+                currentStep: 2,
+                height: 150,
+              ),
+              buildCreditCard(),
+              buildInputs()
+            ],
+          ),
         ));
   }
 
@@ -77,6 +79,17 @@ class OnlinePayment extends StatelessWidget {
               style: TextConsts.instance.regularWhite18,
               text: "Devam Et",
               width: 200,
+              height: 40,
+            ),
+          ),
+          Padding(
+            padding: PaddingConsts.instance.all20,
+            child: CustomStateFullButton(
+              onPressed: () async => await viewModel.deleteSavedCardData(),
+              gradient: ColorConsts.instance.thirdGradient,
+              style: TextConsts.instance.regularWhite18,
+              text: "Kayıtlı Kart Bilgilerini Sil",
+              width: 240,
               height: 40,
             ),
           ),

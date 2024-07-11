@@ -89,6 +89,16 @@ mixin _$OrderStepsViewModel on _OrderStepsViewModelBase, Store {
     });
   }
 
+  late final _$deleteSavedCardDataAsyncAction = AsyncAction(
+      '_OrderStepsViewModelBase.deleteSavedCardData',
+      context: context);
+
+  @override
+  Future<void> deleteSavedCardData() {
+    return _$deleteSavedCardDataAsyncAction
+        .run(() => super.deleteSavedCardData());
+  }
+
   late final _$_OrderStepsViewModelBaseActionController =
       ActionController(name: '_OrderStepsViewModelBase', context: context);
 
