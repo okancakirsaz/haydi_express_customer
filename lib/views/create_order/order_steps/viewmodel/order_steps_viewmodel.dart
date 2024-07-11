@@ -164,6 +164,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   //Details
+  String usesHeRestaurantNames = "";
 
   List<Widget> get fetchBucketToDetails {
     List<BucketElementModel> bucket = _getBucket;
@@ -190,10 +191,13 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
     List<BucketElementModel> bucket = _getBucket;
     List<String> ids = bucket.map((e) => e.menuElement.restaurantUid).toList();
     List result = await _isRestaurantsUsesHe(ids);
-    if (result.contains(false) || result.isEmpty) {
-      return false;
-    } else {
+    if (result.contains(true)) {
+      for (int i = 0; i <= result.length - 1; i++) {
+        usesHeRestaurantNames += "${bucket[i].menuElement.restaurantName}, ";
+      }
       return true;
+    } else {
+      return false;
     }
   }
 

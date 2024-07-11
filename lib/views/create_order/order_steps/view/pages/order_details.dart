@@ -91,7 +91,9 @@ class OrderDetails extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!) {
-            return const ServiceInformation();
+            return ServiceInformation(
+              viewModel: viewModel,
+            );
           } else {
             return const SizedBox();
           }

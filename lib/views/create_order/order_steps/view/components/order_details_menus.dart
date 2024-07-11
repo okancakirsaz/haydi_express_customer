@@ -30,9 +30,12 @@ class OrderDetailsMenus extends StatelessWidget {
               height: 10,
             ),
             Padding(
-              padding: PaddingConsts.instance.top5,
-              child: Text("${viewModel.totalPrice}₺",
-                  style: TextConsts.instance.regularBlack16),
+              padding: PaddingConsts.instance.right10,
+              child: Padding(
+                padding: PaddingConsts.instance.top5,
+                child: Text("${viewModel.totalPrice}₺",
+                    style: TextConsts.instance.regularBlack16),
+              ),
             ),
           ],
         ),
