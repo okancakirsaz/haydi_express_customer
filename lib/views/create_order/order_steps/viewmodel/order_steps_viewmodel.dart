@@ -3,7 +3,6 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/http_exception_model.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
@@ -234,7 +233,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
 
   //Create order
   OrderModel _fetchOrderModel(
-          String restaurantId, int price, List<MenuModel> menuData) =>
+          String restaurantId, int price, List<BucketElementModel> menuData) =>
       OrderModel(
         paymentData: PaymentModel(
           cardData: chosenMethod == PaymentMethods.online
@@ -291,7 +290,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
         await _createOrder(
           idList[i],
           price,
-          restaurantBucket.map((e) => e.menuElement).toList(),
+          restaurantBucket,
           viewModel,
         );
         checkedIdsList.add(idList[i]);
@@ -300,7 +299,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> _createOrder(String restaurantId, int price,
-      List<MenuModel> menuData, OrderStepsViewModel viewModel) async {
+      List<BucketElementModel> menuData, OrderStepsViewModel viewModel) async {
     final response = await service.createOrder(
         _fetchOrderModel(restaurantId, price, menuData), accessToken!);
     bool isSuccess = false;
