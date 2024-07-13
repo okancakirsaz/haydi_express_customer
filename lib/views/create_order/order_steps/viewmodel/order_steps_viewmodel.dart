@@ -211,9 +211,14 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
     List<BucketElementModel> bucket = _getBucket;
     List<String> ids = bucket.map((e) => e.menuElement.restaurantUid).toList();
     List result = await _isRestaurantsUsesHe(ids);
+    List<String> checkedRestaurantNames = [];
     if (result.contains(true)) {
       for (int i = 0; i <= result.length - 1; i++) {
-        usesHeRestaurantNames += "${bucket[i].menuElement.restaurantName}, ";
+        String restaurantName = bucket[i].menuElement.restaurantName;
+        if (!checkedRestaurantNames.contains(restaurantName)) {
+          usesHeRestaurantNames += "$restaurantName, ";
+          checkedRestaurantNames.add(restaurantName);
+        }
       }
       return true;
     } else {
