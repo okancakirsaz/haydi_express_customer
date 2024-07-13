@@ -11,7 +11,6 @@ import 'package:haydi_express_customer/views/create_order/core/constants/payment
 import 'package:haydi_express_customer/views/create_order/core/models/card_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/order_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/payment_model.dart';
-import 'package:haydi_express_customer/views/create_order/core/models/revenue_model.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
 import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
 import 'package:uuid/uuid.dart';
@@ -229,7 +228,9 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   //Create order
-  OrderModel get _fetchOrderModel => OrderModel(
+  OrderModel _fetchOrderModel(
+          String restaurantId, int price, List<MenuModel> menuData) =>
+      OrderModel(
         paymentData: PaymentModel(
           cardData: chosenMethod == PaymentMethods.online
               ? CardModel(
@@ -238,14 +239,11 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
                   cvv: cvvCode,
                   expireDate: expireDate)
               : null,
-          revenues: _fetchRestaurantRevenues(),
-          totalPrice: totalPrice,
+          totalPrice: price,
         ),
+        restaurantId: restaurantId,
         customerId: localeManager.getStringData(LocaleKeysEnums.id.name),
-        menuData:
-            (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
-                .map((e) => MenuModel.fromJson(e["menuElement"]))
-                .toList(),
+        menuData: menuData,
         addressData: chosenAddress!,
         paymentMethod: chosenMethod!.value,
         isPaidSuccess: chosenMethod == PaymentMethods.online ? false : null,
@@ -258,33 +256,48 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
         orderId: const Uuid().v1(),
       );
 
-  List<RevenueModel> _fetchRestaurantRevenues() {
+  Future<void> fetchOrders(OrderStepsViewModel viewModel) async {
+    //Get all bucket
     List<BucketElementModel> bucket =
         (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
-            .map((e) => BucketElementModel.fromJson(e))
+            .map((e) => (BucketElementModel.fromJson(e)))
             .toList();
-    List<String> ids = [];
-    List<RevenueModel> revenues = [];
+    //Seperate restaurant ID's
+    List<String> idList =
+        bucket.map((e) => e.menuElement.restaurantUid).toList();
+    List<String> checkedIdsList = [];
     for (int i = 0; i <= bucket.length - 1; i++) {
-      final String id = bucket[i].menuElement.restaurantUid;
-      if (!ids.contains(id)) {
-        ids.add(id);
-        revenues.add(
-          RevenueModel(
-              restaurantId: id,
-              revenue: bucket[i].menuElement.isOnDiscount
-                  ? calculateDiscount(
-                      (bucket[i].menuElement.price * bucket[i].count),
-                      bucket[i].menuElement.discountAmount!)
-                  : bucket[i].menuElement.price * bucket[i].count),
+      //Check is restaurant order fetched
+      if (!checkedIdsList.contains(idList[i])) {
+        //Get restaurant bucket
+        List<BucketElementModel> restaurantBucket = bucket
+            .where((e) => e.menuElement.restaurantUid == idList[i])
+            .toList();
+        int price = restaurantBucket
+            .map(
+              (e) => (e.count *
+                  (e.menuElement.isOnDiscount
+                      ? calculateDiscount(
+                          e.menuElement.price, e.menuElement.discountAmount!)
+                      : e.menuElement.price)),
+            )
+            .toList()
+            .reduce((a, b) => a + b);
+        await _createOrder(
+          idList[i],
+          price,
+          restaurantBucket.map((e) => e.menuElement).toList(),
+          viewModel,
         );
+        checkedIdsList.add(idList[i]);
       }
     }
-    return revenues;
   }
 
-  Future<void> createOrder(OrderStepsViewModel viewModel) async {
-    final response = await service.createOrder(_fetchOrderModel, accessToken!);
+  Future<void> _createOrder(String restaurantId, int price,
+      List<MenuModel> menuData, OrderStepsViewModel viewModel) async {
+    final response = await service.createOrder(
+        _fetchOrderModel(restaurantId, price, menuData), accessToken!);
     bool isSuccess = false;
     if (response == null) {
       isSuccess = false;

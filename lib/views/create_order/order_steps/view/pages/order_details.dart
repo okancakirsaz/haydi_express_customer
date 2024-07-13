@@ -56,7 +56,7 @@ class OrderDetails extends StatelessWidget {
                     width: 200,
                     style: TextConsts.instance.regularWhite20,
                     onPressed: () async =>
-                        await viewModel.createOrder(viewModel),
+                        await viewModel.fetchOrders(viewModel),
                     text: "Haydi Gelsin!",
                     gradient: ColorConsts.instance.primaryGradient,
                   ),
