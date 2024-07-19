@@ -12,6 +12,7 @@ import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import 'package:haydi_express_customer/views/main_view/viewmodel/main_viewmodel.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:haydi_express_customer/views/profile/view/profile_view.dart';
 import '../../../consts/color_consts/color_consts.dart';
 import '../core/app_bar_elements.dart';
 
@@ -57,8 +58,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
               const AddressesView(), 1, AssetConsts.instance.mapMarker),
           _buildAppBarElement(
               const BucketView(), 2, AssetConsts.instance.orders),
-          _buildAppBarElement(const Center(child: Text("Profile")), 3,
-              AssetConsts.instance.profile),
+          _buildAppBarElement(
+              const ProfileView(), 3, AssetConsts.instance.profile),
           _liveSupportButton(),
         ],
       ),

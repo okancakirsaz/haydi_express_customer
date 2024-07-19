@@ -334,9 +334,25 @@ class TextConsts {
     );
   }
 
+  TextStyle get regularThird14Bold {
+    return GoogleFonts.montserrat(
+      fontSize: 14,
+      color: ColorConsts.instance.third,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
   TextStyle get regularThird14 {
     return GoogleFonts.montserrat(
       fontSize: 14,
+      color: ColorConsts.instance.third,
+      fontWeight: FontWeight.normal,
+    );
+  }
+
+  TextStyle get regularThird12 {
+    return GoogleFonts.montserrat(
+      fontSize: 12,
       color: ColorConsts.instance.third,
       fontWeight: FontWeight.normal,
     );

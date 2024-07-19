@@ -30,7 +30,7 @@ class CustomStateFullButton extends StatelessWidget {
       height: height ?? 50,
       constraints: const BoxConstraints(
         minHeight: 50,
-        minWidth: 150,
+        minWidth: 100,
       ),
       decoration: BoxDecoration(
         gradient: gradient,

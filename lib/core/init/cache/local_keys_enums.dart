@@ -6,10 +6,11 @@ enum LocaleKeysEnums {
   phoneNumber,
   haydiFirsatlar,
   discover,
-  name,
+  nameSurname,
   addresses,
   favSuggestions,
   advertSuggestions,
   bucket,
   creditCard,
+  orderLogs,
 }

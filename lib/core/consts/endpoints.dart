@@ -32,4 +32,11 @@ final class Endpoints {
   //Order
   final String isRestaurantUsesHe = "/order/is-restaurants-uses-he";
   final String createOrder = "/order/create-order";
+
+  //Customer
+  final String deleteAccount = "/customer/delete-account";
+  final String change = "/customer/change";
+  final String cancelOrder = "/order/cancel-order";
+  final String getActiveOrders = "/order/customer-active-orders";
+  final String getOrderLogs = "/order/customer-order-logs";
 }

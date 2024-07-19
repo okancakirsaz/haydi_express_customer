@@ -253,7 +253,8 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
         isPaidSuccess: chosenMethod == PaymentMethods.online ? false : null,
         orderState: "Restoran Onayı Bekleniyor",
         orderCreationDate: DateTime.now().toIso8601String(),
-        customerName: localeManager.getStringData(LocaleKeysEnums.name.name),
+        customerName:
+            localeManager.getStringData(LocaleKeysEnums.nameSurname.name),
         customerPhoneNumber:
             localeManager.getStringData(LocaleKeysEnums.phoneNumber.name),
         note: note.text,

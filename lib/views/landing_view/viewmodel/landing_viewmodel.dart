@@ -25,9 +25,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
   Future<Widget?> init() async {
     WebSocketManager.instance.initializeSocketConnection();
     await localeManager.getSharedPreferencesInstance();
-    //await localeManager.removeData(LocaleKeysEnums.id.name);
-
-    await _clearCache();
+    await clearCache();
     _checkLoggedInState();
     return defaultWidget;
   }
@@ -35,7 +33,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
   final Connectivity connectivity = Connectivity();
   Widget defaultWidget = const SplashScreen();
 
-  Future<void> _clearCache() async {
+  Future<void> clearCache() async {
     await localeManager.removeData(LocaleKeysEnums.haydiFirsatlar.name);
     await localeManager.removeData(LocaleKeysEnums.discover.name);
     await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
