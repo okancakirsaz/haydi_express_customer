@@ -7,8 +7,11 @@ import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/services/public_service.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
+import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
+import 'package:haydi_express_customer/views/create_order/core/models/order_model.dart';
 import 'package:haydi_express_customer/views/flow/service/flow_service.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
+import 'package:haydi_express_customer/views/profile/viewmodel/profile_viewmodel.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 part 'flow_viewmodel.g.dart';
@@ -29,6 +32,7 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
   late final FlowViewModel viewModelInstance;
 
   List<MenuModel> haydiFirsatlar = [];
+  List<MenuModel> favoriteFoods = [];
   List<MenuModel> discover = [];
 
   final PublicService publicService = PublicService();
@@ -141,5 +145,40 @@ abstract class _FlowViewModelBase with Store, BaseViewModel {
 
   navigateToSeeAll(String category, Widget page) {
     navigationManager.navigate(page);
+  }
+
+  Future<List<MenuModel>> fetchUserFavoriteFoods() async {
+    List<OrderModel> orderHistory = await _getUserOrderHistory();
+    _fetchOrderHistoryAsMenuList(orderHistory);
+    return favoriteFoods;
+  }
+
+  Future<List<OrderModel>> _getUserOrderHistory() async {
+    final ProfileViewModel profileVm = ProfileViewModel();
+    await profileVm.getOrderLogs();
+    return profileVm.orderHistory;
+  }
+
+  _fetchOrderHistoryAsMenuList(List<OrderModel> data) {
+    //Convert to List<BucketElementModel>
+    List<BucketElementModel> asBucket = [];
+    for (int i = 0; i <= data.length - 1; i++) {
+      final List<BucketElementModel> menuData = data[i].menuData;
+      for (int j = 0; j <= menuData.length - 1; j++) {
+        asBucket.add(menuData[j]);
+      }
+    }
+    //Log menu id:count for sort elements
+    Map<String, int> menuElements = {};
+    //Convert to List<MenuModel>
+    for (int i = 0; i <= asBucket.length - 1; i++) {
+      final MenuModel asMenu = asBucket[i].menuElement;
+      if (menuElements.containsKey(asMenu.menuId)) {
+        menuElements[asMenu.menuId] = menuElements[asMenu.menuId]! + 1;
+      } else {
+        menuElements[asMenu.menuId] = 1;
+        favoriteFoods.add(asMenu);
+      }
+    }
   }
 }

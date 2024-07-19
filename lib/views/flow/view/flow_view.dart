@@ -67,10 +67,15 @@ class FlowView extends StatelessWidget {
                   _buildTitle(
                     context,
                     model,
-                    category: "",
+                    category: "Favorilerim",
                     text: "Favorilerim",
                     alignment: Alignment.topLeft,
                     color: ColorConsts.instance.primary,
+                  ),
+                  _buildList(
+                    context,
+                    model,
+                    future: model.fetchUserFavoriteFoods(),
                   ),
                 ],
               ),
@@ -112,16 +117,18 @@ class FlowView extends StatelessWidget {
               text,
               style: TextConsts.instance.regularBlack20Bold,
             ),
-            CustomTextButton(
-              onPressed: () => model.navigateToSeeAll(
-                  category,
-                  CategoryListView(
-                    category: category,
-                    appBarColor: color,
-                  )),
-              style: TextConsts.instance.regularBlack14Underlined,
-              text: "Tümünü Gör",
-            ),
+            category == "Favorilerim"
+                ? const SizedBox()
+                : CustomTextButton(
+                    onPressed: () => model.navigateToSeeAll(
+                        category,
+                        CategoryListView(
+                          category: category,
+                          appBarColor: color,
+                        )),
+                    style: TextConsts.instance.regularBlack14Underlined,
+                    text: "Tümünü Gör",
+                  ),
           ],
         ),
       ),
@@ -144,8 +151,7 @@ class FlowView extends StatelessWidget {
           } else if (snapshot.hasData && snapshot.data!.isEmpty) {
             return Center(
               child: Text(
-                //TODO: Add new text
-                "Şuan bir fırsat menüsü bulunmamakta.",
+                "Bu kategoriye uygun bir menü bulunmamakta.",
                 style: TextConsts.instance.regularBlack18Bold,
               ),
             );
