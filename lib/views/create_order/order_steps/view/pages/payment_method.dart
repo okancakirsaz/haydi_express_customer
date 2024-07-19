@@ -23,7 +23,8 @@ class PaymentMethod extends StatelessWidget {
             _buildButton(PaymentMethods.creditCard, false),
             _buildButton(PaymentMethods.cash, false),
             _buildButton(PaymentMethods.online, true),
-            _buildButton(PaymentMethods.foodTicket, false),
+            //TODO: Will be open this method
+            //_buildButton(PaymentMethods.foodTicket, false),
           ],
         ));
   }

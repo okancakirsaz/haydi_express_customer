@@ -4,9 +4,10 @@ import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/init/model/http_exception_model.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
+import 'package:haydi_express_customer/views/address/addresses/viewmodel/addresses_viewmodel.dart';
 import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
-import 'package:haydi_express_customer/views/create_order/core/constants/payment_methods.dart';
+import 'package:haydi_express_customer/views/create_order/core/models/payment_methods.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/card_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/order_model.dart';
 import 'package:haydi_express_customer/views/create_order/core/models/payment_model.dart';
@@ -52,29 +53,10 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   AddressModel? chosenAddress;
 
   Future<List<AddressModel>> getAddresses() async {
-    bringDataFromCacheOrApi(
-      LocaleKeysEnums.addresses.name,
-      getFromApi: () async => _getAddressFromApi(),
-      getFromCache: () => _getAddressFromCache(),
-    );
+    final AddressesViewModel addressesVm = AddressesViewModel();
+    await addressesVm.getAddresses();
+    addresses = addressesVm.addresses;
     return addresses;
-  }
-
-  Future<void> _getAddressFromApi() async {
-    final List<AddressModel>? response =
-        await addressesService.getUserAddresses(
-            localeManager.getStringData(LocaleKeysEnums.id.name), accessToken!);
-    if (response == null) {
-      showErrorDialog();
-      return;
-    }
-    addresses = response;
-  }
-
-  _getAddressFromCache() {
-    final List<dynamic> cachedList =
-        localeManager.getNullableJsonData(LocaleKeysEnums.addresses.name) ?? [];
-    addresses = cachedList.map((e) => AddressModel.fromJson(e)).toList();
   }
 
   String fetchAddressToUi(AddressModel data) {
@@ -122,10 +104,11 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   CardModel get _fetchCardModel => CardModel(
-      cardNumber: cardNumber,
-      expireDate: expireDate,
-      cardHolder: cardHolderName,
-      cvv: cvvCode);
+        cardNumber: cardNumber,
+        expireDate: expireDate,
+        cardHolder: cardHolderName,
+        cvv: cvvCode,
+      );
 
   getCachedCardData() {
     final Map<String, dynamic>? rawValue =
@@ -179,6 +162,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
       LocaleKeysEnums.creditCard.name,
       _fetchCardModel.toJson(),
     );
+    //Close dialog
     navigatorPop();
   }
 
@@ -261,13 +245,14 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
         orderId: const Uuid().v1(),
       );
 
+  //This function creates a order instance for every different restaurant
   Future<void> fetchOrders(OrderStepsViewModel viewModel) async {
     //Get all bucket
     List<BucketElementModel> bucket =
         (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
             .map((e) => (BucketElementModel.fromJson(e)))
             .toList();
-    //Seperate restaurant ID's
+    //Separate restaurant ID's
     List<String> idList =
         bucket.map((e) => e.menuElement.restaurantUid).toList();
     List<String> checkedIdsList = [];
@@ -302,7 +287,9 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   Future<void> _createOrder(String restaurantId, int price,
       List<BucketElementModel> menuData, OrderStepsViewModel viewModel) async {
     final response = await service.createOrder(
-        _fetchOrderModel(restaurantId, price, menuData), accessToken!);
+      _fetchOrderModel(restaurantId, price, menuData),
+      accessToken!,
+    );
     bool isSuccess = false;
     if (response == null) {
       isSuccess = false;

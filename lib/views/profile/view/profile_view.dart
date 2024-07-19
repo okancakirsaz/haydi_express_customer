@@ -31,29 +31,30 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseView<ProfileViewModel>(
-        viewModel: ProfileViewModel(),
-        onPageBuilder: (context, model) {
-          return CustomScaffold(
-              body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                PersonalData(
-                  viewModel: model,
-                ),
-                ActiveOrders(
-                  viewModel: model,
-                ),
-                OrderHistory(
-                  viewModel: model,
-                ),
-              ],
-            ),
-          ));
-        },
-        onModelReady: (model) {
-          model.init();
-          model.setContext(context);
-        },
-        onDispose: (model) {});
+      viewModel: ProfileViewModel(),
+      onPageBuilder: (context, model) {
+        return CustomScaffold(
+            body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              PersonalData(
+                viewModel: model,
+              ),
+              ActiveOrders(
+                viewModel: model,
+              ),
+              OrderHistory(
+                viewModel: model,
+              ),
+            ],
+          ),
+        ));
+      },
+      onModelReady: (model) {
+        model.init();
+        model.setContext(context);
+      },
+      onDispose: (model) {},
+    );
   }
 }
