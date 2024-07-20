@@ -15,24 +15,11 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
-  #State Management
-  mobx: ^2.2.0
-  mobx_codegen: ^2.4.0
-  flutter_mobx: ^2.1.0
-
-
-  #Generating
-  build_runner: ^2.4.6
-  uuid: ^4.3.3
-  intl: ^0.19.0
+  #Devtools
+  haydi_ekspres_dev_tools:
+    path: ../haydi_ekspres_dev_tools
 
   #UI
-  google_fonts: ^6.1.0
-  flutter_svg: ^2.0.9
-  easy_loading_button: ^0.3.2
-  passwordfield:
-  calendar_date_picker2: ^0.5.3
-  toastification: ^1.2.1
   horizontal_stepper_flutter: ^1.0.3
   pinput: ^4.0.0
   skeletonizer: 1.1.2+1
@@ -40,31 +27,10 @@ dependencies:
   latlong2: ^0.9.1
   flutter_credit_card: ^4.0.1
 
-
-  
-  #Others
-  shared_preferences: ^2.2.1
-  
-  
-  #OS
-  
-
   #Network
-  dio:
-  socket_io_client: ^2.0.3+1
-  http_parser: ^4.0.2
   open_geocoder: ^0.0.1
   connectivity_plus: ^6.0.3
   
-  
-  
-  
-  
-  
-  
-  
-  #web_socket_channel: ^2.4.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -78,9 +44,10 @@ flutter:
 
   uses-material-design: true
 
-  assets:
-    - assets/images/
-    - assets/icons/
-    - assets/meta/
+assets:
+  - packages/haydi_ekspres_dev_tools/lib/assets/icons/
+  - packages/haydi_ekspres_dev_tools/lib/assets/images/
+  - packages/haydi_ekspres_dev_tools/lib/assets/meta/
+
 
 

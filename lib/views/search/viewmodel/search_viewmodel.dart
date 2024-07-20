@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_ekspres_dev_tools/models/suggestion_model.dart';
 import 'package:haydi_express_customer/views/search/service/search_service.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../../core/init/cache/local_keys_enums.dart';
-import '../../../core/init/model/suggestion_model.dart';
 import '../view/search_view.dart';
 
 part 'search_viewmodel.g.dart';

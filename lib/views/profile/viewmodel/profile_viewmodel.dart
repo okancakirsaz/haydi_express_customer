@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/models/bucket_element_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/models_index.dart';
+import 'package:haydi_ekspres_dev_tools/models/order_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/personal_value_types.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/core/init/model/http_exception_model.dart';
 import 'package:haydi_express_customer/core/widgets/dialog/are_you_sure_dialog.dart';
 import 'package:haydi_express_customer/views/authentication/forgot_password/viewmodel/forgot_password_viewmodel.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/view/log_in_view.dart';
 import 'package:haydi_express_customer/views/landing_view/viewmodel/landing_viewmodel.dart';
-import 'package:haydi_express_customer/views/profile/model/personal_value_types.dart';
 import 'package:haydi_express_customer/views/profile/service/profile_service.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../create_order/bucket/model/bucket_element_model.dart';
-import '../../create_order/core/models/order_model.dart';
-import '../model/cancel_order_model.dart';
-import '../model/order_states.dart';
 import '../view/profile_view.dart';
 
 part 'profile_viewmodel.g.dart';

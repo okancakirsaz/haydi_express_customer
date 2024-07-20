@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:horizontal_stepper_flutter/horizontal_stepper_flutter.dart';
 
 class CustomStepper extends StatelessWidget {

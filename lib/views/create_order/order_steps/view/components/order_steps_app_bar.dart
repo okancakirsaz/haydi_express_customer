@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
 
 final class OrderStepsAppBar {
   build() {

@@ -2,13 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:haydi_express_customer/core/consts/asset_consts.dart';
-import 'package:haydi_express_customer/core/consts/endpoints.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:latlong2/latlong.dart';
-
-import '../../../../../core/consts/color_consts/color_consts.dart';
-import '../../../../../core/consts/radius_consts.dart';
 import '../../viewmodel/create_edit_address_viewmodel.dart';
 
 class MapComponent extends StatelessWidget {

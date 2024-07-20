@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class CustomCard extends StatelessWidget {
   final String title;

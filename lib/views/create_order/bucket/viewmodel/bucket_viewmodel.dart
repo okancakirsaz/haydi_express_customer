@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_ekspres_dev_tools/models/bucket_element_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';

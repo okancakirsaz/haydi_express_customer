@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
+import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/views/create_order/bucket/model/bucket_element_model.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/view/bucket_view.dart';
 import 'package:haydi_express_customer/views/menu/service/menu_service.dart';
 import 'package:haydi_express_customer/views/menu/view/components/go_bucket_dialog.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../core/init/model/menu_model.dart';
 
 part 'menu_viewmodel.g.dart';
 

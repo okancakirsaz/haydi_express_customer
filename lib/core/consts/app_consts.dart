@@ -1,7 +1,7 @@
-import 'package:haydi_express_customer/core/init/model/comment_model.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
-import 'package:haydi_express_customer/core/init/model/menu_stats_model.dart';
-import 'package:haydi_express_customer/core/init/model/suggestion_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/comment_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_stats_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/suggestion_model.dart';
 
 class AppConst {
   static final AppConst instance = AppConst();

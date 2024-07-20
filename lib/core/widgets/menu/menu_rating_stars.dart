@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:haydi_express_customer/core/consts/asset_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class MenuRatingStars extends StatelessWidget {
   final int starCount;

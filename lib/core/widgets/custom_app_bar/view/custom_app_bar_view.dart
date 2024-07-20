@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:haydi_express_customer/core/consts/asset_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/widgets/custom_app_bar/viewmodel/custom_app_bar_viewmodel.dart';
 import 'package:haydi_express_customer/views/address/addresses/view/addresses_view.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/view/bucket_view.dart';
 import 'package:haydi_express_customer/views/flow/view/flow_view.dart';
 import 'package:haydi_express_customer/views/main_view/viewmodel/main_viewmodel.dart';
-
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:haydi_express_customer/views/profile/view/profile_view.dart';
-import '../../../consts/color_consts/color_consts.dart';
 import '../core/app_bar_elements.dart';
 
 class CustomAppBar extends StatefulWidget {

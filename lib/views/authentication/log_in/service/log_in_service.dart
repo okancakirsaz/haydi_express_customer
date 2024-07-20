@@ -1,14 +1,14 @@
-import 'package:haydi_express_customer/core/consts/endpoints.dart';
-import 'package:haydi_express_customer/views/authentication/models/log_in_model.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/models_index.dart';
 
 import '../../../../core/managers/network_manager.dart';
 
 final class LogInService extends NetworkManager {
-  Future<LogInModel?> logIn(LogInModel data) async {
+  Future<LogInCustomerModel?> logIn(LogInCustomerModel data) async {
     try {
-      final response =
-          await network.post(Endpoints.instance.logIn, data: data.toJson());
-      return LogInModel.fromJson(response.data);
+      final response = await network.post(Endpoints.instance.logInCustomer,
+          data: data.toJson());
+      return LogInCustomerModel.fromJson(response.data);
     } catch (e) {
       return null;
     }

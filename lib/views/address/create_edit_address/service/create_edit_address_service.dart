@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/address_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
-import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
-
-import '../../../../core/consts/endpoints.dart';
 
 final class CreateAddressService extends NetworkManager {
   Future<bool> createAddress(AddressModel data, String accessToken) async {

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:haydi_ekspres_dev_tools/models/address_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/address/create_edit_address/service/create_edit_address_service.dart';
 import 'package:haydi_express_customer/views/main_view/view/main_view.dart';
 import 'package:latlong2/latlong.dart';
@@ -114,8 +114,8 @@ abstract class _CreateEditAddressViewModelBase with Store, BaseViewModel {
   }
 
   Future<List> getProvinceJson() async {
-    final String jsonFile =
-        await rootBundle.loadString('assets/meta/turkey.json');
+    final String jsonFile = await rootBundle.loadString(
+        'packages/haydi_ekspres_dev_tools/lib/assets/meta/turkey.json');
     provinceData = jsonDecode(jsonFile);
     return provinceData;
   }

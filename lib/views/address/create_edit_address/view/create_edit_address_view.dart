@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
+import 'package:haydi_ekspres_dev_tools/models/address_model.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_dropdown.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
-import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../viewmodel/create_edit_address_viewmodel.dart';
 import 'components/map_component.dart';

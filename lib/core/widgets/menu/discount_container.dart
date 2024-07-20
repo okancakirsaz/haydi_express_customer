@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../consts/color_consts/color_consts.dart';
-import '../../consts/padding_consts.dart';
-import '../../consts/radius_consts.dart';
-import '../../consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class DiscountContainer extends StatelessWidget {
   final int discountAmount;

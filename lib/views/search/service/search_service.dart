@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/suggestion_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
-
-import '../../../core/consts/endpoints.dart';
-import '../../../core/init/model/suggestion_model.dart';
 
 final class SearchService extends NetworkManager {
   Future<List<SuggestionModel>?> getSearchAds(String accessToken) async {

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:haydi_express_customer/core/consts/endpoints.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
 
 import '../../../../core/managers/network_manager.dart';
 

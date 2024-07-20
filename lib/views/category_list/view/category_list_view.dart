@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:haydi_ekspres_dev_tools/constants/color_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/consts/app_consts.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/skeleton_widget.dart';
 import 'package:haydi_express_customer/core/widgets/menu/vertical_list_minimized_menu.dart';

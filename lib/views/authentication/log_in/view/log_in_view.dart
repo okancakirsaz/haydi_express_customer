@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/widgets/custom_password_field.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';

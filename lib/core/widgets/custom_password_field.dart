@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:passwordfield/passwordfield.dart';
 
-import '../consts/color_consts/color_consts.dart';
-import '../consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class CustomPasswordField extends StatefulWidget {
   final EdgeInsetsGeometry? padding;

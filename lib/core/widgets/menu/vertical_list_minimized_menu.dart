@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
 import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 

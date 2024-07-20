@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/cancel_order_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/order_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
-
-import '../../../core/consts/endpoints.dart';
-import '../../../core/init/model/http_exception_model.dart';
-import '../../create_order/core/models/order_model.dart';
-import '../model/cancel_order_model.dart';
 
 final class ProfileService extends NetworkManager {
   Future<dynamic> deleteAccount(String customerId, String accessToken) async {
@@ -73,7 +72,7 @@ final class ProfileService extends NetworkManager {
       String customerId, String accessToken) async {
     try {
       final response = await network.get(
-        Endpoints.instance.getActiveOrders,
+        Endpoints.instance.getActiveOrdersCustomer,
         queryParameters: {"customerId": customerId},
         options: Options(
           headers: setHeaderAccessToken(accessToken),
@@ -91,7 +90,7 @@ final class ProfileService extends NetworkManager {
       String restaurantId, String accessToken) async {
     try {
       final response = await network.get(
-        Endpoints.instance.getOrderLogs,
+        Endpoints.instance.getOrderLogsCustomer,
         queryParameters: {
           "restaurantId": restaurantId,
         },

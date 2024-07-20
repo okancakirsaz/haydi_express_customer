@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/models/address_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
-import 'package:haydi_express_customer/views/address/core/models/address_model.dart';
 import 'package:haydi_express_customer/views/address/create_edit_address/view/create_edit_address_view.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';

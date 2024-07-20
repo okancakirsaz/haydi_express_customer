@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_manager.dart';
-import 'package:haydi_express_customer/core/init/model/menu_model.dart';
 import 'package:haydi_express_customer/core/managers/navigation_manager.dart';
 import 'package:haydi_express_customer/views/menu/view/menu_view.dart';
 import 'package:intl/intl.dart';

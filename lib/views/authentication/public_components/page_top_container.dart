@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class PageTopContainer extends StatelessWidget {
   final Widget child;

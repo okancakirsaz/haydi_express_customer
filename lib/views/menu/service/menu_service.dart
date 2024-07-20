@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
-
-import '../../../core/consts/endpoints.dart';
-import '../../../core/init/model/menu_model.dart';
 
 final class MenuService extends NetworkManager {
   Future<List<MenuModel>?> getSimilarFoods(

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
+import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
 import 'package:haydi_express_customer/core/consts/app_consts.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-import 'package:haydi_express_customer/core/consts/text_consts.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_button.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/button/custom_text_button.dart';
@@ -13,7 +11,6 @@ import 'package:haydi_express_customer/views/address/create_edit_address/view/cr
 import 'package:haydi_express_customer/views/category_list/view/category_list_view.dart';
 import 'package:haydi_express_customer/views/search/view/search_view.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../core/init/model/menu_model.dart';
 import '../viewmodel/flow_viewmodel.dart';
 
 part './components/categorized_flow_list.dart';

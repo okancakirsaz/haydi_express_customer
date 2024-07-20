@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/views/authentication/models/customer_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/customer_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/mail_verification_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/mail_verification_request_model.dart';
 import 'package:haydi_express_customer/views/authentication/sign_up/service/sign_up_service.dart';
 import 'package:uuid/uuid.dart';
-
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
-
-import '../../../../core/init/model/http_exception_model.dart';
 import '../../log_in/viewmodel/log_in_viewmodel.dart';
-import '../../models/mail_verification_model.dart';
-import '../../models/mail_verification_request_model.dart';
 import '../view/sign_up_view.dart';
 
 part 'sign_up_viewmodel.g.dart';

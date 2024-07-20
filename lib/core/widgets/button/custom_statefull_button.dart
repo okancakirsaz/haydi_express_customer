@@ -1,10 +1,6 @@
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
-import 'package:haydi_express_customer/core/consts/color_consts/color_consts.dart';
-import 'package:haydi_express_customer/core/consts/padding_consts.dart';
-import 'package:haydi_express_customer/core/consts/radius_consts.dart';
-
-import '../../consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class CustomStateFullButton extends StatelessWidget {
   final VoidCallback onPressed;

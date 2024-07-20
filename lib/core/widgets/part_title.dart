@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../consts/text_consts.dart';
+import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 
 class PartTitle extends StatelessWidget {
   final String title;

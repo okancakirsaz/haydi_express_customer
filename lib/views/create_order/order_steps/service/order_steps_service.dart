@@ -1,11 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
+import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/order_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
-import 'package:haydi_express_customer/views/create_order/core/models/order_model.dart';
-
-import '../../../../core/consts/endpoints.dart';
-import '../../../../core/init/model/http_exception_model.dart';
 
 final class OrderStepsService extends NetworkManager {
   Future<List?> isRestaurantsUsesHe(
