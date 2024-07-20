@@ -25,6 +25,14 @@ mixin _$ChatViewModel on _ChatViewModelBase, Store {
     });
   }
 
+  late final _$_onChatUpdateAsyncAction =
+      AsyncAction('_ChatViewModelBase._onChatUpdate', context: context);
+
+  @override
+  Future<void> _onChatUpdate(dynamic e) {
+    return _$_onChatUpdateAsyncAction.run(() => super._onChatUpdate(e));
+  }
+
   late final _$createChatRoomAsyncAction =
       AsyncAction('_ChatViewModelBase.createChatRoom', context: context);
 
@@ -43,17 +51,6 @@ mixin _$ChatViewModel on _ChatViewModelBase, Store {
 
   late final _$_ChatViewModelBaseActionController =
       ActionController(name: '_ChatViewModelBase', context: context);
-
-  @override
-  dynamic _listenRoomId() {
-    final _$actionInfo = _$_ChatViewModelBaseActionController.startAction(
-        name: '_ChatViewModelBase._listenRoomId');
-    try {
-      return super._listenRoomId();
-    } finally {
-      _$_ChatViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
 
   @override
   dynamic _getOlderChatList() {

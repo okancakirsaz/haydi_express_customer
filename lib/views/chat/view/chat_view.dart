@@ -37,8 +37,10 @@ class ChatView extends StatelessWidget {
             ));
       },
       onModelReady: (model) {
-        model.targetId = targetId;
-        model.targetName = targetName;
+        model.initTargetUserData(
+          targetName,
+          targetId,
+        );
         model.init();
         model.setContext(context);
       },

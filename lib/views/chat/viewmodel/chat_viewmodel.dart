@@ -41,6 +41,11 @@ abstract class _ChatViewModelBase with Store, BaseViewModel {
 
   TextEditingController text = TextEditingController();
 
+  initTargetUserData(String name, String id) {
+    targetName = name;
+    targetId = id;
+  }
+
   initActiveChats() => activeChats = ((localeManager
               .getNullableJsonData(LocaleKeysEnums.activeConversations.name) ??
           []) as List)
@@ -62,9 +67,6 @@ abstract class _ChatViewModelBase with Store, BaseViewModel {
   @action
   Future<void> _onChatUpdate(dynamic e) async {
     final ChatModel element = ChatModel.fromJson(e);
-    if (element.content == text.text) {
-      return;
-    }
     final int index = activeChats.indexWhere((e) => e.roomId == _roomId);
     chatList.add(element);
     activeChats[index].content.add(element);
@@ -155,7 +157,6 @@ abstract class _ChatViewModelBase with Store, BaseViewModel {
       showErrorDialog();
       return;
     }
-    chatList.add(chatElement);
   }
 
   Future<void> sendMessage() async {
