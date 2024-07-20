@@ -13,4 +13,5 @@ enum LocaleKeysEnums {
   bucket,
   creditCard,
   orderLogs,
+  activeConversations,
 }

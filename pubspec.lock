@@ -74,7 +74,7 @@ packages:
     source: hosted
     version: "2.4.2"
   build_runner:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: build_runner
       sha256: "3ac61a79bfb6f6cc11f693591063a7f19a7af628dc52f141743edac5c16e8c22"
@@ -552,7 +552,7 @@ packages:
     source: hosted
     version: "2.3.3+2"
   mobx_codegen:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: mobx_codegen
       sha256: "8e0d8653a0c720ad933cd8358f6f89f740ce89203657c13f25bea772ef1fff7c"

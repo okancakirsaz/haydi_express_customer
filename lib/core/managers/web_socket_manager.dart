@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import 'network_manager.dart';
-
-final class WebSocketManager extends NetworkManager {
+final class WebSocketManager {
   static final WebSocketManager instance = WebSocketManager();
 
-  IO.Socket get socket => IO.io(
-      fetchBaseUrl(), IO.OptionBuilder().setTransports(['websocket']).build());
+  IO.Socket get socket => IO.io("http://localhost:3001",
+      IO.OptionBuilder().setTransports(['websocket']).build());
   initializeSocketConnection() {
     try {
       socket.connect();
@@ -24,9 +22,17 @@ final class WebSocketManager extends NetworkManager {
     socket.onDisconnect((data) => debugPrint("Websocket disconnected"));
   }
 
+  closeEvent(String channel) {
+    socket.off(channel);
+  }
+
   void webSocketReceiver(String eventName, Function(dynamic) onEvent) {
     socket.on(eventName, (data) {
       onEvent(data);
     });
+  }
+
+  void webSocketEmitter(String eventName, dynamic data) {
+    socket.emit(eventName, data);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_express_customer/views/chat/view/chat_view.dart';
 import 'package:haydi_express_customer/views/main_view/viewmodel/main_viewmodel.dart';
 import '../../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
@@ -26,5 +27,11 @@ abstract class _CustomAppBarViewModelBase with Store, BaseViewModel {
   changePage(Widget page, int index) {
     mainViewModel.changePage(page);
     pageIndex = index;
+  }
+
+  navigateToLiveSupport() {
+    navigationManager.navigate(
+      const ChatView(targetId: "live-support", targetName: "Canlı Destek"),
+    );
   }
 }
