@@ -160,17 +160,19 @@ abstract class _ChatViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> sendMessage() async {
-    if (isChatExist) {
-      await updateChat();
-    } else {
-      debugPrint(_roomId);
-      await createChatRoom();
+    if (text.text.trim().isNotEmpty) {
+      if (isChatExist) {
+        await updateChat();
+      } else {
+        debugPrint(_roomId);
+        await createChatRoom();
+      }
+      if (!isRoomIdListening) {
+        _listenRoomId();
+        isRoomIdListening = true;
+      }
+      text.text = "";
     }
-    if (!isRoomIdListening) {
-      _listenRoomId();
-      isRoomIdListening = true;
-    }
-    text.text = "";
   }
 
   bool detectIsUserSender(String owner) {
