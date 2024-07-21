@@ -216,8 +216,8 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   //Create order
-  OrderModel _fetchOrderModel(
-          String restaurantId, int price, List<BucketElementModel> menuData) =>
+  OrderModel _fetchOrderModel(String restaurantId, String restaurantName,
+          int price, List<BucketElementModel> menuData) =>
       OrderModel(
         paymentData: PaymentModel(
           cardData: chosenMethod == PaymentMethods.online
@@ -230,6 +230,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
           totalPrice: price,
         ),
         restaurantId: restaurantId,
+        restaurantName: restaurantName,
         customerId: localeManager.getStringData(LocaleKeysEnums.id.name),
         menuData: menuData,
         addressData: chosenAddress!,
@@ -252,9 +253,11 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
         (localeManager.getJsonData(LocaleKeysEnums.bucket.name) as List)
             .map((e) => (BucketElementModel.fromJson(e)))
             .toList();
-    //Separate restaurant ID's
+    //Separate restaurant ID's and names
     List<String> idList =
         bucket.map((e) => e.menuElement.restaurantUid).toList();
+    List<String> nameList =
+        bucket.map((e) => e.menuElement.restaurantName).toList();
     List<String> checkedIdsList = [];
     for (int i = 0; i <= bucket.length - 1; i++) {
       //Check is restaurant order fetched
@@ -275,6 +278,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
             .reduce((a, b) => a + b);
         await _createOrder(
           idList[i],
+          nameList[i],
           price,
           restaurantBucket,
           viewModel,
@@ -284,10 +288,14 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
     }
   }
 
-  Future<void> _createOrder(String restaurantId, int price,
-      List<BucketElementModel> menuData, OrderStepsViewModel viewModel) async {
+  Future<void> _createOrder(
+      String restaurantId,
+      String restaurantName,
+      int price,
+      List<BucketElementModel> menuData,
+      OrderStepsViewModel viewModel) async {
     final response = await service.createOrder(
-      _fetchOrderModel(restaurantId, price, menuData),
+      _fetchOrderModel(restaurantId, restaurantName, price, menuData),
       accessToken!,
     );
     bool isSuccess = false;

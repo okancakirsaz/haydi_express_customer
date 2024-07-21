@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:haydi_ekspres_dev_tools/models/chat_room_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/managers/web_socket_manager.dart';
-import 'package:haydi_express_customer/views/chat/viewmodel/chat_viewmodel.dart';
 import 'package:haydi_express_customer/views/landing_view/view/components/lost_connection_screen.dart';
 import 'package:haydi_express_customer/views/landing_view/view/components/splash_screen.dart';
 import 'package:haydi_express_customer/views/landing_view/view/landing_view.dart';
@@ -29,7 +27,6 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     await localeManager.getSharedPreferencesInstance();
     await clearCache();
     _checkLoggedInState();
-    _subscribeForNewMessages();
     return defaultWidget;
   }
 
@@ -43,6 +40,7 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     await localeManager.removeData(LocaleKeysEnums.advertSuggestions.name);
     await localeManager.removeData(LocaleKeysEnums.addresses.name);
     await localeManager.removeData(LocaleKeysEnums.bucket.name);
+    await localeManager.removeData(LocaleKeysEnums.orderLogs.name);
   }
 
   _checkLoggedInState() {
@@ -77,20 +75,5 @@ abstract class _LandingViewModelBase with Store, BaseViewModel {
     } else {
       navigationManager.navigateAndRemoveUntil(const LandingView());
     }
-  }
-
-  //For getting new messages
-  _subscribeForNewMessages() {
-    WebSocketManager.instance.webSocketReceiver(
-      "New Chat:${localeManager.getStringData(LocaleKeysEnums.id.name)}",
-      (e) async {
-        final ChatViewModel chatVm = ChatViewModel();
-        chatVm.initActiveChats();
-        chatVm.activeChats.add(ChatRoomModel.fromJson(e));
-        await localeManager.setJsonData(
-            LocaleKeysEnums.activeConversations.name,
-            chatVm.activeChats.map((e) => e.toJson()).toList());
-      },
-    );
   }
 }

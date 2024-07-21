@@ -14,6 +14,7 @@ import 'package:haydi_express_customer/views/profile/service/profile_service.dar
 import 'package:intl/intl.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
+import '../../chat/view/chat_view.dart';
 import '../view/profile_view.dart';
 
 part 'profile_viewmodel.g.dart';
@@ -58,8 +59,7 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
   }
 
   Future<void> logOut() async {
-    await localeManager.removeData(LocaleKeysEnums.id.name);
-    await localeManager.removeData(LocaleKeysEnums.orderLogs.name);
+    await LandingViewModel().clearCache();
     navigationManager.navigateAndRemoveUntil(const LogInView());
   }
 
@@ -120,6 +120,14 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
         onPressed: () async => await _deleteAccount(),
       ),
     );
+  }
+
+  Future<String> getRestaurantName(String id) async {
+    final String? response = await service.getRestaurantName(id, accessToken!);
+    if (response == null) {
+      return "Restoran adı getirilemedi";
+    }
+    return response;
   }
 
   Future<void> _deleteAccount() async {
@@ -243,5 +251,10 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
     } else {
       return true;
     }
+  }
+
+  chatWithRestaurant(String targetName, String targetId) {
+    navigationManager
+        .navigate(ChatView(targetId: targetId, targetName: targetName));
   }
 }

@@ -34,7 +34,7 @@ class OrderWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          data.customerName,
+          data.restaurantName,
           style: TextConsts.instance.regularThird14Bold,
           overflow: TextOverflow.ellipsis,
         ),
@@ -190,12 +190,14 @@ class OrderWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        //TODO:Add contact process
         _buildSpecialButton(
           AssetConsts.instance.orders,
           "Restoran ile iletişime geç",
           color: ColorConsts.instance.primary,
-          () {},
+          () => viewModel.chatWithRestaurant(
+            data.restaurantName,
+            data.restaurantId,
+          ),
         ),
         _buildSpecialButton(
           AssetConsts.instance.cancel,
