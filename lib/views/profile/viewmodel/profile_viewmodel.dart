@@ -60,6 +60,7 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
 
   Future<void> logOut() async {
     await LandingViewModel().clearCache();
+    await localeManager.removeData(LocaleKeysEnums.activeConversations.name);
     navigationManager.navigateAndRemoveUntil(const LogInView());
   }
 
