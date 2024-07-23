@@ -86,22 +86,6 @@ final class ProfileService extends NetworkManager {
     }
   }
 
-  Future<String?> getRestaurantName(
-      String restaurantId, String accessToken) async {
-    try {
-      final response = await network.get(
-        Endpoints.instance.getRestaurantName,
-        queryParameters: {"restaurantId": restaurantId},
-        options: Options(
-          headers: setHeaderAccessToken(accessToken),
-        ),
-      );
-      return response.data;
-    } catch (e) {
-      return null;
-    }
-  }
-
   Future<List<OrderModel>?> getOrderLogs(
       String restaurantId, String accessToken) async {
     try {

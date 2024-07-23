@@ -124,14 +124,6 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
     );
   }
 
-  Future<String> getRestaurantName(String id) async {
-    final String? response = await service.getRestaurantName(id, accessToken!);
-    if (response == null) {
-      return "Restoran adı getirilemedi";
-    }
-    return response;
-  }
-
   Future<void> _deleteAccount() async {
     final response = await service.deleteAccount(
       id,

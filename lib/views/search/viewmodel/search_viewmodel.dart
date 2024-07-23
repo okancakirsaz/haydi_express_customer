@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
 import 'package:haydi_ekspres_dev_tools/models/suggestion_model.dart';
+import 'package:haydi_express_customer/views/menu/view/menu_view.dart';
+import 'package:haydi_express_customer/views/restaurant/view/restaurant_view.dart';
 import 'package:haydi_express_customer/views/search/service/search_service.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
@@ -107,6 +110,7 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
   //TODO: Complete this function.
   Future<void> onSuggestionTap(SuggestionModel data) async {
     await _setNewFavSuggestion(data);
+    await _navigateToElementPage(data);
   }
 
   Future<void> _setNewFavSuggestion(SuggestionModel data) async {
@@ -139,5 +143,34 @@ abstract class _SearchViewModelBase with Store, BaseViewModel {
             .getNullableJsonData(LocaleKeysEnums.advertSuggestions.name) ??
         [];
     return suggestionsRaw.map((e) => SuggestionModel.fromJson(e)).toList();
+  }
+
+  Future<void> _navigateToElementPage(SuggestionModel data) async {
+    if (data.isRestaurant) {
+      RestaurantModel? restaurant = await getRestaurantData(data.elementId);
+      if (restaurant == null) {
+        showErrorDialog();
+        return;
+      }
+      navigationManager.navigate(RestaurantView(data: restaurant));
+    } else {
+      MenuModel? menu = await _getMenuData(data.elementId);
+      if (menu == null) {
+        showErrorDialog();
+        return;
+      }
+      navigationManager.navigate(MenuView(data: menu));
+    }
+  }
+
+  Future<RestaurantModel?> getRestaurantData(String restaurantId) async {
+    final RestaurantModel? response =
+        await service.getRestaurant(restaurantId, accessToken!);
+    return response;
+  }
+
+  Future<MenuModel?> _getMenuData(String menuId) async {
+    final MenuModel? response = await service.getMenu(menuId, accessToken!);
+    return response;
   }
 }

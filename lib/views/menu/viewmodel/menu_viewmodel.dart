@@ -4,6 +4,8 @@ import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/view/bucket_view.dart';
 import 'package:haydi_express_customer/views/menu/service/menu_service.dart';
 import 'package:haydi_express_customer/views/menu/view/components/go_bucket_dialog.dart';
+import 'package:haydi_express_customer/views/restaurant/view/restaurant_view.dart';
+import 'package:haydi_express_customer/views/search/viewmodel/search_viewmodel.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
@@ -87,5 +89,15 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
       navigatorPop();
       showErrorDialog("Bu menü artık mevcut değil.");
     }
+  }
+
+  Future<void> navigateToRestaurant() async {
+    final RestaurantModel? response =
+        await SearchViewModel().getRestaurantData(menuData!.restaurantUid);
+    if (response == null) {
+      showErrorDialog();
+      return;
+    }
+    navigationManager.navigate(RestaurantView(data: response));
   }
 }

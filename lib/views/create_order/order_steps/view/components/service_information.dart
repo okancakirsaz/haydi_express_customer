@@ -1,8 +1,8 @@
 part of '../order_steps_view.dart';
 
 class ServiceInformation extends StatelessWidget {
-  final OrderStepsViewModel viewModel;
-  const ServiceInformation({super.key, required this.viewModel});
+  final String restaurantNames;
+  const ServiceInformation({super.key, required this.restaurantNames});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class ServiceInformation extends StatelessWidget {
             textAlign: TextAlign.left,
             text: TextSpan(
               style: TextConsts.instance.regularBlack16,
-              text: viewModel.usesHeRestaurantNames,
+              text: restaurantNames,
               children: <TextSpan>[
                 TextSpan(
                   text: "Haydi Ekspres ",

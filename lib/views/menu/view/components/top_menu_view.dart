@@ -80,12 +80,15 @@ class TopMenuView extends StatelessWidget {
             data.name,
             style: TextConsts.instance.regularBlack23Bold,
           ),
-          Padding(
-            padding: PaddingConsts.instance.top5,
-            child: Text(
-              data.restaurantName,
-              textAlign: TextAlign.left,
-              style: TextConsts.instance.regularBlack16,
+          InkWell(
+            onTap: () async => await viewModel.navigateToRestaurant(),
+            child: Padding(
+              padding: PaddingConsts.instance.top5,
+              child: Text(
+                data.restaurantName,
+                textAlign: TextAlign.left,
+                style: TextConsts.instance.regularBlack16,
+              ),
             ),
           ),
           _price(),

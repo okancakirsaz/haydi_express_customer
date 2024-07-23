@@ -93,7 +93,7 @@ class OrderDetails extends StatelessWidget {
         if (snapshot.hasData) {
           if (snapshot.data!) {
             return ServiceInformation(
-              viewModel: viewModel,
+              restaurantNames: viewModel.usesHeRestaurantNames,
             );
           } else {
             return const SizedBox();
