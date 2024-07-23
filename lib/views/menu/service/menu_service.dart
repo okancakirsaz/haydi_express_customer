@@ -26,4 +26,19 @@ final class MenuService extends NetworkManager {
       return null;
     }
   }
+
+  Future<bool?> isMenuAvailable(String menuId, String accessToken) async {
+    try {
+      final response = await network.get(
+        Endpoints.instance.isMenuAvailable,
+        queryParameters: {"menuId": menuId},
+        options: Options(
+          headers: setHeaderAccessToken(accessToken),
+        ),
+      );
+      return bool.parse(response.data);
+    } catch (e) {
+      return null;
+    }
+  }
 }

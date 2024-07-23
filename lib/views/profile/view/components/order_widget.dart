@@ -85,7 +85,7 @@ class OrderWidget extends StatelessWidget {
           alignment: Alignment.bottomRight,
           child: SvgPicture.asset(
             AssetConsts.instance.addition,
-            height: 7,
+            height: 9,
             color: ColorConsts.instance.black,
           ),
         ),
@@ -120,7 +120,7 @@ class OrderWidget extends StatelessWidget {
       ),
       Padding(
         padding: PaddingConsts.instance.top10,
-        child: isOrderExpired ? null : _buildContactButtons(),
+        child: isOrderExpired ? _buildCommentButton() : _buildContactButtons(),
       ),
     ];
   }
@@ -206,6 +206,17 @@ class OrderWidget extends StatelessWidget {
           size: 15,
         ),
       ],
+    );
+  }
+
+  Widget _buildCommentButton() {
+    return SizedBox(
+      width: 180,
+      child: _buildSpecialButton(
+        AssetConsts.instance.comment,
+        "Siparişi Değerlendir",
+        () => viewModel.showCommentDialog(data),
+      ),
     );
   }
 

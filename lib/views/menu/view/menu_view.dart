@@ -51,6 +51,7 @@ class MenuView extends StatelessWidget {
           );
         },
         onModelReady: (model) {
+          model.initOpenedMenu(data);
           model.init();
           model.setContext(context);
         },

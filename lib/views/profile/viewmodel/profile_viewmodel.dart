@@ -9,6 +9,7 @@ import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/core/widgets/dialog/are_you_sure_dialog.dart';
 import 'package:haydi_express_customer/views/authentication/forgot_password/viewmodel/forgot_password_viewmodel.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/view/log_in_view.dart';
+import 'package:haydi_express_customer/views/comment/view/comment_view.dart';
 import 'package:haydi_express_customer/views/landing_view/viewmodel/landing_viewmodel.dart';
 import 'package:haydi_express_customer/views/profile/service/profile_service.dart';
 import 'package:intl/intl.dart';
@@ -257,5 +258,14 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
   chatWithRestaurant(String targetName, String targetId) {
     navigationManager
         .navigate(ChatView(targetId: targetId, targetName: targetName));
+  }
+
+  showCommentDialog(OrderModel data) {
+    showDialog(
+      barrierColor: Colors.transparent,
+      context: viewModelContext,
+      builder: (context) =>
+          SizedBox(height: 200, child: CommentView(data: data)),
+    );
   }
 }

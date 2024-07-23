@@ -146,10 +146,12 @@ class FlowView extends StatelessWidget {
               viewModel: model,
             );
           } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-            return Center(
+            return Padding(
+              padding: PaddingConsts.instance.all20,
               child: Text(
                 "Bu kategoriye uygun bir menü bulunmamakta.",
                 style: TextConsts.instance.regularBlack18Bold,
+                textAlign: TextAlign.center,
               ),
             );
           } else {

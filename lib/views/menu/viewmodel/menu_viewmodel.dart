@@ -16,12 +16,18 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
   void setContext(BuildContext context) => viewModelContext = context;
 
   @override
-  init() {}
+  init() async {
+    await _checkIsMenuAvailable();
+  }
 
   @observable
   int counter = 1;
 
   final MenuService service = MenuService();
+
+  MenuModel? menuData;
+
+  initOpenedMenu(MenuModel data) => menuData = data;
 
   @action
   changeCounterState(bool isIncrement) {
@@ -68,5 +74,18 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
         ),
       ),
     );
+  }
+
+  Future<void> _checkIsMenuAvailable() async {
+    final bool? response =
+        await service.isMenuAvailable(menuData!.menuId, accessToken!);
+    if (response == null) {
+      showErrorDialog();
+      return;
+    }
+    if (!response) {
+      navigatorPop();
+      showErrorDialog("Bu menü artık mevcut değil.");
+    }
   }
 }

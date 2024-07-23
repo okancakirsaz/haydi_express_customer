@@ -90,12 +90,14 @@ class TopMenuView extends StatelessWidget {
           ),
           _price(),
           Padding(
-            padding: PaddingConsts.instance.top5,
-            child: Text(
-              data.content,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.left,
-              style: TextConsts.instance.regularBlack16,
+            padding: PaddingConsts.instance.bottom10,
+            child: Padding(
+              padding: PaddingConsts.instance.top5,
+              child: Text(
+                data.content,
+                textAlign: TextAlign.left,
+                style: TextConsts.instance.regularBlack16,
+              ),
             ),
           ),
         ],

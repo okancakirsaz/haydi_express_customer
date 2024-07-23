@@ -25,7 +25,14 @@ class AppConst {
       mostOrderTakingHour: "20.00",
       totalRevenue: 2000,
       comments: [
-        CommentModel(comment: "comment", like: 5),
+        CommentModel(
+          comment: "comment",
+          uid: "id",
+          like: 5,
+          restaurantId: "Example Restaurant Uid",
+          menuId: "menuId",
+          customerId: "customer-id",
+        ),
       ],
     ),
     restaurantName: "restaurantName",
