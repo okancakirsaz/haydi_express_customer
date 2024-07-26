@@ -6,6 +6,7 @@ class TopInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AddressModel address = viewModel.restaurantData.address;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -36,7 +37,7 @@ class TopInformation extends StatelessWidget {
         Padding(
           padding: PaddingConsts.instance.all10,
           child: Text(
-            viewModel.restaurantData.address,
+            "${address.neighborhood}, ${address.street}, Bina No: ${address.buildingNumber}, Kapı No: ${address.doorNumber},${address.city}/${address.state}",
             style: TextConsts.instance.regularBlack16,
           ),
         ),
