@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
-import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 import 'package:haydi_express_customer/core/widgets/menu/vertical_list_minimized_menu.dart';
 import 'package:haydi_express_customer/core/widgets/out_of_work_hours.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';

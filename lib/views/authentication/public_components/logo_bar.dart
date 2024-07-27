@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
-import 'package:haydi_express_customer/core/widgets/logo.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/logo.dart';
 
 class LogoBar extends StatelessWidget {
   final String title;

@@ -5,8 +5,8 @@ import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
 import 'package:haydi_ekspres_dev_tools/models/models_index.dart';
 import 'package:haydi_ekspres_dev_tools/models/order_model.dart';
 import 'package:haydi_ekspres_dev_tools/models/personal_value_types.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/are_you_sure_dialog.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
-import 'package:haydi_express_customer/core/widgets/dialog/are_you_sure_dialog.dart';
 import 'package:haydi_express_customer/views/authentication/forgot_password/viewmodel/forgot_password_viewmodel.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/view/log_in_view.dart';
 import 'package:haydi_express_customer/views/comment/view/comment_view.dart';
@@ -61,6 +61,7 @@ abstract class _ProfileViewModelBase with Store, BaseViewModel {
 
   Future<void> logOut() async {
     await LandingViewModel().clearCache();
+    await localeManager.removeData(LocaleKeysEnums.id.name);
     await localeManager.removeData(LocaleKeysEnums.activeConversations.name);
     navigationManager.navigateAndRemoveUntil(const LogInView());
   }

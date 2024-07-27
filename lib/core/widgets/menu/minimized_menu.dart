@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/menu_rating_stars.dart';
 import 'package:haydi_express_customer/core/base/viewmodel/base_viewmodel.dart';
 import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
-import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 
 class MinimizedMenu extends StatelessWidget {
   final MenuModel data;

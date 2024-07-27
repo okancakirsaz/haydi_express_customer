@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../core/widgets/custom_scaffold.dart';
-import '../../../../core/widgets/logo.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_scaffold.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/logo.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

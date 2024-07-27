@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/widgets_index.dart';
 import 'package:haydi_express_customer/core/widgets/custom_password_field.dart';
-import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';
-import 'package:haydi_express_customer/core/widgets/button/custom_text_button.dart';
-import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
 import 'package:haydi_express_customer/views/authentication/forgot_password/view/forgot_password_view.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/viewmodel/log_in_viewmodel.dart';
 import 'package:haydi_express_customer/views/authentication/public_components/logo_bar.dart';
@@ -97,6 +94,7 @@ class LogInView extends StatelessWidget {
         Padding(
           padding: PaddingConsts.instance.top10,
           child: CustomPasswordField(
+            hintStyle: TextConsts.instance.regularWhite18,
             padding: PaddingConsts.instance.horizontal30,
             controller: model.password,
             hint: "Şifre",

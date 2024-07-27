@@ -8,6 +8,7 @@ import 'package:haydi_ekspres_dev_tools/models/http_exception_model.dart';
 import 'package:haydi_ekspres_dev_tools/models/order_model.dart';
 import 'package:haydi_ekspres_dev_tools/models/payment_methods.dart';
 import 'package:haydi_ekspres_dev_tools/models/payment_model.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/are_you_sure_dialog.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/address/addresses/service/addresses_service.dart';
 import 'package:haydi_express_customer/views/address/addresses/viewmodel/addresses_viewmodel.dart';
@@ -17,7 +18,6 @@ import 'package:uuid/uuid.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
 
-import '../../../../core/widgets/dialog/are_you_sure_dialog.dart';
 import '../service/order_steps_service.dart';
 
 part 'order_steps_viewmodel.g.dart';

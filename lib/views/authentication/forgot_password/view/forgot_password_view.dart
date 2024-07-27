@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:haydi_ekspres_dev_tools/constants/padding_consts.dart';
 import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
-import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
-import 'package:haydi_express_customer/core/widgets/button/custom_statefull_button.dart';
-import 'package:haydi_express_customer/core/widgets/custom_text_field.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_scaffold.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_statefull_button.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_text_button.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_text_field.dart';
 import 'package:haydi_express_customer/views/authentication/log_in/view/log_in_view.dart';
 import 'package:haydi_express_customer/views/authentication/public_components/logo_bar.dart';
 import 'package:haydi_express_customer/views/authentication/public_components/page_top_container.dart';
 import 'package:haydi_express_customer/views/authentication/sign_up/view/sign_up_view.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../../core/widgets/button/custom_text_button.dart';
 import '../viewmodel/forgot_password_viewmodel.dart';
 
 class ForgotPasswordView extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/custom_app_bar/view/custom_app_bar_view.dart';
-import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../viewmodel/main_viewmodel.dart';
 

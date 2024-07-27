@@ -3,9 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:haydi_ekspres_dev_tools/constants/constants_index.dart';
 import 'package:haydi_ekspres_dev_tools/models/suggestion_model.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/menu/discount_container.dart';
 import '../../../../core/base/view/base_view.dart';
-import '../../../core/widgets/custom_scaffold.dart';
 import '../viewmodel/search_viewmodel.dart';
 
 part './components/suggestion.dart';

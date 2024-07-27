@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/constants/text_consts.dart';
-import 'package:haydi_express_customer/core/widgets/button/custom_text_button.dart';
+import 'package:haydi_ekspres_dev_tools/widgets/custom_text_button.dart';
 import 'package:toastification/toastification.dart';
 
 class GoBucketDialog {
