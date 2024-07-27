@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
+import 'package:haydi_ekspres_dev_tools/models/work_hours_model.dart';
 import 'package:haydi_express_customer/views/restaurant/service/restaurant_service.dart';
 import '../../../../core/base/viewmodel/base_viewmodel.dart';
 import 'package:mobx/mobx.dart';
@@ -13,11 +14,14 @@ abstract class _RestaurantViewModelBase with Store, BaseViewModel {
   void setContext(BuildContext context) => viewModelContext = context;
 
   @override
-  init() {}
+  init() {
+    _checkIsRestaurantWorkingNow();
+  }
 
   initRestaurantData(RestaurantModel data) => restaurantData = data;
 
   late final RestaurantModel restaurantData;
+  bool isRestaurantWorking = false;
   final RestaurantService service = RestaurantService();
   List<MenuModel> menus = [];
   List<CommentModel> comments = [];
@@ -48,5 +52,19 @@ abstract class _RestaurantViewModelBase with Store, BaseViewModel {
   _calculateRestaurantStarCount() {
     List<int> counts = comments.map((e) => e.like).toList();
     restaurantStarCount = counts.reduce((a, b) => a + b) ~/ counts.length;
+  }
+
+  _checkIsRestaurantWorkingNow() {
+    final WorkHoursModel hours = restaurantData.workHours;
+    final int hour = DateTime.now().hour;
+    final int minute = DateTime.now().minute;
+    final double currentTime = double.parse("$hour.$minute");
+    final double startHour =
+        double.parse("${hours.startHour}.${hours.startMinute}");
+    final double endHour = double.parse("${hours.endHour}.${hours.endMinute}");
+    if (startHour <= currentTime && endHour > currentTime) {
+      isRestaurantWorking = true;
+      return;
+    }
   }
 }

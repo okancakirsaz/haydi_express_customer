@@ -3,6 +3,7 @@ import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
 import 'package:haydi_express_customer/core/widgets/custom_scaffold.dart';
 import 'package:haydi_express_customer/core/widgets/menu/menu_rating_stars.dart';
 import 'package:haydi_express_customer/core/widgets/menu/vertical_list_minimized_menu.dart';
+import 'package:haydi_express_customer/core/widgets/out_of_work_hours.dart';
 import 'package:haydi_express_customer/views/create_order/order_steps/view/order_steps_view.dart';
 import '../../../../core/base/view/base_view.dart';
 import '../viewmodel/restaurant_viewmodel.dart';
@@ -21,45 +22,21 @@ class RestaurantView extends StatelessWidget {
       viewModel: RestaurantViewModel(),
       onPageBuilder: (context, model) {
         return CustomScaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-            body: FutureBuilder<bool>(
-                future: model.getRestaurantContents(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return SingleChildScrollView(
-                      child: Column(
-                        children: <Widget>[
-                          TopInformation(viewModel: model),
-                          _buildTitle(
-                            "Menüler",
-                            false,
-                            ColorConsts.instance.lightThird,
-                          ),
-                          RestaurantMenus(
-                            viewModel: model,
-                          ),
-                          _buildTitle(
-                            "Yorumlar",
-                            true,
-                            ColorConsts.instance.third,
-                          ),
-                          RestaurantComments(
-                            viewModel: model,
-                          ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        color: ColorConsts.instance.primary,
-                      ),
-                    );
-                  }
-                }));
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          body: Stack(
+            children: <Widget>[
+              _buildView(model),
+              model.isRestaurantWorking
+                  ? const SizedBox()
+                  : OutOfWorkHours(
+                      hours: model.restaurantData.workHours,
+                    ),
+            ],
+          ),
+        );
       },
       onModelReady: (model) {
         model.initRestaurantData(data);
@@ -67,6 +44,45 @@ class RestaurantView extends StatelessWidget {
         model.setContext(context);
       },
       onDispose: (model) {},
+    );
+  }
+
+  Widget _buildView(RestaurantViewModel model) {
+    return FutureBuilder<bool>(
+      future: model.getRestaurantContents(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TopInformation(viewModel: model),
+                _buildTitle(
+                  "Menüler",
+                  false,
+                  ColorConsts.instance.lightThird,
+                ),
+                RestaurantMenus(
+                  viewModel: model,
+                ),
+                _buildTitle(
+                  "Yorumlar",
+                  true,
+                  ColorConsts.instance.third,
+                ),
+                RestaurantComments(
+                  viewModel: model,
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(
+              color: ColorConsts.instance.primary,
+            ),
+          );
+        }
+      },
     );
   }
 

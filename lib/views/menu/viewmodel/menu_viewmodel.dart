@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haydi_ekspres_dev_tools/haydi_ekspres_dev_tools.dart';
+import 'package:haydi_ekspres_dev_tools/models/work_hours_model.dart';
 import 'package:haydi_express_customer/core/init/cache/local_keys_enums.dart';
 import 'package:haydi_express_customer/views/create_order/bucket/view/bucket_view.dart';
 import 'package:haydi_express_customer/views/menu/service/menu_service.dart';
@@ -20,6 +21,7 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
   @override
   init() async {
     await _checkIsMenuAvailable();
+    await _getRestaurantWorkHours();
   }
 
   @observable
@@ -99,5 +101,31 @@ abstract class _MenuViewModelBase with Store, BaseViewModel {
       return;
     }
     navigationManager.navigate(RestaurantView(data: response));
+  }
+
+  Future<void> _getRestaurantWorkHours() async {
+    final WorkHoursModel? response = await service.getRestaurantWorkHours(
+        menuData!.restaurantUid, accessToken!);
+    if (response == null) {
+      showErrorDialog();
+      navigatorPop();
+      return;
+    }
+    _checkIsRestaurantWorkingNow(response);
+  }
+
+  _checkIsRestaurantWorkingNow(WorkHoursModel hours) {
+    final int hour = DateTime.now().hour;
+    final int minute = DateTime.now().minute;
+    final double currentTime = double.parse("$hour.$minute");
+    final double startHour =
+        double.parse("${hours.startHour}.${hours.startMinute}");
+    final double endHour = double.parse("${hours.endHour}.${hours.endMinute}");
+    if (startHour <= currentTime && endHour > currentTime) {
+      return;
+    }
+    showErrorDialog(
+        "Restoran şu anda çalışma saatleri dışında.\n Çalışma Saatleri: ${startHour.toStringAsFixed(2)} - ${endHour.toStringAsFixed(2)}");
+    navigatorPop();
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:haydi_ekspres_dev_tools/constants/endpoints.dart';
 import 'package:haydi_ekspres_dev_tools/models/menu_model.dart';
+import 'package:haydi_ekspres_dev_tools/models/work_hours_model.dart';
 import 'package:haydi_express_customer/core/managers/network_manager.dart';
 
 final class MenuService extends NetworkManager {
@@ -22,6 +23,25 @@ final class MenuService extends NetworkManager {
         dataList.add(MenuModel.fromJson(data));
       }
       return dataList;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<WorkHoursModel?> getRestaurantWorkHours(
+      String restaurantId, String accessToken) async {
+    try {
+      final response = await network.get(
+        Endpoints.instance.getRestaurantWorkHours,
+        queryParameters: {
+          "restaurantId": restaurantId,
+        },
+        options: Options(
+          headers: setHeaderAccessToken(accessToken),
+        ),
+      );
+
+      return WorkHoursModel.fromJson(response.data);
     } catch (e) {
       return null;
     }
