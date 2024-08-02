@@ -216,35 +216,42 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
   }
 
   //Create order
-  OrderModel _fetchOrderModel(String restaurantId, String restaurantName,
-          int price, List<BucketElementModel> menuData) =>
-      OrderModel(
-        paymentData: PaymentModel(
-          cardData: chosenMethod == PaymentMethods.online
-              ? CardModel(
-                  cardHolder: cardHolderName,
-                  cardNumber: cardNumber,
-                  cvv: cvvCode,
-                  expireDate: expireDate)
-              : null,
-          totalPrice: price,
-        ),
-        restaurantId: restaurantId,
-        restaurantName: restaurantName,
-        customerId: localeManager.getStringData(LocaleKeysEnums.id.name),
-        menuData: menuData,
-        addressData: chosenAddress!,
-        paymentMethod: chosenMethod!.value,
-        isPaidSuccess: chosenMethod == PaymentMethods.online ? false : null,
-        orderState: "Restoran Onayı Bekleniyor",
-        orderCreationDate: DateTime.now().toIso8601String(),
-        customerName:
-            localeManager.getStringData(LocaleKeysEnums.nameSurname.name),
-        customerPhoneNumber:
-            localeManager.getStringData(LocaleKeysEnums.phoneNumber.name),
-        note: note.text,
-        orderId: const Uuid().v1(),
-      );
+  Future<OrderModel> _fetchOrderModel(
+      String restaurantId,
+      String restaurantName,
+      int price,
+      List<BucketElementModel> menuData) async {
+    bool isRestaurantUseCourierService =
+        (await _isRestaurantsUsesHe([restaurantId]))[0];
+    return OrderModel(
+      paymentData: PaymentModel(
+        cardData: chosenMethod == PaymentMethods.online
+            ? CardModel(
+                cardHolder: cardHolderName,
+                cardNumber: cardNumber,
+                cvv: cvvCode,
+                expireDate: expireDate)
+            : null,
+        totalPrice: price,
+      ),
+      restaurantId: restaurantId,
+      isDeliveringWithCourierService: isRestaurantUseCourierService,
+      restaurantName: restaurantName,
+      customerId: localeManager.getStringData(LocaleKeysEnums.id.name),
+      menuData: menuData,
+      addressData: chosenAddress!,
+      paymentMethod: chosenMethod!.value,
+      isPaidSuccess: chosenMethod == PaymentMethods.online ? false : null,
+      orderState: "Restoran Onayı Bekleniyor",
+      orderCreationDate: DateTime.now().toIso8601String(),
+      customerName:
+          localeManager.getStringData(LocaleKeysEnums.nameSurname.name),
+      customerPhoneNumber:
+          localeManager.getStringData(LocaleKeysEnums.phoneNumber.name),
+      note: note.text,
+      orderId: const Uuid().v1(),
+    );
+  }
 
   //This function creates a order instance for every different restaurant
   Future<void> fetchOrders(OrderStepsViewModel viewModel) async {
@@ -295,7 +302,7 @@ abstract class _OrderStepsViewModelBase with Store, BaseViewModel {
       List<BucketElementModel> menuData,
       OrderStepsViewModel viewModel) async {
     final response = await service.createOrder(
-      _fetchOrderModel(restaurantId, restaurantName, price, menuData),
+      await _fetchOrderModel(restaurantId, restaurantName, price, menuData),
       accessToken!,
     );
     bool isSuccess = false;
